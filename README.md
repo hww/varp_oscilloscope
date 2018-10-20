@@ -61,9 +61,9 @@ an oscilloscope and their relationship to each other.
 ![Basic Concept Diagram](images/varp_oscilloscope_basic_concept.png)
 
 
-## Channel names
+## Channel Names
 
-The cnannels named A,B,C,D can be used for record samples and draw oscillogram on screen. Additional channel EXT can be used only for synhronixation.
+The cnannels named A,B,C,D can be used for record samples and draw oscillogram on screen. Additional channel EXT can be used only for triggering recording samples.
 
 ## Horizontal Scale
 
