@@ -39,6 +39,7 @@ In addition to the list of general features, this section covers the following t
 
 - Does not require custom Unity GUI tools and learing.
 - Fully configurable with script for different measurements. 
+- Human friendly attenuation gain and time per division values. 
 
 ## Installation
 
@@ -60,25 +61,69 @@ an oscilloscope and their relationship to each other.
 
 ![Basic Concept Diagram](images/varp_oscilloscope_basic_concept.png)
 
-GameValue _Any variable or class member can be captured by pushing it to the probe every frame or only when it was changed. As alternative the value can be pulled by lambda function assigned to the probe. Before recording the value should be converted to floating point type_
+**GameValue** _Any variable or class member can be captured by pushing it to the probe every frame or only when it was changed. As alternative the value can be pulled by lambda function assigned to the probe. Before recording the value should be converted to floating point type_
 
-OscProbe _Container of sample and configuration settings for the channel or trigger. Avery time when the probe connected to the oscilloscope channel, the values will be copyied to the channel and to trigger (if this channel connected to trigger)_
+**OscProbe** _Container of sample and configuration settings for the channel or trigger. Avery time when the probe connected to the oscilloscope channel, the values will be copyied to the channel and to trigger (if this channel connected to trigger)_
 
-OscChannel _This class contains data for data recording and rendering it on the screen_
+**OscChannel** _This class contains data for data recording and rendering it on the screen_
 
-OscBuffer _The buffer for recorded samples_
+**OscBuffer** _The buffer for recorded samples_
 
-Oscilloscope _Main code for the oscilloscope_
+**Oscilloscope** _Main code for the oscilloscope_
 
-OscGrid _Rendering of grid on the screen_
+**OscGrid** _Rendering of grid on the screen_
 
-OscRenderer _Renderer of waveforms_
+**OscRenderer** _Renderer of waveforms_
 
+**OscTrigger** _Class which monitoring one of the channels and can be used to the start/stop acquiring data.
 
 
 ## Channel Names
 
-The cnannels named A,B,C,D can be used for record samples and draw oscillogram on screen. Additional channel EXT can be used only for triggering recording samples.
+The cnannels named A,B,C,D can be used for record samples and draw oscillogram on screen. Additional channel EXT can be used only for triggering recording samples. The channel's name will be displayed on sceen display and can be used as argumen of functions.
 
-## Horizontal Scale
+## Probe Names
+
+The name of probe in just a string value will be displayed on scree to inform user about which probe connected to this or that channel.
+
+## OsdProbe
+
+Lets create simple probe and connect it to oscilloscope channel A.
+
+```C#
+var characterVelocityProbe = new OscProbe("CharacterVelocity");
+Oscilloscope.I.ActivateProbe(OscChannel.Name.A, characterVelocityProbe);
+```
+
+### Push Value to Probe
+
+As probe created we can push value to the probe with setting the sample field.
+
+```C#
+characterVelocityProbe.sample = rigidbody.velocity.magnitude;
+```
+
+### Pull Value by Probe
+
+Alternative way to read values is to assign the lambda method to the deligate of probe.
+
+```C#
+oscEvents.readSample = () => { return rigidbody.velocity.magnitude };
+```
+
+### Probe Fields
+
+| Type | Field | Info |
+|---:|:----|:-----|
+| RenderLabels | renderLabels |	Render labels or markers |
+| ReadSampleDelegate | readSample | Read sample from this input	 |
+| readonly | string name | Input's name will be displayed on screen |
+| float | position | Change vertical position of this diagram |
+| bool | autoGain | Make this input autoscaled verticaly |
+| int autoGainDivisions | Auto gain wil fit to X divisions |
+| OscTrigger.Mode | triggerMode | Trigger mode |
+| float | triggerLevel | Trigger threshold |
+| float| sample | Curent sample value |
+
+
 
