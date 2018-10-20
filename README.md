@@ -86,6 +86,7 @@ _Main code for the oscilloscope._
 _Rendering of grid on the screen._
 
 **OscRenderer** 
+
 _Renderer of waveforms._
 
 **OscTrigger** 
