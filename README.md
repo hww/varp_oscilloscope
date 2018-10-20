@@ -58,15 +58,7 @@ following basic concepts:
 The figure below shows a block diagram of the various functions of
 an oscilloscope and their relationship to each other.
 
- ```ditaa {cmd=true args=["-E"]}
-    +-----------+    +------------------+
- ---| Game Data |--> | OscProbe         |-->| OscChannel
-    +-----------+    +------------------+   | A,B,C or D channel
-                     | Verical Gain     |   +-----------------------
-                     | and Position     |   | Sample's buffer 
-                     | Auto Gain        |
-                     | Triggering mode
-  ```
+![Basic Concept Diagram](images/varp_oscilloscope_basic_concept.png)
 
 
 ## Channel names
