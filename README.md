@@ -65,7 +65,7 @@ an oscilloscope and their relationship to each other.
 
 **OscProbe** _Container of sample and configuration settings for the channel or trigger. Avery time when the probe connected to the oscilloscope channel, the values will be copyied to the channel and to trigger (if this channel connected to trigger)_
 
-**OscChannel** _This class contains data for data recording and rendering it on the screen_
+**OscChannel** _This class contains data for data recording and rendering it on the screen. Every time when probe coonected to the channel, the channel reads settings from probe._
 
 **OscBuffer** _The buffer for recorded samples_
 
@@ -75,8 +75,7 @@ an oscilloscope and their relationship to each other.
 
 **OscRenderer** _Renderer of waveforms_
 
-**OscTrigger** _Class which monitoring one of the channels and can be used to the start/stop acquiring data.
-
+**OscTrigger** _Class which monitoring one of the channels and can be used to the start/stop acquiring data. Every time when trigger connected to channel, the trigger reads the configuration falues from channel.
 
 ## Channel Names
 
