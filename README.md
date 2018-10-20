@@ -111,19 +111,37 @@ Alternative way to read values is to assign the lambda method to the deligate of
 oscEvents.readSample = () => { return rigidbody.velocity.magnitude };
 ```
 
+## Render Markers 
+
+Each probe can display horizontal markers with short text. 
+
+```C#
+oscLastDifficultyForce.postRender = (OscRenderer renderer, OscChannel channel) =>
+		{
+			var x = 9f; // grid divisions
+			channel.DrawHorizMarker(renderer, "-2", x, -2f);
+			channel.DrawHorizMarker(renderer, "-1", x, -1f);
+			channel.DrawHorizMarker(renderer, "0", x, 0f);
+			channel.DrawHorizMarker(renderer, "1", x, 1f);
+			channel.DrawHorizMarker(renderer, "2", x, 2f);
+		};```
+
 ### Probe Fields
 
 | Type | Field | Info |
 |---:|:----|:-----|
-| RenderLabelsDelegate | renderLabels |	Render labels or markers |
-| ReadSampleDelegate | readSample | Read sample from this probe	 |
-| readonly | string name | Input's name will be displayed on screen |
-| float | position | Change vertical position of this diagram |
-| bool | autoGain | Make this input autoscaled verticaly |
-| int | autoGainDivisions | Auto gain wil fit to X divisions |
+| readonly string | name | Probe name will be displayed on screen |
+| float | position | Change vertical position of this diagram (divisions) |
+| bool | autoGain | Audoset best gain for this probe |
+| int | autoGainDivisions | Audoset gain will try to fit diagram to X divisions |
 | OscTrigger.Mode | triggerMode | Trigger mode |
 | float | triggerLevel | Trigger threshold |
 | float| sample | Curent sample value |
 
+### Probe Delegates
 
+| Type | Field | Info |
+|---:|:----|:-----|
+| PostRenderDelegate | postRender |	Render additional markers |
+| ReadSampleDelegate | readSample | Read sample from this probe	 |
 
