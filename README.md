@@ -115,12 +115,12 @@ oscEvents.readSample = () => { return rigidbody.velocity.magnitude };
 
 | Type | Field | Info |
 |---:|:----|:-----|
-| RenderLabels | renderLabels |	Render labels or markers |
-| ReadSampleDelegate | readSample | Read sample from this input	 |
+| RenderLabelsDelegate | renderLabels |	Render labels or markers |
+| ReadSampleDelegate | readSample | Read sample from this probe	 |
 | readonly | string name | Input's name will be displayed on screen |
 | float | position | Change vertical position of this diagram |
 | bool | autoGain | Make this input autoscaled verticaly |
-| int autoGainDivisions | Auto gain wil fit to X divisions |
+| int | autoGainDivisions | Auto gain wil fit to X divisions |
 | OscTrigger.Mode | triggerMode | Trigger mode |
 | float | triggerLevel | Trigger threshold |
 | float| sample | Curent sample value |
