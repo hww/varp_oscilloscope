@@ -199,4 +199,7 @@ oscLastDifficultyForce.postRender = (OscRenderer renderer, OscChannel channel) =
 
 ## Class OscSettings
 
+## Class OscTrigger
+
+![Custom Probe Markers](images/varp_oscilloscope_trigger.png)
 
