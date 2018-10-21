@@ -134,7 +134,7 @@ Alternative way to read values is to assign the lambda method to the deligate of
 oscEvents.readSample = () => { return rigidbody.velocity.magnitude };
 ```
 
-## Render Markers 
+## Render Probe Markers 
 
 Each probe can display horizontal markers with short text. 
 
