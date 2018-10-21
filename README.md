@@ -107,7 +107,7 @@ The enum value OscChannel.Name has the list of  default names.
 
 | Value | Value Name | Comment |
 |------------|-------|---------|
-| 0 | EXT | External channel |
+| 0 | EXT | External trigger source |
 | 1 | CH1 | Channel 1 |
 | 2 | CH2 | Channel 2 |
 | 3 | CH3 | Channel 2 |
