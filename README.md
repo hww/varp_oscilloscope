@@ -133,7 +133,7 @@ In cases when origin is outside of screen the channel's label will blink (at the
 The name of probe in just a string value will be displayed on scree to inform user about which probe connected to this or that channel.
 
 
-## OsdProbe
+## Class OsdProbe
 
 Lets create simple probe and connect it to oscilloscope channel A.
 
@@ -194,4 +194,9 @@ oscLastDifficultyForce.postRender = (OscRenderer renderer, OscChannel channel) =
 |---:|:----|:-----|
 | PostRenderDelegate | postRender |	Render additional markers |
 | ReadSampleDelegate | readSample | Read sample from this probe	 |
+
+## Class OscChannel
+
+## Class OscSettings
+
 
