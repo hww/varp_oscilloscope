@@ -77,10 +77,6 @@ _This class contains data for data recording and rendering it on the screen. Eve
 
 _The buffer for recorded samples._
 
-**Oscilloscope** 
-
-_Main code for the oscilloscope._
-
 **OscGrid** 
 
 _Rendering of grid on the screen._
@@ -93,6 +89,10 @@ _Renderer of waveforms._
 
 _Class which monitoring one of the channels and can be used to the start/stop acquiring data. Every time when trigger connected to channel, the trigger reads the configuration falues from channel._
 
+**Oscilloscope** 
+
+_Main code for the oscilloscope._
+
 ## Understanding Grid
 
 The grid has divisions, subdivisions and rullers. Center of screen has coordinate 0,0. Horizontal axis X, and vertical axis Y has the ruller bar in the center of screen.
@@ -101,7 +101,24 @@ The grid has divisions, subdivisions and rullers. Center of screen has coordinat
 
 ## Channel Names
 
-The cnannels named A,B,C,D can be used for record samples and draw oscillogram on screen. Additional channel EXT can be used only for triggering recording samples. The channel's name will be displayed on sceen display and can be used as argumen of functions.
+The cnannels named CH1,CH2,CH3,CH4 can be used for record samples and draw oscillogram on screen. Additional channel EXT can be used only for triggering recording samples. The channel's name will be displayed on sceen display and can be used as argumen of functions.
+
+The enum value OscChannel.Name has the list of  default names. 
+
+| Value | Value Name | Comment |
+|------------|-------|---------|
+| 0 | EXT | External channel |
+| 1 | CH1 | Channel 1 |
+| 2 | CH2 | Channel 2 |
+| 3 | CH3 | Channel 2 |
+| 4 | CH4 | Channel 4 |
+| 5 | CH5 | Channel 5<sup>1</sup> |
+| 6 | CH6 | Channel 6<sup>1</sup> |
+| 7 | CH7 | Channel 7<sup>1</sup> |
+| 8 | CH8 | Channel 8<sup>1</sup> |
+
+<sup>1</sup> _Reserved for extension_
+
 
 ## Probe Names
 
@@ -115,7 +132,7 @@ Lets create simple probe and connect it to oscilloscope channel A.
 
 ```C#
 var characterVelocityProbe = new OscProbe("CharacterVelocity");
-Oscilloscope.I.ActivateProbe(OscChannel.Name.A, characterVelocityProbe);
+Oscilloscope.I.ActivateProbe(OscChannel.Name.CH1, characterVelocityProbe);
 ```
 
 ### Push Value to Probe
@@ -146,7 +163,7 @@ oscLastDifficultyForce.postRender = (OscRenderer renderer, OscChannel channel) =
     channel.DrawHorizMarker(renderer, "-1", x, -1f);
     channel.DrawHorizMarker(renderer, " 0", x, 0f);
     channel.DrawHorizMarker(renderer, "+1", x, 1f);
-    channel.DrawHorizMarker(renderer, "_2", x, 2f);
+    channel.DrawHorizMarker(renderer, "+2", x, 2f);
 };
 ```
 
