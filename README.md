@@ -93,6 +93,12 @@ _Renderer of waveforms._
 
 _Class which monitoring one of the channels and can be used to the start/stop acquiring data. Every time when trigger connected to channel, the trigger reads the configuration falues from channel._
 
+## Understanding Grid
+
+The grid has divisions, subdivisions and rullers. Center of screen has coordinate 0,0. Horizontal axis X, and vertical axis Y has the ruller bar in the center of screen.
+
+![Grid](images/varp_oscilloscope_grid_info.png)
+
 ## Channel Names
 
 The cnannels named A,B,C,D can be used for record samples and draw oscillogram on screen. Additional channel EXT can be used only for triggering recording samples. The channel's name will be displayed on sceen display and can be used as argumen of functions.
