@@ -119,14 +119,21 @@ The enum value OscChannel.Name has the list of  default names.
 
 <sup>1</sup> _Reserved for extension_
 
+The number of channel will be displayed on screen as the marker. It has short horizontal line to mark channel's origin (0 value).
+
+![Channel Labels](images/varp_oscilloscope_channel_labels.png)
+
+In cases when origin is outside of screen the channel's label will blink (at the sceen edge).
+
+![Channel Labels Blinking](images/varp_oscilloscope_channel_labels_blinking.png)
+
 
 ## Probe Names
 
 The name of probe in just a string value will be displayed on scree to inform user about which probe connected to this or that channel.
 
-![Channel Labels](images/varp_oscilloscope_channel_labels.png)
 
-## OsdProbe
+## Class OsdProbe
 
 Lets create simple probe and connect it to oscilloscope channel A.
 
@@ -187,4 +194,9 @@ oscLastDifficultyForce.postRender = (OscRenderer renderer, OscChannel channel) =
 |---:|:----|:-----|
 | PostRenderDelegate | postRender |	Render additional markers |
 | ReadSampleDelegate | readSample | Read sample from this probe	 |
+
+## Class OscChannel
+
+## Class OscSettings
+
 
