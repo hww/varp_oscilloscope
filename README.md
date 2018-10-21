@@ -139,13 +139,14 @@ Each probe can display horizontal markers with short text.
 ```C#
 oscLastDifficultyForce.postRender = (OscRenderer renderer, OscChannel channel) =>
 		{
-			var x = 9f; // grid divisions
+			var x = 4f; // grid divisions
 			channel.DrawHorizMarker(renderer, "-2", x, -2f);
 			channel.DrawHorizMarker(renderer, "-1", x, -1f);
 			channel.DrawHorizMarker(renderer, "0", x, 0f);
 			channel.DrawHorizMarker(renderer, "1", x, 1f);
 			channel.DrawHorizMarker(renderer, "2", x, 2f);
-		};```
+		};
+```
 
 ### Probe Fields
 
@@ -157,7 +158,7 @@ oscLastDifficultyForce.postRender = (OscRenderer renderer, OscChannel channel) =
 | int | autoGainDivisions | Audoset gain will try to fit diagram to X divisions |
 | OscTrigger.Mode | triggerMode | Trigger mode |
 | float | triggerLevel | Trigger threshold |
-| float| sample | Curent sample value |
+| float | sample | Curent sample value |
 
 ### Probe Delegates
 
