@@ -225,3 +225,5 @@ void OnDisable()
     oscilloscope.TriggerStop(); // stop capturing
 }
 ```
+
+The Auto mode is less usefull, the trigger starts the recording every time when it is not recording it yet. In this case the result picture can be unpredictable.
