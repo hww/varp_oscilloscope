@@ -138,15 +138,17 @@ Each probe can display horizontal markers with short text.
 
 ```C#
 oscLastDifficultyForce.postRender = (OscRenderer renderer, OscChannel channel) =>
-		{
-			var x = 4f; // grid divisions
-			channel.DrawHorizMarker(renderer, "-2", x, -2f);
-			channel.DrawHorizMarker(renderer, "-1", x, -1f);
-			channel.DrawHorizMarker(renderer, "0", x, 0f);
-			channel.DrawHorizMarker(renderer, "1", x, 1f);
-			channel.DrawHorizMarker(renderer, "2", x, 2f);
-		};
+{
+    var x = 4f; // grid divisions
+    channel.DrawHorizMarker(renderer, "-2", x, -2f);
+    channel.DrawHorizMarker(renderer, "-1", x, -1f);
+    channel.DrawHorizMarker(renderer, " 0", x, 0f);
+    channel.DrawHorizMarker(renderer, "+1", x, 1f);
+    channel.DrawHorizMarker(renderer, "_2", x, 2f);
+};
 ```
+
+![Grid](images/varp_oscilloscope_custom_markers.png)
 
 ### Probe Fields
 
