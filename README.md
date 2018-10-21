@@ -201,5 +201,27 @@ oscLastDifficultyForce.postRender = (OscRenderer renderer, OscChannel channel) =
 
 ## Class OscTrigger
 
+The trigger determines when the oscilloscope starts to acquire data
+and display a waveform. When a trigger is set up properly, it can
+convert unstable displays or blank screens into meaningful
+waveforms.
+
+**Source**
+
+You can derive your trigger from various sources: Input channels and External. The trigger compare the channel value with trigger's level value and produces starting or stoping data capturing. The picture below explain some of trigger modes.
+
 ![Custom Probe Markers](images/varp_oscilloscope_trigger.png)
 
+Additionaly here is Manual and Auto modes. In manual mode the oscilloscope can be started by method TriggerStart and stopped by TriggerStop.
+
+```C#
+void OnEnable()
+{
+    oscilloscope.TriggerStart(); // start capturing
+}
+
+void OnDisable()
+{
+    oscilloscope.TriggerStop(); // stop capturing
+}
+```
