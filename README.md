@@ -107,6 +107,8 @@ The cnannels named A,B,C,D can be used for record samples and draw oscillogram o
 
 The name of probe in just a string value will be displayed on scree to inform user about which probe connected to this or that channel.
 
+!(Channel Labels)[images/varp_oscilloscope_channel_labels.png]
+
 ## OsdProbe
 
 Lets create simple probe and connect it to oscilloscope channel A.
