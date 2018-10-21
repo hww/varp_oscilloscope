@@ -121,11 +121,11 @@ The enum value OscChannel.Name has the list of  default names.
 
 The number of channel will be displayed on screen as the marker. It has short horizontal line to mark level 0 of channel.
 
-![Channel Labels](images/varp_oscilloscope_channel_labels.png =256x)
+![Channel Labels](images/varp_oscilloscope_channel_labels.png)
 
 In cases when level 0 is not fit on grid the channel's label will blink at the edge of sceen.
 
-![Channel Labels](images/varp_oscilloscope_channel_labels_blinking.png =256x)
+![Channel Labels Blinking](images/varp_oscilloscope_channel_labels_blinking.png)
 
 
 ## Probe Names
