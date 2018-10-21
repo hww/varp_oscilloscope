@@ -148,7 +148,7 @@ oscLastDifficultyForce.postRender = (OscRenderer renderer, OscChannel channel) =
 };
 ```
 
-![Grid](images/varp_oscilloscope_custom_markers.png)
+![Custom Probe Markers](images/varp_oscilloscope_custom_markers.png)
 
 ### Probe Fields
 
