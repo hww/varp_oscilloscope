@@ -190,6 +190,12 @@ oscLastDifficultyForce.postRender = (OscRenderer renderer, OscChannel channel) =
 | PostRenderDelegate | postRender |	Render additional markers    |
 | ReadSampleDelegate | readSample | Read sample from this probe	 |
 
+### Default Probes
+
+- **OscProbe.Null** Default probe usualy used for disabling a channel. 
+- **OscSineProbe.Default** Default probe with 10Hz 1V sine wave form. 
+- **OscSquareProbe.Default** Default probe with 10Hz 1V square form. 
+
 ## Class OscChannel
 
 ## Class OscSettings
