@@ -3,7 +3,7 @@ _Documentation for Untiy asset_
 
 ## Getting Stated
 
- VARP Oscilloscope are small, easy to use Unity asset, that you can use to record and analyze values modifyed by script, physcis or animation in real time. The oscilloscopes have four-channels but can be extended without proggraming.
+ VARP Oscilloscope are small, easy to use Unity asset, that you can use to record and analyze values modifyed by script, physcis or animation in real time. The oscilloscopes have four-channels but can be extended to 8 without additional proggraming.
 In addition to the list of general features, this section covers the following topics:
 
 - How to add asset to your project
@@ -14,24 +14,24 @@ In addition to the list of general features, this section covers the following t
 ## Features
 
 - Single time base digital real-time oscilloscope
-- Every frame or every fixed update sample rate and 1024<sup>2</sup> point record lenght for each channel. 
+- Every frame or every fixed update sample rate<sup>1</sup> and 1024<sup>2</sup> point record lenght for each channel. 
 - Four<sup>3</sup> independed recording channels.
 - One additional external channel can be used for trigger sampling 
 - Each buffer is aray of floating point values
 - Each channel has it's own color tag.
-- Screen 550x550pixels and 11x11 divisions grid<sup>4</sup> 
+- Screen 550x550pixels and 11x11 divisions grid<sup>4</sup>.
 - Four automated measurements (min,max,peak,average)
 - Autoset for quick setup
 - Cursors with readout
-- Custom markers OSD.
+- Custom labels OSD.
 
-<sup>1</sup> The sampling rate is fully configurable and can be replaced to other time steps for example 1second.
+<sup>1</sup> The sampling rate is fully configurable and can be replaced to other time steps.
 
 <sup>2</sup> Can be modifyed to another size.
 
-<sup>4</sup> Can be modifyed to another channels quantity.
+<sup>3</sup> Can be modifyed to another channels quantity.
 
-<sup>3</sup> Can be modifyed to another dimentions.
+<sup>4</sup> Can be modifyed to another dimentions and .
 
 ## Additional Features 
 
@@ -185,10 +185,16 @@ oscLastDifficultyForce.postRender = (OscRenderer renderer, OscChannel channel) =
 
 ### Probe Delegates
 
-| Type | Field | Info |
-|---:|:----|:-----|
-| PostRenderDelegate | postRender |	Render additional markers |
+| Type               | Field      | Info                         |
+|-------------------:|:-----------|:-----------------------------|
+| PostRenderDelegate | postRender |	Render additional markers    |
 | ReadSampleDelegate | readSample | Read sample from this probe	 |
+
+### Default Probes
+
+- **OscProbe.Null** Default probe usualy used for disabling a channel. 
+- **OscSineProbe.Default** Default probe with 10Hz 1V sine wave form. 
+- **OscSquareProbe.Default** Default probe with 10Hz 1V square form. 
 
 ## Class OscChannel
 
@@ -197,14 +203,14 @@ oscLastDifficultyForce.postRender = (OscRenderer renderer, OscChannel channel) =
 It is based on ScriptabbleObject, can be used to create asset with oscilloscope's configuration settings.
 
 | Type | Field | Info |
-|------|-------|------|
-| int pixelsPerDivision | How many pixels in single division (recomend 10,20,30,...) |
-| int divisionsX | Horizontal divisions (Recomend odd value) |
-| int divisionsY | Vertical divisions (Recomend odd value) |
-| int subdivisions | Subdivisions in the division (Recomend 5 or 10) |
-| bool | drawGrid | Draw grid lines |
-| bool | drawRullerX | Draw horizontal ruller in center |
-| bool | drawRullerY | Draw vertical ruller in center |
+|------|-------------------|------------------------------------------------------------|
+| int  | pixelsPerDivision | How many pixels in single division (recomend 10,20,30,...) |
+| int  | divisionsX        | Horizontal divisions (Recomend odd value) |
+| int  | divisionsY        | Vertical divisions (Recomend odd value) |
+| int  | subdivisions      | Subdivisions in the division (Recomend 5 or 10) |
+| bool | drawGrid          | Draw grid lines |
+| bool | drawRullerX       | Draw horizontal ruller in center |
+| bool | drawRullerY       | Draw vertical ruller in center |
         
 ## Class OscTrigger
 
@@ -213,24 +219,49 @@ and display a waveform. When a trigger is set up properly, it can
 convert unstable displays or blank screens into meaningful
 waveforms.
 
-**Source**
+###Source
 
-You can derive your trigger from various sources: Input channels and External. The trigger compare the channel value with trigger's level value and produces starting or stoping data capturing. The picture below explain some of trigger modes.
+You can derive your trigger from various sources: Input channels and External. 
 
-![Custom Probe Markers](images/varp_oscilloscope_trigger.png)
+###Modes
 
-Additionaly here is Manual and Auto modes. In manual mode the oscilloscope can be started by method TriggerStart and stopped by TriggerStop.
+- **Auto.** This trigger mode allows the oscilloscope to acquire a
+waveform even when it does not detect a trigger condition. If no
+trigger condition occurs while the oscilloscope waits for a specific
+period (as determined by the time-base setting), it will force itself to
+trigger.
+
+- **Normal.** The Normal mode allows the oscilloscope to acquire a
+waveform only when it is triggered. If no trigger occurs, the
+oscilloscope will not acquire a new waveform, and the previous
+waveform, if any, will remain on the display.
+
+- **Single** The Single mode allows the oscilloscope to acquire one waveform each time you call ForceTrigger method, and the trigger condition is detected.
 
 ```C#
 void OnEnable()
 {
-    oscilloscope.TriggerStart(); // start capturing
-}
-
-void OnDisable()
-{
-    oscilloscope.TriggerStop(); // stop capturing
+    oscilloscope.trigger.ForceTrigger(); // start capturing
 }
 ```
 
-The Auto mode is less usefull, the trigger starts the recording every time when it is not recording it yet. In this case the result picture can be unpredictable.
+###Edge Detection
+
+The trigger compare the channel value with trigger's level value and produces starting data acquiring depend on Edge detection mode. The picture below explain difference of Edge modes.
+
+![Edge Detection](images/varp_oscilloscope_trigger.png)
+
+###Stopping the Acquisition. 
+
+While acquisition is running, the waveform display is live. Stopping the acquisition freezes the display. In either
+mode, the waveform display can be scaled or positioned with the vertical and horizontal controls.
+
+```C#
+void OnEnable()
+{
+    oscilloscope.trigger.SetRunOrStop(true); // run acquiring
+    ....
+    oscilloscope.trigger.SetRunOrStop(false); // stop acquiring
+}
+```
+
