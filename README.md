@@ -185,9 +185,9 @@ oscLastDifficultyForce.postRender = (OscRenderer renderer, OscChannel channel) =
 
 ### Probe Delegates
 
-| Type | Field | Info |
-|---:|:----|:-----|
-| PostRenderDelegate | postRender |	Render additional markers |
+| Type               | Field      | Info                         |
+|-------------------:|:-----------|:-----------------------------|
+| PostRenderDelegate | postRender |	Render additional markers    |
 | ReadSampleDelegate | readSample | Read sample from this probe	 |
 
 ## Class OscChannel
@@ -197,14 +197,14 @@ oscLastDifficultyForce.postRender = (OscRenderer renderer, OscChannel channel) =
 It is based on ScriptabbleObject, can be used to create asset with oscilloscope's configuration settings.
 
 | Type | Field | Info |
-|------|-------|------|
-| int pixelsPerDivision | How many pixels in single division (recomend 10,20,30,...) |
-| int divisionsX | Horizontal divisions (Recomend odd value) |
-| int divisionsY | Vertical divisions (Recomend odd value) |
-| int subdivisions | Subdivisions in the division (Recomend 5 or 10) |
-| bool | drawGrid | Draw grid lines |
-| bool | drawRullerX | Draw horizontal ruller in center |
-| bool | drawRullerY | Draw vertical ruller in center |
+|------|-------------------|------------------------------------------------------------|
+| int  | pixelsPerDivision | How many pixels in single division (recomend 10,20,30,...) |
+| int  | divisionsX        | Horizontal divisions (Recomend odd value) |
+| int  | divisionsY        | Vertical divisions (Recomend odd value) |
+| int  | subdivisions      | Subdivisions in the division (Recomend 5 or 10) |
+| bool | drawGrid          | Draw grid lines |
+| bool | drawRullerX       | Draw horizontal ruller in center |
+| bool | drawRullerY       | Draw vertical ruller in center |
         
 ## Class OscTrigger
 
