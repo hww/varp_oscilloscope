@@ -7,16 +7,14 @@ _Documentation for Untiy asset_
 In addition to the list of general features, this section covers the following topics:
 
 - How to add asset to your project
-- How to add extended functions
-- How to perform a brief functional check
-- How to compensate probes
-- How to use the self calibration routine
-- How to match your probe attenuation factor
+- How to add initialize the oscilloscope from your code
+- How to push or pull values to the oscilloscope probes
+- How to ajust probe magnitude attenuation factor
 
 ## Features
 
 - Single time base digital real-time oscilloscope
-- Every frame or every fixed update sample rate<sup>1</sup> and 1000<sup>2</sup> point record lenght for each channel. 
+- Every frame or every fixed update sample rate and 1024<sup>2</sup> point record lenght for each channel. 
 - Four<sup>3</sup> independed recording channels.
 - One additional external channel can be used for trigger sampling 
 - Each buffer is aray of floating point values
@@ -72,10 +70,6 @@ _Container of sample and configuration settings for the channel or trigger. Aver
 **OscChannel** 
 
 _This class contains data for data recording and rendering it on the screen. Every time when probe coonected to the channel, the channel reads settings from probe._
-
-**OscBuffer** 
-
-_The buffer for recorded samples._
 
 **OscGrid** 
 
@@ -166,11 +160,11 @@ Each probe can display horizontal markers with short text.
 oscLastDifficultyForce.postRender = (OscRenderer renderer, OscChannel channel) =>
 {
     var x = 4f; // grid divisions
-    channel.DrawHorizMarker(renderer, "-2", x, -2f);
-    channel.DrawHorizMarker(renderer, "-1", x, -1f);
-    channel.DrawHorizMarker(renderer, " 0", x, 0f);
-    channel.DrawHorizMarker(renderer, "+1", x, 1f);
-    channel.DrawHorizMarker(renderer, "+2", x, 2f);
+    channel.DrawLabel(renderer, "-2", x, -2f);
+    channel.DrawLabel(renderer, "-1", x, -1f);
+    channel.DrawLabel(renderer, " 0", x, 0f);
+    channel.DrawLabel(renderer, "+1", x, 1f);
+    channel.DrawLabel(renderer, "+2", x, 2f);
 };
 ```
 
@@ -185,6 +179,7 @@ oscLastDifficultyForce.postRender = (OscRenderer renderer, OscChannel channel) =
 | bool | autoGain | Audoset best gain for this probe |
 | int | autoGainDivisions | Audoset gain will try to fit diagram to X divisions |
 | OscTrigger.Mode | triggerMode | Trigger mode |
+| OscTrigger.Edge | triggerEdge | Trigger edge detection |
 | float | triggerLevel | Trigger threshold |
 | float | sample | Curent sample value |
 
@@ -199,6 +194,18 @@ oscLastDifficultyForce.postRender = (OscRenderer renderer, OscChannel channel) =
 
 ## Class OscSettings
 
+It is based on ScriptabbleObject, can be used to create asset with oscilloscope's configuration settings.
+
+| Type | Field | Info |
+|------|-------|------|
+| int pixelsPerDivision | How many pixels in single division (recomend 10,20,30,...) |
+| int divisionsX | Horizontal divisions (Recomend odd value) |
+| int divisionsY | Vertical divisions (Recomend odd value) |
+| int subdivisions | Subdivisions in the division (Recomend 5 or 10) |
+| bool | drawGrid | Draw grid lines |
+| bool | drawRullerX | Draw horizontal ruller in center |
+| bool | drawRullerY | Draw vertical ruller in center |
+        
 ## Class OscTrigger
 
 The trigger determines when the oscilloscope starts to acquire data
