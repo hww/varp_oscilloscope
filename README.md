@@ -114,12 +114,28 @@ The number of channel will be displayed on screen as the marker. It has horizont
 
 In cases when origin is outside of screen the channel's label will rendered at the sceen edge.
 
-## Probe Names
+## Class OscSettings
 
-The name of probe in just a string value will be displayed on scree to inform user about which probe connected to this or that channel.
+It is based on ScriptabbleObject, can be used to create asset with oscilloscope's configuration settings.
+
+| Type | Field | Info |
+|------|-------------------|------------------------------------------------------------|
+| int  | pixelsPerDivision | How many pixels in single division (recomend 10,20,30,...) |
+| int  | divisionsX        | Horizontal divisions (Recomend odd value) |
+| int  | divisionsY        | Vertical divisions (Recomend odd value) |
+| int  | subdivisions      | Subdivisions in the division (Recomend 5 or 10) |
+| bool | drawGrid          | Draw grid lines |
+| bool | drawRullerX       | Draw horizontal ruller in center |
+| bool | drawRullerY       | Draw vertical ruller in center |
 
 
 ## Class OsdProbe
+
+### Probe Names
+
+The name of probe in just a string value will be displayed on scree to inform user about which probe connected to this or that channel.
+
+### Probe Instantiating
 
 Lets create simple probe and connect it to oscilloscope channel A.
 
@@ -211,20 +227,6 @@ var channel = oscilloscope.GetChannel(OscChannel.Name.C1);
 channel.Gain = 2f;                            //      
 ```
 
-
-## Class OscSettings
-
-It is based on ScriptabbleObject, can be used to create asset with oscilloscope's configuration settings.
-
-| Type | Field | Info |
-|------|-------------------|------------------------------------------------------------|
-| int  | pixelsPerDivision | How many pixels in single division (recomend 10,20,30,...) |
-| int  | divisionsX        | Horizontal divisions (Recomend odd value) |
-| int  | divisionsY        | Vertical divisions (Recomend odd value) |
-| int  | subdivisions      | Subdivisions in the division (Recomend 5 or 10) |
-| bool | drawGrid          | Draw grid lines |
-| bool | drawRullerX       | Draw horizontal ruller in center |
-| bool | drawRullerY       | Draw vertical ruller in center |
         
 ## Class OscTrigger
 
