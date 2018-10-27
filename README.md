@@ -91,20 +91,20 @@ The grid has divisions, subdivisions and rullers. Center of screen has coordinat
 
 ## Channel Names
 
-The cnannels named CH1,CH2,CH3,CH4 can be used for record samples and draw oscillogram on screen. The channel's name will be displayed on sceen display and can be used as argumen of functions.
+The cnannels named C1,C2,C3,C4 can be used for record samples and draw oscillogram on screen. The channel's name will be displayed on sceen display and can be used as argumen of functions.
 
 The enum value OscChannel.Name has the list of  default names. 
 
 | Value | Value Name | Comment |
 |------------|-------|---------|
-| 0 | CH1 | Channel 1 |
-| 1 | CH2 | Channel 2 |
-| 2 | CH3 | Channel 2 |
-| 3 | CH4 | Channel 4 |
-| 4 | CH5 | Channel 5<sup>1</sup> |
-| 5 | CH6 | Channel 6<sup>1</sup> |
-| 6 | CH7 | Channel 7<sup>1</sup> |
-| 7 | CH8 | Channel 8<sup>1</sup> |
+| 0 | C1 | Channel 1 |
+| 1 | C2 | Channel 2 |
+| 2 | C3 | Channel 2 |
+| 3 | C4 | Channel 4 |
+| 4 | C5 | Channel 5<sup>1</sup> |
+| 5 | C6 | Channel 6<sup>1</sup> |
+| 6 | C7 | Channel 7<sup>1</sup> |
+| 7 | C8 | Channel 8<sup>1</sup> |
 
 <sup>1</sup> _Reserved for extension_
 
@@ -124,8 +124,12 @@ The name of probe in just a string value will be displayed on scree to inform us
 Lets create simple probe and connect it to oscilloscope channel A.
 
 ```C#
+// Create probe
 var characterVelocityProbe = new OscProbe("CharacterVelocity");
-Oscilloscope.I.ActivateProbe(OscChannel.Name.CH1, characterVelocityProbe);
+// Plug to the channel
+oscilloscope.GetChannel(OscChannel.Name.C1).Plug(characterVelocityProbe);
+// Remove probe from channel (disable channel)
+oscilloscope.GetChannel(OscChannel.Name.C1).Unplug();
 ```
 
 ### Push Value to Probe
@@ -133,18 +137,18 @@ Oscilloscope.I.ActivateProbe(OscChannel.Name.CH1, characterVelocityProbe);
 As probe created we can push value to the probe with setting the sample field. You can directly change the _sample_ field or use various methods.
 
 ```C#
-  // Write floating point value to probe
-		characterVelocityProbe.Log(rigidbody.velocity.magnitude);
-		// Write integer value to probe
-		characterVelocityProbe.Log((int)Time.time);
-		// Write bool value to probe
-		characterVelocityProbe.Log(Time.time > 10f);
-		// Write vector 2 to probe
-		characterVelocityProbe.Log(transform.achoredPosition);
-		// Write vector3 value to probe
-		characterVelocityProbe.Log(rigidbody.velocity);
-		// Write color value to probe
-		characterVelocityProbe.Log(text.color);
+// Write floating point value to probe
+characterVelocityProbe.Log(rigidbody.velocity.magnitude);
+// Write integer value to probe
+characterVelocityProbe.Log((int)Time.time);
+// Write bool value to probe
+characterVelocityProbe.Log(Time.time > 10f);
+// Write vector 2 to probe
+characterVelocityProbe.Log(transform.achoredPosition);
+// Write vector3 value to probe
+characterVelocityProbe.Log(rigidbody.velocity);
+// Write color value to probe
+characterVelocityProbe.Log(text.color);
 ```
 
 ### Pull Value by Probe
@@ -154,10 +158,9 @@ Alternative way to read values is to assign the lambda method to the deligate of
 ```C#
 characterVelocityProbe.readSample = (OscProbe probe) =>
 {
-				probe.sample = rigidbody.velocity;
+   probe.sample = rigidbody.velocity;
 }; 
 ```
-
 
 ## Render Probe Markers 
 
@@ -187,11 +190,26 @@ Three predefined probe types available.
 
 ### Other Probe Parameters
 
-position - _Verical position_
-autoGainDivisions - _How many division on screen should be if we will call AutoGain method_
+```C#
+probe.Gain = 2f;                              // To sen gain value V/
+probe.position = -5;                          // To ajust vertical position (zero level of oscillogram)
+probe.autoGain = true;                        // To enable auto gain featue
+probe.autoGainDivisions = 2;                  // Request 2 division for peak to peak oscillogram
+probe.style = OscProbe.Style.Logic;           // To change rendering style (Default, Logic)
+// To set trigger's values (will be applyyed after tigger will be connected to channel)
+probe.triggerMode = OscTrigger.Mode.Normal;   // Trigger's mode
+probe.triggerEdge = OscTrigger.Edge.Rising;   // Trigger's edge detection
+probe.triggerLevel = 0.5f;                    // Trigger's edge detection threshold
+```
 
 ## Class OscChannel
 
+When probe connected to channel all values from this probe will be copyied to the chanel. Now we can manipulate by channel's values directly.
+
+```C#
+var channel = oscilloscope.GetChannel(OscChannel.Name.C1);
+channel.Gain = 2f;                            //      
+```
 
 
 ## Class OscSettings
