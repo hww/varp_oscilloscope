@@ -253,7 +253,6 @@ To select trigger source use method
 ```C#
 var trigger = oscilloscope.trigger;
 trigger.SetChannel(OscChannel.Name.C1);
-
  ```
  
  After _SetChannel_ the settings from this channels will be applyed for trigger. After that the settings can be ajusted by next methods.
@@ -286,19 +285,13 @@ waveform, if any, will remain on the display.
 - **Single** The Single mode allows the oscilloscope to acquire one waveform each time you call ForceTrigger method, and the trigger condition is detected.
 
 ```C#
-void OnEnable()
-{
-    oscilloscope.trigger.ForceTrigger(); // start capturing
-}
+oscilloscope.trigger.ForceTrigger(); // start capturing
 ```
 
 To set trigger mode use method _SetMode_
 
 ```C#
-void OnEnable()
-{
-    oscilloscope.trigger.SetMode(Mode.Auto); // start capturing
-}
+oscilloscope.trigger.SetMode(Mode.Auto); // start capturing
 ```
 
 ### Edge Detection
@@ -313,12 +306,9 @@ While acquisition is running, the waveform display is live. Stopping the acquisi
 mode, the waveform display can be scaled or positioned with the vertical and horizontal controls.
 
 ```C#
-void OnEnable()
-{
-    oscilloscope.trigger.IsRun = true;  // run acquiring
-    ....
-    oscilloscope.trigger.IsRun = false; // stop acquiring
-}
+oscilloscope.trigger.IsRun = true;  // run acquiring
+....
+oscilloscope.trigger.IsRun = false; // stop acquiring
 ```
 
 ### Time Labels
