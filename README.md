@@ -95,16 +95,16 @@ The cnannels named C1,C2,C3,C4 can be used for record samples and draw oscillogr
 
 The enum value OscChannel.Name has the list of  default names. 
 
-| Value | Value Name | Comment |
-|------------|-------|---------|
-| 0 | C1 | Channel 1 |
-| 1 | C2 | Channel 2 |
-| 2 | C3 | Channel 2 |
-| 3 | C4 | Channel 4 |
-| 4 | C5 | Channel 5<sup>1</sup> |
-| 5 | C6 | Channel 6<sup>1</sup> |
-| 6 | C7 | Channel 7<sup>1</sup> |
-| 7 | C8 | Channel 8<sup>1</sup> |
+| Value | Value Name | Comment               |
+|-------|------------|-----------------------|
+| 0     | C1         | Channel 1             |
+| 1     | C2         | Channel 2             |
+| 2     | C3         | Channel 2             |
+| 3     | C4         | Channel 4             |
+| 4     | C5         | Channel 5<sup>1</sup> |
+| 5     | C6         | Channel 6<sup>1</sup> |
+| 6     | C7         | Channel 7<sup>1</sup> |
+| 7     | C8         | Channel 8<sup>1</sup> |
 
 <sup>1</sup> _Reserved for extension_
 
@@ -221,8 +221,6 @@ Three predefined probe types available.
 - **OscSineProbe.Default** Default probe with 10Hz 1V sine wave form. 
 - **OscSquareProbe.Default** Default probe with 10Hz 1V square form. 
 
-
-
 ## Class OscChannel
 
 When probe connected to channel all values from this probe will be copyied to the chanel. Now we can manipulate by channel's values directly.
@@ -307,7 +305,6 @@ mode, the waveform display can be scaled or positioned with the vertical and hor
 
 ```C#
 oscilloscope.trigger.IsRun = true;  // run acquiring
-....
 oscilloscope.trigger.IsRun = false; // stop acquiring
 ```
 
