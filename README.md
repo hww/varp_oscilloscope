@@ -248,6 +248,24 @@ and display a waveform. When a trigger is set up properly, it can
 convert unstable displays or blank screens into meaningful
 waveforms.
 
+To select trigger source use method 
+
+```C#
+var trigger = oscilloscope.trigger;
+trigger.SetChannel(OscChannel.Name.C1);
+
+ ```
+ 
+ After _SetChannel_ the settings from this channels will be applyed for trigger. After that the settings can be ajusted by next methods.
+
+```C#
+oscilloscope.trigger.SecondsDivision = 1f;   // set 1 second per division
+oscilloscope.trigger.SecondsDivisionPlus();  // increase second per division value
+oscilloscope.trigger.SecondsDivisionMinus(); // decrease second per division value
+oscilloscope.trigger.Position = 1f;          // chane horizontal position 1 division after trigger
+oscilloscope.trigger.Level = 1f;             // set threshold value for trigger
+```
+ 
 ### Source
 
 You can derive your trigger source from any channel.
@@ -274,13 +292,22 @@ void OnEnable()
 }
 ```
 
-###Edge Detection
+To set trigger mode use method _SetMode_
+
+```C#
+void OnEnable()
+{
+    oscilloscope.trigger.SetMode(Mode.Auto); // start capturing
+}
+```
+
+### Edge Detection
 
 The trigger compare the channel value with trigger's level value and produces starting data acquiring depend on Edge detection mode. The picture below explain difference of Edge modes.
 
 ![Edge Detection](images/varp_oscilloscope_trigger.png)
 
-###Stopping the Acquisition. 
+### Stopping the Acquisition. 
 
 While acquisition is running, the waveform display is live. Stopping the acquisition freezes the display. In either
 mode, the waveform display can be scaled or positioned with the vertical and horizontal controls.
@@ -293,4 +320,13 @@ void OnEnable()
     oscilloscope.trigger.IsRun = false; // stop acquiring
 }
 ```
+
+### Time Labels
+
+The time label will be rendered below the screen. 
+
+```C#
+oscilloscope.trigger.AddTimeLabel("X1", 1f); // add time label at 1 division after trigger point
+```
+
 
