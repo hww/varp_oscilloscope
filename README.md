@@ -10,20 +10,22 @@ In addition to the list of general features, this section covers the following t
 - How to add initialize the oscilloscope from your code
 - How to push or pull values to the oscilloscope probes
 - How to ajust probe magnitude attenuation factor
+- How to ajust trigger settings and horizontal scale value
 
 ## Features
 
 - Single time base digital real-time oscilloscope
 - Every frame or every fixed update sample rate<sup>1</sup> and 1024<sup>2</sup> point record lenght for each channel. 
 - Four<sup>3</sup> independed recording channels.
-- One additional external channel can be used for trigger sampling 
-- Each buffer is aray of floating point values
+- One of channels can be used for trigger acquiring 
+- Each buffer is aray of Vector3 values
 - Each channel has it's own color tag.
 - Screen 550x550pixels and 11x11 divisions grid<sup>4</sup>.
 - Four automated measurements (min,max,peak,average)
-- Autoset for quick setup
-- Cursors with readout
 - Custom labels OSD.
+- Alternative 'Logic' rendering for integer values as a logic analyzer.
+- Cursors with readout<sup>5</sup>
+- Autoset for quick setup<sup>5</sup>
 
 <sup>1</sup> The sampling rate is fully configurable and can be replaced to other time steps.
 
@@ -33,11 +35,19 @@ In addition to the list of general features, this section covers the following t
 
 <sup>4</sup> Can be modifyed to another dimentions and .
 
+<sup>5</sup> Not yet implemented
+
 ## Additional Features 
 
-- Does not require custom Unity GUI tools and learing.
+- Does not require custom Unity GUI tools and learing it.
 - Fully configurable with script for different measurements. 
 - Human friendly attenuation gain and time per division values. 
+
+## Screenshoot
+
+The asset is in development so the actual screenshot can have differences.
+
+![Screenshot](images/screenshot.png)
 
 ## Installation
 
@@ -59,33 +69,19 @@ an oscilloscope and their relationship to each other.
 
 ![Basic Concept Diagram](images/varp_oscilloscope_basic_concept.png)
 
-**GameValue** 
+**GameValue** _Any variable or class member can be captured by pushing it to the probe every frame or only when it was changed. As alternative the value can be pulled by lambda function assigned to the probe. Before recording the value should be converted to floating point type._
 
-_Any variable or class member can be captured by pushing it to the probe every frame or only when it was changed. As alternative the value can be pulled by lambda function assigned to the probe. Before recording the value should be converted to floating point type._
+**OscProbe** _Container of sample and configuration settings for the channel or trigger. Avery time when the probe connected to the oscilloscope channel, the values will be copyied to the channel and to trigger (if this channel connected to trigger)._
 
-**OscProbe** 
+**OscChannel** _This class contains data for data recording and rendering it on the screen. Every time when probe coonected to the channel, the channel reads settings from probe._
 
-_Container of sample and configuration settings for the channel or trigger. Avery time when the probe connected to the oscilloscope channel, the values will be copyied to the channel and to trigger (if this channel connected to trigger)._
+**OscGrid** _Rendering of grid on the screen._
 
-**OscChannel** 
+**OscRenderer** _Renderer of waveforms._
 
-_This class contains data for data recording and rendering it on the screen. Every time when probe coonected to the channel, the channel reads settings from probe._
+**OscTrigger** _Class which monitoring one of the channels and can be used to the start/stop acquiring data. Every time when trigger connected to channel, the trigger reads the configuration falues from channel._
 
-**OscGrid** 
-
-_Rendering of grid on the screen._
-
-**OscRenderer** 
-
-_Renderer of waveforms._
-
-**OscTrigger** 
-
-_Class which monitoring one of the channels and can be used to the start/stop acquiring data. Every time when trigger connected to channel, the trigger reads the configuration falues from channel._
-
-**Oscilloscope** 
-
-_Main code for the oscilloscope._
+**Oscilloscope** _Main code for the oscilloscope._
 
 ## Understanding Grid
 
@@ -95,32 +91,28 @@ The grid has divisions, subdivisions and rullers. Center of screen has coordinat
 
 ## Channel Names
 
-The cnannels named CH1,CH2,CH3,CH4 can be used for record samples and draw oscillogram on screen. Additional channel EXT can be used only for triggering recording samples. The channel's name will be displayed on sceen display and can be used as argumen of functions.
+The cnannels named CH1,CH2,CH3,CH4 can be used for record samples and draw oscillogram on screen. The channel's name will be displayed on sceen display and can be used as argumen of functions.
 
 The enum value OscChannel.Name has the list of  default names. 
 
 | Value | Value Name | Comment |
 |------------|-------|---------|
-| 0 | EXT | External trigger source |
-| 1 | CH1 | Channel 1 |
-| 2 | CH2 | Channel 2 |
-| 3 | CH3 | Channel 2 |
-| 4 | CH4 | Channel 4 |
-| 5 | CH5 | Channel 5<sup>1</sup> |
-| 6 | CH6 | Channel 6<sup>1</sup> |
-| 7 | CH7 | Channel 7<sup>1</sup> |
-| 8 | CH8 | Channel 8<sup>1</sup> |
+| 0 | CH1 | Channel 1 |
+| 1 | CH2 | Channel 2 |
+| 2 | CH3 | Channel 2 |
+| 3 | CH4 | Channel 4 |
+| 4 | CH5 | Channel 5<sup>1</sup> |
+| 5 | CH6 | Channel 6<sup>1</sup> |
+| 6 | CH7 | Channel 7<sup>1</sup> |
+| 7 | CH8 | Channel 8<sup>1</sup> |
 
 <sup>1</sup> _Reserved for extension_
 
-The number of channel will be displayed on screen as the marker. It has short horizontal line to mark channel's origin (0 value).
+The number of channel will be displayed on screen as the marker. It has horizontal arrow to mark channel's origin (0 value).
 
 ![Channel Labels](images/varp_oscilloscope_channel_labels.png)
 
-In cases when origin is outside of screen the channel's label will blink (at the sceen edge).
-
-![Channel Labels Blinking](images/varp_oscilloscope_channel_labels_blinking.png)
-
+In cases when origin is outside of screen the channel's label will rendered at the sceen edge.
 
 ## Probe Names
 
