@@ -148,6 +148,23 @@ oscilloscope.GetChannel(OscChannel.Name.C1).Plug(characterVelocityProbe);
 oscilloscope.GetChannel(OscChannel.Name.C1).Unplug();
 ```
 
+### Probe Parameters
+
+```C#
+probe.Gain = 2f;                              // To sen gain value V/
+probe.position = -5;                          // To ajust vertical position (zero level of oscillogram)
+probe.autoGain = true;                        // To enable auto gain featue
+probe.autoGainDivisions = 2;                  // Request 2 division for peak to peak oscillogram
+probe.style = OscProbe.Style.Logic;           // To change rendering style (Default, Logic)
+// To set trigger's values (will be applyyed after tigger will be connected to channel)
+probe.triggerMode = OscTrigger.Mode.Normal;   // Trigger's normal mode
+probe.triggerMode = OscTrigger.Mode.Auto;     // Trigger's auto mode
+probe.triggerMode = OscTrigger.Mode.Single;   // Trigger's single mode
+probe.triggerEdge = OscTrigger.Edge.Rising;   // Trigger's rising edge detection
+probe.triggerEdge = OscTrigger.Edge.Falling;  // Trigger's failing edge detection
+probe.triggerLevel = 0.5f;                    // Trigger's edge detection threshold
+```
+
 ### Push Value to Probe
 
 As probe created we can push value to the probe with setting the sample field. You can directly change the _sample_ field or use various methods.
@@ -178,7 +195,7 @@ characterVelocityProbe.readSample = (OscProbe probe) =>
 }; 
 ```
 
-## Render Probe Markers 
+### Render Probe Markers 
 
 Each probe can display horizontal markers with short text. 
 
@@ -204,19 +221,7 @@ Three predefined probe types available.
 - **OscSineProbe.Default** Default probe with 10Hz 1V sine wave form. 
 - **OscSquareProbe.Default** Default probe with 10Hz 1V square form. 
 
-### Other Probe Parameters
 
-```C#
-probe.Gain = 2f;                              // To sen gain value V/
-probe.position = -5;                          // To ajust vertical position (zero level of oscillogram)
-probe.autoGain = true;                        // To enable auto gain featue
-probe.autoGainDivisions = 2;                  // Request 2 division for peak to peak oscillogram
-probe.style = OscProbe.Style.Logic;           // To change rendering style (Default, Logic)
-// To set trigger's values (will be applyyed after tigger will be connected to channel)
-probe.triggerMode = OscTrigger.Mode.Normal;   // Trigger's mode
-probe.triggerEdge = OscTrigger.Edge.Rising;   // Trigger's edge detection
-probe.triggerLevel = 0.5f;                    // Trigger's edge detection threshold
-```
 
 ## Class OscChannel
 
@@ -224,10 +229,18 @@ When probe connected to channel all values from this probe will be copyied to th
 
 ```C#
 var channel = oscilloscope.GetChannel(OscChannel.Name.C1);
-channel.Gain = 2f;                            //      
-```
-
-        
+channel.Gain = 2f;                            // To set gain (Volts per Div) 
+channel.GainPlus();                           // Increase gain
+channel.GainMinus();                          // Decrease gain
+channel.Position = 1f;                        // Vertical position of channel (Divisions)
+channel.AutoGain = true;                      // Enable auto gain
+channel.autoDivisions = 2f;                   // Auto gain division number
+channel.Coupling = OscProbe.Coupling.AC;      // AC mode
+channel.Coupling = OscProbe.Coupling.DC;      // DC mode
+channel.Style = Style.Default;                // Render standart diagramm
+channel.Style = Style.Logic;                  // Render logic analyzer diagramm
+ ```
+   
 ## Class OscTrigger
 
 The trigger determines when the oscilloscope starts to acquire data
@@ -237,7 +250,7 @@ waveforms.
 
 ### Source
 
-You can derive your trigger from various sources: Input channels and External. 
+You can derive your trigger source from any channel.
 
 ### Modes
 
@@ -275,9 +288,9 @@ mode, the waveform display can be scaled or positioned with the vertical and hor
 ```C#
 void OnEnable()
 {
-    oscilloscope.trigger.SetRunOrStop(true); // run acquiring
+    oscilloscope.trigger.IsRun = true;  // run acquiring
     ....
-    oscilloscope.trigger.SetRunOrStop(false); // stop acquiring
+    oscilloscope.trigger.IsRun = false; // stop acquiring
 }
 ```
 
