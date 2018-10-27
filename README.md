@@ -130,10 +130,21 @@ Oscilloscope.I.ActivateProbe(OscChannel.Name.CH1, characterVelocityProbe);
 
 ### Push Value to Probe
 
-As probe created we can push value to the probe with setting the sample field.
+As probe created we can push value to the probe with setting the sample field. You can directly change the _sample_ field or use various methods.
 
 ```C#
-characterVelocityProbe.sample = rigidbody.velocity.magnitude;
+  // Write floating point value to probe
+		characterVelocityProbe.Log(rigidbody.velocity.magnitude);
+		// Write integer value to probe
+		characterVelocityProbe.Log((int)Time.time);
+		// Write bool value to probe
+		characterVelocityProbe.Log(Time.time > 10f);
+		// Write vector 2 to probe
+		characterVelocityProbe.Log(transform.achoredPosition);
+		// Write vector3 value to probe
+		characterVelocityProbe.Log(rigidbody.velocity);
+		// Write color value to probe
+		characterVelocityProbe.Log(text.color);
 ```
 
 ### Pull Value by Probe
@@ -141,8 +152,12 @@ characterVelocityProbe.sample = rigidbody.velocity.magnitude;
 Alternative way to read values is to assign the lambda method to the deligate of probe.
 
 ```C#
-oscEvents.readSample = () => { return rigidbody.velocity.magnitude };
+characterVelocityProbe.readSample = (OscProbe probe) =>
+{
+				probe.sample = rigidbody.velocity;
+}; 
 ```
+
 
 ## Render Probe Markers 
 
@@ -162,33 +177,22 @@ oscLastDifficultyForce.postRender = (OscRenderer renderer, OscChannel channel) =
 
 ![Custom Probe Markers](images/varp_oscilloscope_custom_markers.png)
 
-### Probe Fields
-
-| Type | Field | Info |
-|---:|:----|:-----|
-| readonly string | name | Probe name will be displayed on screen |
-| float | position | Change vertical position of this diagram (divisions) |
-| bool | autoGain | Audoset best gain for this probe |
-| int | autoGainDivisions | Audoset gain will try to fit diagram to X divisions |
-| OscTrigger.Mode | triggerMode | Trigger mode |
-| OscTrigger.Edge | triggerEdge | Trigger edge detection |
-| float | triggerLevel | Trigger threshold |
-| float | sample | Curent sample value |
-
-### Probe Delegates
-
-| Type               | Field      | Info                         |
-|-------------------:|:-----------|:-----------------------------|
-| PostRenderDelegate | postRender |	Render additional markers    |
-| ReadSampleDelegate | readSample | Read sample from this probe	 |
-
 ### Default Probes
+
+Three predefined probe types available.
 
 - **OscProbe.Null** Default probe usualy used for disabling a channel. 
 - **OscSineProbe.Default** Default probe with 10Hz 1V sine wave form. 
 - **OscSquareProbe.Default** Default probe with 10Hz 1V square form. 
 
+### Other Probe Parameters
+
+position - _Verical position_
+autoGainDivisions - _How many division on screen should be if we will call AutoGain method_
+
 ## Class OscChannel
+
+
 
 ## Class OscSettings
 
@@ -211,11 +215,11 @@ and display a waveform. When a trigger is set up properly, it can
 convert unstable displays or blank screens into meaningful
 waveforms.
 
-###Source
+### Source
 
 You can derive your trigger from various sources: Input channels and External. 
 
-###Modes
+### Modes
 
 - **Auto.** This trigger mode allows the oscilloscope to acquire a
 waveform even when it does not detect a trigger condition. If no
