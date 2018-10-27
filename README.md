@@ -326,7 +326,11 @@ void OnEnable()
 The time label will be rendered below the screen. 
 
 ```C#
-oscilloscope.trigger.AddTimeLabel("X1", 1f); // add time label at 1 division after trigger point
+oscilloscope.trigger.AddTimeLabel("T1", 1f); // add time label at 1 division after trigger point
+oscilloscope.trigger.AddTimeLabel("T2");     // add time now at curen acquiring position
 ```
+
+![Time Markers](images/varp_oscilloscope_time_markers.png)
+
 
 
