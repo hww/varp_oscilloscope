@@ -27,15 +27,15 @@ In addition to the list of general features, this section covers the following t
 - Cursors with readout<sup>5</sup>
 - Autoset for quick setup<sup>5</sup>
 
-<sup>1</sup> The sampling rate is fully configurable and can be replaced to other time steps.
+<sup>1</sup> _The sampling rate is fully configurable and can be replaced to other time steps._
 
-<sup>2</sup> Can be modifyed to another size.
+<sup>2</sup> _Can be modifyed to another size._
 
-<sup>3</sup> Can be modifyed to another channels quantity.
+<sup>3</sup> _Can be modifyed to another channels quantity._
 
-<sup>4</sup> Can be modifyed to another dimentions and .
+<sup>4</sup> _Can be modifyed to another dimentions and ._
 
-<sup>5</sup> Not yet implemented
+<sup>5</sup> _Not yet implemented._
 
 ## Additional Features 
 
