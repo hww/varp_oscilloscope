@@ -128,6 +128,15 @@ It is based on ScriptabbleObject, can be used to create asset with oscilloscope'
 | bool | drawRullerX       | Draw horizontal ruller in center |
 | bool | drawRullerY       | Draw vertical ruller in center |
 
+## Class OsdGrid
+
+Changing the grid view by scripg.
+
+```C#
+oscilloscope.grid.DrawGrid = true;    // Draw grid cells
+oscilloscope.grid.DrawRullerX = true; // Draw horizontal ruller
+oscilloscope.grid.DrawRullerY = true; // Draw vertical ruller
+```
 
 ## Class OsdProbe
 
@@ -329,6 +338,7 @@ oscilloscope.trigger.AddTimeLabel("T2");     // add time now at curen acquiring 
 | SHIFT+1 to SHIFT+8 | _Activate channel for trigger's source_ |
 | Pause              | _Pause/Unpause the data acquiring_ |
 | S                  | _Force start acquiring_ |
+| G                  | _Modify grid style_ |
 
 ### Selected Channel 
 
