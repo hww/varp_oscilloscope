@@ -338,7 +338,7 @@ oscilloscope.trigger.AddTimeLabel("T2");     // add time now at curen acquiring 
 | Pause                | _Pause/Unpause the data acquiring_ |
 | S                    | _Force start acquiring_ |
 | G                    | _Modify grid style_ |
-| **Selected Channel*  | | 
+| **Selected Channel** | | 
 | +, -                 | _Ajust gain value_ |
 | Up, Down             | _Ajust verical position_ |
 | C                    | _Ajust coupling settigs_ |
