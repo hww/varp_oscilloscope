@@ -261,7 +261,7 @@ You can derive your trigger source from any channel. To select trigger source us
 ```C#
 var trigger = oscilloscope.trigger;
 trigger.SetChannel(OscChannel.Name.C1);
-``
+```
 
 After method _SetChannel_ the settings from this channels will be applyed for trigger. After that the settings can be ajusted by next methods.
 
