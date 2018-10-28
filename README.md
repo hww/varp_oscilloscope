@@ -118,16 +118,25 @@ In cases when origin is outside of screen the channel's label will rendered at t
 
 It is based on ScriptabbleObject, can be used to create asset with oscilloscope's configuration settings.
 
-| Type | Field | Info |
+| Type | Field             | Info                                                       |
 |------|-------------------|------------------------------------------------------------|
 | int  | pixelsPerDivision | How many pixels in single division (recomend 10,20,30,...) |
-| int  | divisionsX        | Horizontal divisions (Recomend odd value) |
-| int  | divisionsY        | Vertical divisions (Recomend odd value) |
-| int  | subdivisions      | Subdivisions in the division (Recomend 5 or 10) |
-| bool | drawGrid          | Draw grid lines |
-| bool | drawRullerX       | Draw horizontal ruller in center |
-| bool | drawRullerY       | Draw vertical ruller in center |
+| int  | divisionsX        | Horizontal divisions (Recomend odd value)                  |
+| int  | divisionsY        | Vertical divisions (Recomend odd value)                    |
+| int  | subdivisions      | Subdivisions in the division (Recomend 5 or 10)            |
+| bool | drawGrid          | Draw grid lines                                            |
+| bool | drawRullerX       | Draw horizontal ruller in center                           |
+| bool | drawRullerY       | Draw vertical ruller in center                             |
 
+## Class OsdGrid
+
+Changing the grid view by script.
+
+```C#
+oscilloscope.grid.DrawGrid = true;    // Draw grid cells
+oscilloscope.grid.DrawRullerX = true; // Draw horizontal ruller
+oscilloscope.grid.DrawRullerY = true; // Draw vertical ruller
+```
 
 ## Class OsdProbe
 
@@ -202,12 +211,11 @@ Each probe can display horizontal markers with short text.
 ```C#
 oscLastDifficultyForce.postRender = (OscRenderer renderer, OscChannel channel) =>
 {
-    var x = 4f; // grid divisions
-    channel.DrawLabel(renderer, "-2", x, -2f);
-    channel.DrawLabel(renderer, "-1", x, -1f);
-    channel.DrawLabel(renderer, " 0", x, 0f);
-    channel.DrawLabel(renderer, "+1", x, 1f);
-    channel.DrawLabel(renderer, "+2", x, 2f);
+    channel.DrawLabel(renderer, "-2", -2f);
+    channel.DrawLabel(renderer, "-1", -1f);
+    channel.DrawLabel(renderer, " 0", 0f);
+    channel.DrawLabel(renderer, "+1", 1f);
+    channel.DrawLabel(renderer, "+2", 2f);
 };
 ```
 
@@ -319,5 +327,26 @@ oscilloscope.trigger.AddTimeLabel("T2");     // add time now at curen acquiring 
 
 ![Time Markers](images/varp_oscilloscope_time_markers.png)
 
+## Keyboard Shorcuts
+
+| Keys                 | Functions |
+|:--------------------:|--|
+| `                    | _Enable, Disable oscilloscope GUI. Also used for activate input focus on oscilloscope_  |
+| 1 to 8               | _Select current channel_ |
+| 0                    | _Select trigger_ |
+| SHIFT+1 to SHIFT+8   | _Activate channel for trigger's source_ |
+| Pause                | _Pause/Unpause the data acquiring_ |
+| S                    | _Force start acquiring_ |
+| G                    | _Modify grid style_ |
+| **Selected Channel** | | 
+| +, -                 | _Ajust gain value_ |
+| Up, Down             | _Ajust verical position_ |
+| C                    | _Ajust coupling settigs_ |
+| A                    | _Enable/Disable auto gain mode_ |
+| **Selected Trigger** | |
+| E                    | _Edge detection mode_ |
+| M                    | _Trigger mode_ |
+| +, -                 | _Ajust time scale value_ |
+| Left, Right          | _Ajust horizontal position_ |
 
 
