@@ -331,14 +331,19 @@ oscilloscope.trigger.AddTimeLabel("T2");     // add time now at curen acquiring 
 ### Selected Channel 
 
 **+**, **-** _Ajust gain value_
+
 **Up**, **Down** _Ajust verical position_
 
 ### Selected Trigger
 
 **C** _Coupling settigs_
+
 **E** _Edge detection mode_
+
 **M** _Trigger mode_
+
 **+**, **-** _Ajust time scale value_
+
 **Left**, **Right** _Ajust horizontal position_
 
 
