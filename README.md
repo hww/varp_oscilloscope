@@ -346,12 +346,13 @@ oscilloscope.trigger.AddTimeLabel("T2");     // add time now at curen acquiring 
 |:--------:|--|
 | +, -     | _Ajust gain value_ |
 | Up, Down | _Ajust verical position_ |
+| C        | _Ajust coupling settigs_ |
+| A        | _Enable/Disable auto gain mode_ |
 
 ### Selected Trigger
 
 | Keys | Functions |
 |:-----------:|--|
-| C           | _Coupling settigs_ |
 | E           | _Edge detection mode_ |
 | M           | _Trigger mode_ |
 | +, -        | _Ajust time scale value_ |
