@@ -187,8 +187,10 @@ characterVelocityProbe.Log((int)Time.time);
 characterVelocityProbe.Log(Time.time > 10f);
 // Write vector 2 to probe
 characterVelocityProbe.Log(transform.achoredPosition);
+characterVelocityProbe.Log(x,y);
 // Write vector3 value to probe
 characterVelocityProbe.Log(rigidbody.velocity);
+characterVelocityProbe.Log(x,y,z);
 // Write color value to probe
 characterVelocityProbe.Log(text.color);
 ```
@@ -254,14 +256,17 @@ and display a waveform. When a trigger is set up properly, it can
 convert unstable displays or blank screens into meaningful
 waveforms.
 
-To select trigger source use method 
+### Trigger Source
+
+You can derive your trigger source from any channel. To select trigger source use method.
 
 ```C#
 var trigger = oscilloscope.trigger;
 trigger.SetChannel(OscChannel.Name.C1);
- ```
- 
- After _SetChannel_ the settings from this channels will be applyed for trigger. After that the settings can be ajusted by next methods.
+```
+
+After method _SetChannel_ the settings from this channels will be applyed for trigger. After that the settings can be ajusted by next methods.
+
 
 ```C#
 oscilloscope.trigger.SecondsDivision = 1f;   // set 1 second per division
@@ -271,11 +276,13 @@ oscilloscope.trigger.Position = 1f;          // chane horizontal position 1 divi
 oscilloscope.trigger.Level = 1f;             // set threshold value for trigger
 ```
  
-### Source
-
-You can derive your trigger source from any channel.
-
 ### Modes
+
+There are three trigger mode available Auto, Normal, Single. To set trigger mode use method _SetMode_
+
+```C#
+oscilloscope.trigger.SetMode(Mode.Auto); // start capturing
+```
 
 - **Auto.** This trigger mode allows the oscilloscope to acquire a
 waveform even when it does not detect a trigger condition. If no
@@ -290,21 +297,20 @@ waveform, if any, will remain on the display.
 
 - **Single** The Single mode allows the oscilloscope to acquire one waveform each time you call ForceTrigger method, and the trigger condition is detected.
 
-```C#
-oscilloscope.trigger.ForceTrigger(); // start capturing
-```
 
-To set trigger mode use method _SetMode_
-
-```C#
-oscilloscope.trigger.SetMode(Mode.Auto); // start capturing
-```
 
 ### Edge Detection
 
 The trigger compare the channel value with trigger's level value and produces starting data acquiring depend on Edge detection mode. The picture below explain difference of Edge modes.
 
 ![Edge Detection](images/varp_oscilloscope_trigger.png)
+
+The method **AutoSetLevel** set the trigger level is set to the vertical midpoint
+between the peaks of the trigger signal.
+
+```C#
+oscilloscope.trigger.AutoSetLevel();  
+```
 
 ### Stopping acquiring waveform data 
 
@@ -314,6 +320,11 @@ mode, the waveform display can be scaled or positioned with the vertical and hor
 ```C#
 oscilloscope.trigger.Pause = true;   // stop acquiring
 oscilloscope.trigger.Pause = false;  // run acquiring
+```
+Starts an acquisition regardless of an adequate trigger signal. This button has no effect if the acquisition is already stopped.
+
+```C#
+oscilloscope.trigger.ForceTrigger(); // start capturing
 ```
 
 ### Time Labels
@@ -327,7 +338,13 @@ oscilloscope.trigger.AddTimeLabel("T2");     // add time now at curen acquiring 
 
 ![Time Markers](images/varp_oscilloscope_time_markers.png)
 
-## Keyboard Shorcuts
+## Taking Measurements
+
+**TODO**
+
+## Appendix
+
+### Keyboard Shorcuts
 
 | Keys                 | Functions |
 |:--------------------:|--|
@@ -349,4 +366,6 @@ oscilloscope.trigger.AddTimeLabel("T2");     // add time now at curen acquiring 
 | +, -                 | _Ajust time scale value_ |
 | Left, Right          | _Ajust horizontal position_ |
 
+### Icons
 
+![Icons](images/osc_icons.png)
