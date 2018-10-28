@@ -243,8 +243,8 @@ channel.GainMinus();                          // Decrease gain
 channel.Position = 1f;                        // Vertical position of channel (Divisions)
 channel.AutoGain = true;                      // Enable auto gain
 channel.autoDivisions = 2f;                   // Auto gain division number
-channel.Coupling = OscProbe.Coupling.AC;      // AC mode
-channel.Coupling = OscProbe.Coupling.DC;      // DC mode
+channel.Decoupling = true;                    // AC mode
+channel.Decoupling = false;                   // DC mode
 channel.Style = Style.Default;                // Render standart diagramm
 channel.Style = Style.Logic;                  // Render logic analyzer diagramm
  ```
