@@ -187,8 +187,10 @@ characterVelocityProbe.Log((int)Time.time);
 characterVelocityProbe.Log(Time.time > 10f);
 // Write vector 2 to probe
 characterVelocityProbe.Log(transform.achoredPosition);
+characterVelocityProbe.Log(x,y);
 // Write vector3 value to probe
 characterVelocityProbe.Log(rigidbody.velocity);
+characterVelocityProbe.Log(x,y,z);
 // Write color value to probe
 characterVelocityProbe.Log(text.color);
 ```
