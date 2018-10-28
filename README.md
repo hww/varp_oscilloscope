@@ -321,6 +321,7 @@ oscilloscope.trigger.AddTimeLabel("T2");     // add time now at curen acquiring 
 
 ## Keyboard Shorcuts
 
+|--|--|
 | ` | _Enable, Disable oscilloscope GUI. Also used for activate input focus on oscilloscope_  |
 | 1 to 8 | _Select current channel_ |
 | 0 | _Select trigger_ |
@@ -330,11 +331,13 @@ oscilloscope.trigger.AddTimeLabel("T2");     // add time now at curen acquiring 
 
 ### Selected Channel 
 
+|--|--|
 | +, - | _Ajust gain value_ |
 | Up, Down | _Ajust verical position_ |
 
 ### Selected Trigger
 
+|--|--|
 | C | _Coupling settigs_ |
 | E | _Edge detection mode_ |
 | M | _Trigger mode_ |
