@@ -211,12 +211,11 @@ Each probe can display horizontal markers with short text.
 ```C#
 oscLastDifficultyForce.postRender = (OscRenderer renderer, OscChannel channel) =>
 {
-    var x = 4f; // grid divisions
-    channel.DrawLabel(renderer, "-2", x, -2f);
-    channel.DrawLabel(renderer, "-1", x, -1f);
-    channel.DrawLabel(renderer, " 0", x, 0f);
-    channel.DrawLabel(renderer, "+1", x, 1f);
-    channel.DrawLabel(renderer, "+2", x, 2f);
+    channel.DrawLabel(renderer, "-2", -2f);
+    channel.DrawLabel(renderer, "-1", -1f);
+    channel.DrawLabel(renderer, " 0", 0f);
+    channel.DrawLabel(renderer, "+1", 1f);
+    channel.DrawLabel(renderer, "+2", 2f);
 };
 ```
 
