@@ -298,14 +298,14 @@ The trigger compare the channel value with trigger's level value and produces st
 
 ![Edge Detection](images/varp_oscilloscope_trigger.png)
 
-### Stopping the Acquisition. 
+### Stopping acquiring waveform data 
 
 While acquisition is running, the waveform display is live. Stopping the acquisition freezes the display. In either
 mode, the waveform display can be scaled or positioned with the vertical and horizontal controls.
 
 ```C#
-oscilloscope.trigger.IsRun = true;  // run acquiring
-oscilloscope.trigger.IsRun = false; // stop acquiring
+oscilloscope.trigger.Pause = true;   // stop acquiring
+oscilloscope.trigger.Pause = false;  // run acquiring
 ```
 
 ### Time Labels
