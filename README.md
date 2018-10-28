@@ -349,4 +349,6 @@ oscilloscope.trigger.AddTimeLabel("T2");     // add time now at curen acquiring 
 | +, -                 | _Ajust time scale value_ |
 | Left, Right          | _Ajust horizontal position_ |
 
+## Icons
 
+![Icons](images/osc_icons.png)
