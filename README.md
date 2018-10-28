@@ -275,6 +275,13 @@ oscilloscope.trigger.SecondsDivisionMinus(); // decrease second per division val
 oscilloscope.trigger.Position = 1f;          // chane horizontal position 1 division after trigger
 oscilloscope.trigger.Level = 1f;             // set threshold value for trigger
 ```
+
+When channel record Vector3 or Vecto2 data, the trigger reading only X component of vector on input. To alternate it can be used _readTriggerSample_ delegate.
+
+```C#
+probe.readTriggerSample = () => probe.GetSample().magntude; // use vector's magnitude to the trigger's source
+```
+
  
 ### Modes
 
