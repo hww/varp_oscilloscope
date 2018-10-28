@@ -319,5 +319,26 @@ oscilloscope.trigger.AddTimeLabel("T2");     // add time now at curen acquiring 
 
 ![Time Markers](images/varp_oscilloscope_time_markers.png)
 
+## Keyboard Shorcuts
+
+**`** _Enable, Disable oscilloscope GUI. Also used for activate input focus on oscilloscope_ 
+**1 to 8** _Select current channel_
+**0** _Select trigger_
+**SHIFT+1** to **SHIFT+8** _Activate channel for trigger's source_
+**Pause** _Pause/Unpause the data acquiring_
+**S** _Force start acquiring_
+
+### Selected Channel 
+
+**+**, **-** _Ajust gain value_
+**Up**, **Down** _Ajust verical position_
+
+### Selected Trigger
+
+**C** _Coupling settigs_
+**E** _Edge detection mode_
+**M** _Trigger mode_
+**+**, **-** _Ajust time scale value_
+**Left**, **Right** _Ajust horizontal position_
 
 
