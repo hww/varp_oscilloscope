@@ -279,7 +279,7 @@ oscilloscope.trigger.Level = 1f;             // set threshold value for trigger
 When channel record Vector3 or Vecto2 data, the trigger reading only X component of vector on input. To alternate it can be used _readTriggerSample_ delegate.
 
 ```C#
-probe.readTriggerSample = () => probe.GetSample().magntude; // use vector's magnitude to the trigger's source
+probe.readTriggerSample = () => probe.GetSample().magntude; // use vector's magnitude as the trigger's source
 ```
 
  
@@ -367,6 +367,7 @@ oscilloscope.trigger.AddTimeLabel("T2");     // add time now at curen acquiring 
 | Up, Down             | _Ajust verical position_ |
 | C                    | _Ajust coupling settigs_ |
 | A                    | _Enable/Disable auto gain mode_ |
+| V                    | _Alternate view style_ |
 | **Selected Trigger** | |
 | E                    | _Edge detection mode_ |
 | M                    | _Trigger mode_ |
