@@ -27,15 +27,15 @@ In addition to the list of general features, this section covers the following t
 - Cursors with readout<sup>5</sup>
 - Autoset for quick setup<sup>5</sup>
 
-<sup>1</sup> The sampling rate is fully configurable and can be replaced to other time steps.
+<sup>1</sup> _The sampling rate is fully configurable and can be replaced to other time steps._
 
-<sup>2</sup> Can be modifyed to another size.
+<sup>2</sup> _Can be modifyed to another size._
 
-<sup>3</sup> Can be modifyed to another channels quantity.
+<sup>3</sup> _Can be modifyed to another channels quantity._
 
-<sup>4</sup> Can be modifyed to another dimentions and .
+<sup>4</sup> _Can be modifyed to another dimentions and ._
 
-<sup>5</sup> Not yet implemented
+<sup>5</sup> _Not yet implemented._
 
 ## Additional Features 
 
@@ -95,16 +95,16 @@ The cnannels named C1,C2,C3,C4 can be used for record samples and draw oscillogr
 
 The enum value OscChannel.Name has the list of  default names. 
 
-| Value | Value Name | Comment |
-|------------|-------|---------|
-| 0 | C1 | Channel 1 |
-| 1 | C2 | Channel 2 |
-| 2 | C3 | Channel 2 |
-| 3 | C4 | Channel 4 |
-| 4 | C5 | Channel 5<sup>1</sup> |
-| 5 | C6 | Channel 6<sup>1</sup> |
-| 6 | C7 | Channel 7<sup>1</sup> |
-| 7 | C8 | Channel 8<sup>1</sup> |
+| Value | Value Name | Comment               |
+|-------|------------|-----------------------|
+| 0     | C1         | Channel 1             |
+| 1     | C2         | Channel 2             |
+| 2     | C3         | Channel 2             |
+| 3     | C4         | Channel 4             |
+| 4     | C5         | Channel 5<sup>1</sup> |
+| 5     | C6         | Channel 6<sup>1</sup> |
+| 6     | C7         | Channel 7<sup>1</sup> |
+| 7     | C8         | Channel 8<sup>1</sup> |
 
 <sup>1</sup> _Reserved for extension_
 
@@ -221,8 +221,6 @@ Three predefined probe types available.
 - **OscSineProbe.Default** Default probe with 10Hz 1V sine wave form. 
 - **OscSquareProbe.Default** Default probe with 10Hz 1V square form. 
 
-
-
 ## Class OscChannel
 
 When probe connected to channel all values from this probe will be copyied to the chanel. Now we can manipulate by channel's values directly.
@@ -253,7 +251,6 @@ To select trigger source use method
 ```C#
 var trigger = oscilloscope.trigger;
 trigger.SetChannel(OscChannel.Name.C1);
-
  ```
  
  After _SetChannel_ the settings from this channels will be applyed for trigger. After that the settings can be ajusted by next methods.
@@ -286,19 +283,13 @@ waveform, if any, will remain on the display.
 - **Single** The Single mode allows the oscilloscope to acquire one waveform each time you call ForceTrigger method, and the trigger condition is detected.
 
 ```C#
-void OnEnable()
-{
-    oscilloscope.trigger.ForceTrigger(); // start capturing
-}
+oscilloscope.trigger.ForceTrigger(); // start capturing
 ```
 
 To set trigger mode use method _SetMode_
 
 ```C#
-void OnEnable()
-{
-    oscilloscope.trigger.SetMode(Mode.Auto); // start capturing
-}
+oscilloscope.trigger.SetMode(Mode.Auto); // start capturing
 ```
 
 ### Edge Detection
@@ -307,18 +298,14 @@ The trigger compare the channel value with trigger's level value and produces st
 
 ![Edge Detection](images/varp_oscilloscope_trigger.png)
 
-### Stopping the Acquisition. 
+### Stopping acquiring waveform data 
 
 While acquisition is running, the waveform display is live. Stopping the acquisition freezes the display. In either
 mode, the waveform display can be scaled or positioned with the vertical and horizontal controls.
 
 ```C#
-void OnEnable()
-{
-    oscilloscope.trigger.IsRun = true;  // run acquiring
-    ....
-    oscilloscope.trigger.IsRun = false; // stop acquiring
-}
+oscilloscope.trigger.Pause = true;   // stop acquiring
+oscilloscope.trigger.Pause = false;  // run acquiring
 ```
 
 ### Time Labels
@@ -326,7 +313,11 @@ void OnEnable()
 The time label will be rendered below the screen. 
 
 ```C#
-oscilloscope.trigger.AddTimeLabel("X1", 1f); // add time label at 1 division after trigger point
+oscilloscope.trigger.AddTimeLabel("T1", 1f); // add time label at 1 division after trigger point
+oscilloscope.trigger.AddTimeLabel("T2");     // add time now at curen acquiring position
 ```
+
+![Time Markers](images/varp_oscilloscope_time_markers.png)
+
 
 
