@@ -254,14 +254,17 @@ and display a waveform. When a trigger is set up properly, it can
 convert unstable displays or blank screens into meaningful
 waveforms.
 
-To select trigger source use method 
+### Trigger Source
+
+You can derive your trigger source from any channel. To select trigger source use method.
 
 ```C#
 var trigger = oscilloscope.trigger;
 trigger.SetChannel(OscChannel.Name.C1);
- ```
- 
- After _SetChannel_ the settings from this channels will be applyed for trigger. After that the settings can be ajusted by next methods.
+``
+
+After method _SetChannel_ the settings from this channels will be applyed for trigger. After that the settings can be ajusted by next methods.
+
 
 ```C#
 oscilloscope.trigger.SecondsDivision = 1f;   // set 1 second per division
@@ -271,11 +274,13 @@ oscilloscope.trigger.Position = 1f;          // chane horizontal position 1 divi
 oscilloscope.trigger.Level = 1f;             // set threshold value for trigger
 ```
  
-### Source
-
-You can derive your trigger source from any channel.
-
 ### Modes
+
+There are three trigger mode available Auto, Normal, Single. To set trigger mode use method _SetMode_
+
+```C#
+oscilloscope.trigger.SetMode(Mode.Auto); // start capturing
+```
 
 - **Auto.** This trigger mode allows the oscilloscope to acquire a
 waveform even when it does not detect a trigger condition. If no
@@ -292,12 +297,6 @@ waveform, if any, will remain on the display.
 
 ```C#
 oscilloscope.trigger.ForceTrigger(); // start capturing
-```
-
-To set trigger mode use method _SetMode_
-
-```C#
-oscilloscope.trigger.SetMode(Mode.Auto); // start capturing
 ```
 
 ### Edge Detection
@@ -327,7 +326,13 @@ oscilloscope.trigger.AddTimeLabel("T2");     // add time now at curen acquiring 
 
 ![Time Markers](images/varp_oscilloscope_time_markers.png)
 
-## Keyboard Shorcuts
+## Taking Measurements
+
+**TODO**
+
+## Appendix
+
+### Keyboard Shorcuts
 
 | Keys                 | Functions |
 |:--------------------:|--|
@@ -349,6 +354,6 @@ oscilloscope.trigger.AddTimeLabel("T2");     // add time now at curen acquiring 
 | +, -                 | _Ajust time scale value_ |
 | Left, Right          | _Ajust horizontal position_ |
 
-## Icons
+### Icons
 
 ![Icons](images/osc_icons.png)
