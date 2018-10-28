@@ -47,7 +47,7 @@ In addition to the list of general features, this section covers the following t
 
 The asset is in development so the actual screenshot can have differences.
 
-![Screenshot](images/screenshot.png  | width=256)
+![Screenshot](images/screenshot.png | width=256)
 
 ## Installation
 
