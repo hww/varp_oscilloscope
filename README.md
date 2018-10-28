@@ -295,15 +295,20 @@ waveform, if any, will remain on the display.
 
 - **Single** The Single mode allows the oscilloscope to acquire one waveform each time you call ForceTrigger method, and the trigger condition is detected.
 
-```C#
-oscilloscope.trigger.ForceTrigger(); // start capturing
-```
+
 
 ### Edge Detection
 
 The trigger compare the channel value with trigger's level value and produces starting data acquiring depend on Edge detection mode. The picture below explain difference of Edge modes.
 
 ![Edge Detection](images/varp_oscilloscope_trigger.png)
+
+The method **AutoSetLevel** set the trigger level is set to the vertical midpoint
+between the peaks of the trigger signal.
+
+```C#
+oscilloscope.trigger.AutoSetLevel();  
+```
 
 ### Stopping acquiring waveform data 
 
@@ -313,6 +318,11 @@ mode, the waveform display can be scaled or positioned with the vertical and hor
 ```C#
 oscilloscope.trigger.Pause = true;   // stop acquiring
 oscilloscope.trigger.Pause = false;  // run acquiring
+```
+Starts an acquisition regardless of an adequate trigger signal. This button has no effect if the acquisition is already stopped.
+
+```C#
+oscilloscope.trigger.ForceTrigger(); // start capturing
 ```
 
 ### Time Labels
