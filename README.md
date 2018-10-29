@@ -3,7 +3,7 @@ _Documentation for Untiy asset_
 
 ## Getting Stated
 
- VARP Oscilloscope are small, easy to use Unity asset, that you can use to record and analyze values modifyed by script, physcis or animation in real time. The oscilloscopes have four-channels but can be extended to 8 without additional proggraming.
+ VARP Oscilloscope are small, easy to use Unity asset, that you can use to record and analyze values modifyed by script, physcis or animation in real time. The oscilloscopes have four-channels but can be extended to 8 without additional programing.
 In addition to the list of general features, this section covers the following topics:
 
 - How to add asset to your project
@@ -279,7 +279,7 @@ oscilloscope.trigger.Level = 1f;             // set threshold value for trigger
 When channel record Vector3 or Vecto2 data, the trigger reading only X component of vector on input. To alternate it can be used _readTriggerSample_ delegate.
 
 ```C#
-probe.readTriggerSample = () => probe.GetSample().magntude; // use vector's magnitude as the trigger's source
+probe.readTriggerSample = (OscCnammel ch) => ch.sample.magntude; // use vector's magnitude as the trigger's source
 ```
 
  
@@ -336,11 +336,10 @@ oscilloscope.trigger.ForceTrigger(); // start capturing
 
 ### Time Labels
 
-The time label will be rendered below the screen. 
+The time label will be rendered below the screen.  Each lable has unique id and calling the _AddTimeLabel_ method with same index will override previously defined label.  
 
 ```C#
-oscilloscope.trigger.AddTimeLabel("T1", 1f); // add time label at 1 division after trigger point
-oscilloscope.trigger.AddTimeLabel("T2");     // add time now at curen acquiring position
+oscilloscope.trigger.AddTimeLabel(0, "T1", Color.red); // add time label at the current time
 ```
 
 ![Time Markers](images/varp_oscilloscope_time_markers.png)
