@@ -1,4 +1,28 @@
-﻿using System;
+﻿// =============================================================================
+// MIT License
+// 
+// Copyright (c) [2018] [Valeriya Pudova]
+// 
+// Permission is hereby granted, free of charge, to any person obtaining a copy
+// of this software and associated documentation files (the "Software"), to deal
+// in the Software without restriction, including without limitation the rights
+// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+// copies of the Software, and to permit persons to whom the Software is
+// furnished to do so, subject to the following conditions:
+// 
+// The above copyright notice and this permission notice shall be included in all
+// copies or substantial portions of the Software.
+// 
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+// SOFTWARE.
+// =============================================================================
+
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -11,7 +35,7 @@ namespace VARP.OSC
 	{
 		public enum Mode
 		{
-			Default,							//< Default oscilloscope diagramm
+			Default,							//< Default oscilloscope diagram
 		}
 
 		public Color colorX = Color.red;        //< Draw vector data with this colors
@@ -23,7 +47,7 @@ namespace VARP.OSC
 		private Texture2D screenTexture;		//< The texture used for screenImage
 		private Color[] clearColors;			//< The colors to clear screenTexture
 		private OscSettings oscSettings;		//< Oscilloscope settings
-		public bool heartBeat;					//< To make gui elements blinkh
+		public bool heartBeat;					//< To make GUI elements blink
 		
 		/// <summary>Use this for initialization</summary>
 		/// <param name="divisionsX">Divisions of X axis</para>
@@ -75,7 +99,7 @@ namespace VARP.OSC
 		}
 		
 		/// <summary>
-		/// Clear horizintal block of texture
+		/// Clear horizontal block of texture
 		/// </summary>
 		/// <param name="x1">Start pixel</param>
 		/// <param name="x2">End pixel</param>

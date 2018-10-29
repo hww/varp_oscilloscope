@@ -1,4 +1,28 @@
-﻿using System.Collections;
+﻿// =============================================================================
+// MIT License
+// 
+// Copyright (c) [2018] [Valeriya Pudova]
+// 
+// Permission is hereby granted, free of charge, to any person obtaining a copy
+// of this software and associated documentation files (the "Software"), to deal
+// in the Software without restriction, including without limitation the rights
+// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+// copies of the Software, and to permit persons to whom the Software is
+// furnished to do so, subject to the following conditions:
+// 
+// The above copyright notice and this permission notice shall be included in all
+// copies or substantial portions of the Software.
+// 
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+// SOFTWARE.
+// =============================================================================
+
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -7,7 +31,7 @@ namespace VARP.OSC
     /// <summary>
     /// The base class for all input. It is model of the oscilloscope's cable probe.
     /// Also it has default settings for oscilloscope's channel. And when we will
-    /// plug input to the channel those settings will be applayed to the channel.
+    /// plug input to the channel those settings will be applied to the channel.
     /// </summary>
 	public class OscProbe
 	{
@@ -18,16 +42,16 @@ namespace VARP.OSC
 		 ***********************************************/
 
 		public float position = 0f;						//< Change vertical position of this diagram (divisions)
-		public bool autoGain = false;					//< Audoset best gain for this probe
-		public int autoGainDivisions = 2;				//< Audoset gain will try to fit diagram to X divisions
+		public bool autoGain = false;					//< Auto set best gain for this probe
+		public int autoGainDivisions = 2;				//< Auto set gain will try to fit diagram to X divisions
 		
 		/***********************************************
 		 * Settings for the OscTrigger
 		 ***********************************************/
 		
-		public OscTrigger.TriggerMode Mode;				//< Trigger mode will be copyied to the OscTrigger
-		public OscTrigger.TriggerEdge Edge;				//< Trigger edge will be copyied to the OscTrigger
-		public float triggerLevel;						//< Trigger level will be copyied to the OscTrigger
+		public OscTrigger.TriggerMode Mode;				//< Trigger mode will be copied to the OscTrigger
+		public OscTrigger.TriggerEdge Edge;				//< Trigger edge will be copied to the OscTrigger
+		public float triggerLevel;						//< Trigger level will be copied to the OscTrigger
 		
 		/***********************************************
 		 * Decoupling 

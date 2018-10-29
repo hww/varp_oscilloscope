@@ -1,4 +1,28 @@
-﻿using UnityEngine;
+﻿// =============================================================================
+// MIT License
+// 
+// Copyright (c) [2018] [Valeriya Pudova]
+// 
+// Permission is hereby granted, free of charge, to any person obtaining a copy
+// of this software and associated documentation files (the "Software"), to deal
+// in the Software without restriction, including without limitation the rights
+// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+// copies of the Software, and to permit persons to whom the Software is
+// furnished to do so, subject to the following conditions:
+// 
+// The above copyright notice and this permission notice shall be included in all
+// copies or substantial portions of the Software.
+// 
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+// SOFTWARE.
+// =============================================================================
+
+using UnityEngine;
 
 namespace VARP.OSC
 {
@@ -22,14 +46,14 @@ namespace VARP.OSC
         // Fiels for designer
         // =============================================================================================================
 
-        public int pixelsPerDivision = 50;	//< How many pixels in single division (recomend 10,20,30,...)
-        public int divisionsX = 11;			//< Horizontal divisions (Recomend odd value)
-        public int divisionsY = 11;			//< Vertical divisions (Recomend odd value)
-        public int subdivisions = 5;		//< Subdivisions in the division (Recomend 5 or 10)
+        public int pixelsPerDivision = 50;	//< How many pixels in single division (recommend 10,20,30,...)
+        public int divisionsX = 11;			//< Horizontal divisions (Recommend odd value)
+        public int divisionsY = 11;			//< Vertical divisions (Recommend odd value)
+        public int subdivisions = 5;		//< Subdivisions in the division (Recommend 5 or 10)
         [Header("Grid options")]
         public bool drawGrid = true;		//< Draw grid
-        public bool drawRullerX = true;		//< Draw horizontal ruller in center
-        public bool drawRullerY = true;		//< Draw vertical ruller in center
+        public bool drawRulerX = true;		//< Draw horizontal ruler in center
+        public bool drawRulerY = true;		//< Draw vertical ruler in center
         [Header("Calculated")]
         public int pixelsPerSubdivision;	//< (Calculated) How many pixels in subdivision
         public Vector2Int textureSize;		//< (Calculated) Texture size in pixels

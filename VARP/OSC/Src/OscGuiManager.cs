@@ -1,4 +1,28 @@
-﻿using System.Collections;
+﻿// =============================================================================
+// MIT License
+// 
+// Copyright (c) [2018] [Valeriya Pudova]
+// 
+// Permission is hereby granted, free of charge, to any person obtaining a copy
+// of this software and associated documentation files (the "Software"), to deal
+// in the Software without restriction, including without limitation the rights
+// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+// copies of the Software, and to permit persons to whom the Software is
+// furnished to do so, subject to the following conditions:
+// 
+// The above copyright notice and this permission notice shall be included in all
+// copies or substantial portions of the Software.
+// 
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+// SOFTWARE.
+// =============================================================================
+
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -39,7 +63,7 @@ namespace VARP.OSC
         private const KeyCode buttonSelectModifyer1 = KeyCode.LeftShift;
         private const KeyCode buttonSelectModifyer2 = KeyCode.LeftShift;
         
-        // (computed) list of all obove
+        // (computed) list of all above
         private KeyCode[] buttonSelectKeys;
 
         /**********************************************************
@@ -150,13 +174,13 @@ namespace VARP.OSC
                     {
                         gridSetting++;
                         oscilloscope.grid.DrawGrid = (gridSetting & 1) > 0;
-                        oscilloscope.grid.DrawRullerY = oscilloscope.grid.DrawRullerX = (gridSetting & 2) > 0;
+                        oscilloscope.grid.DrawRulerY = oscilloscope.grid.DrawRulerX = (gridSetting & 2) > 0;
                     }
                     
                     // the event for selected or trigger channel
                     if (selectedChannel == null)
                     {
-                        // Joypad controll
+                        // Joy pad control
                         if (Input.GetKeyDown(buttonTimeScalePlus))
                             trigger.SecondsDivisionPlus();
                         else if (Input.GetKeyDown(buttonTimeScaleMinus))
@@ -186,7 +210,7 @@ namespace VARP.OSC
                         else if (Input.GetKeyDown(buttonChannelView))
                             channel.Style = GetNextEnum<OscProbe.Style>(channel.Style);
 
-                        // Joypad controll
+                        // Joy pad control
                         if (Input.GetKeyDown(buttonPosPlus))
                             channel.Position += 0.5f;
                         else if (Input.GetKeyDown(buttonPosMinus))
@@ -287,7 +311,7 @@ namespace VARP.OSC
         // The text messages for help
         // =============================================================================================================
 
-        private readonly string toFocusHelp = "` activate keyboard shorcuts\n";
+        private readonly string toFocusHelp = "` activate keyboard shortcuts\n";
         private readonly string channelHelp = "1,2,..,8 select input\nA auto, C coupling\nU unplug, V view\nUP,DOWN position\n+,- gain\n";
         private readonly string triggerHelp = "SHIFT+1,2,..,8 select input\nM mode, E edge\nUP,DOWN level\nLEFT,RIGHT time position\n+,- time scale";
         private readonly string persistHelp = "PAUSE pause, S force start\n";
@@ -327,7 +351,7 @@ namespace VARP.OSC
         public T GetNextEnum<T>(T src) where T : struct
         {
             if (!typeof(T).IsEnum)
-                throw new System.ArgumentException(string.Format("Argumnent {0} is not an Enum", typeof(T).FullName));
+                throw new System.ArgumentException(string.Format("Argument {0} is not an Enum", typeof(T).FullName));
 
             T[] values = (T[]) System.Enum.GetValues(src.GetType());
             var j = System.Array.IndexOf<T>(values, src) + 1;
@@ -337,7 +361,7 @@ namespace VARP.OSC
         public T GetPrevEnum<T>(T src) where T : struct
         {
             if (!typeof(T).IsEnum)
-                throw new System.ArgumentException(string.Format("Argumnent {0} is not an Enum", typeof(T).FullName));
+                throw new System.ArgumentException(string.Format("Argument {0} is not an Enum", typeof(T).FullName));
 
             T[] values = (T[]) System.Enum.GetValues(src.GetType());
             var j = System.Array.IndexOf<T>(values, src) - 1;

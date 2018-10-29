@@ -1,4 +1,28 @@
-﻿using System;
+﻿// =============================================================================
+// MIT License
+// 
+// Copyright (c) [2018] [Valeriya Pudova]
+// 
+// Permission is hereby granted, free of charge, to any person obtaining a copy
+// of this software and associated documentation files (the "Software"), to deal
+// in the Software without restriction, including without limitation the rights
+// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+// copies of the Software, and to permit persons to whom the Software is
+// furnished to do so, subject to the following conditions:
+// 
+// The above copyright notice and this permission notice shall be included in all
+// copies or substantial portions of the Software.
+// 
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+// SOFTWARE.
+// =============================================================================
+
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Xml;
@@ -253,7 +277,7 @@ namespace VARP.OSC
                         // finish render of screen 
                         dmaDraw = RenderSamples(dmaDraw, dmaWrite-1);
                         dmaWrite &= BUFFER_INDEX_MASK;
-                        // go to nexr state depend on curent mode
+                        // go to nexr state depend on current mode
                         switch (mode)
                         {
                             case TriggerMode.Auto:
@@ -276,7 +300,7 @@ namespace VARP.OSC
                             dmaDraw = RenderSamples(dmaDraw, dmaWrite-1);
                     }
                     break;
-                case Status.Auto:                      /* Record and display on screen all what acuired */
+                case Status.Auto:                      /* Record and display on screen all what acquired */
                     AquireSampe();
                     // test if we fill the buffer for all screen then finish render of screen
                     if (dmaWrite > dmaWriteEnd)
@@ -324,7 +348,7 @@ namespace VARP.OSC
         /// <summary>Detect the start/stop events for oscilloscope</summary>
         private bool ReadTrigger()
         {
-            // try to trigger the sampling it depends on curent mode.
+            // try to trigger the sampling it depends on current mode.
             switch (mode)
             {
                 case TriggerMode.Auto: 
@@ -384,8 +408,8 @@ namespace VARP.OSC
         /// <summary>Available trigger edge detection modes</summary>
         public enum TriggerEdge
         {
-            Rising,     //< When signal more than treshold
-            Falling,    //< When signal less than treshold
+            Rising,     //< When signal more than threshold
+            Falling,    //< When signal less than threshold
         }
 
         /// <summary>Trigger status</summary>
@@ -418,8 +442,8 @@ namespace VARP.OSC
         }
 
 
-        public Status status;                        //< Curent status of trigger
-        public float level;                          //< The treshold value to detect trigger
+        public Status status;                        //< Current status of trigger
+        public float level;                          //< The threshold value to detect trigger
         public Text configText;                      //< The channel's text message
         public Image iconStateArmed;
         public Image iconStateAuto;
@@ -445,8 +469,8 @@ namespace VARP.OSC
         // Dirty flags
         // =============================================================================================================
 		
-        private bool isDirtyConfigText;              //< Required rebuld config text
-        private bool isDirtyStatusText;              //< Required rebuld statuc text
+        private bool isDirtyConfigText;              //< Required rebuild configuration text
+        private bool isDirtyStatusText;              //< Required rebuild status text
         
         // =============================================================================================================
         // Timing labels
@@ -524,7 +548,7 @@ namespace VARP.OSC
         // =============================================================================================================
         
         /// <summary>
-        /// Positive values move diagram to the left. Untits DIVISIONS
+        /// Positive values move diagram to the left. Units DIVISIONS
         /// Other way to think about is the time in center of screen.
         /// </summary>
         public float Position
@@ -599,7 +623,7 @@ namespace VARP.OSC
             set { SetMode(value); }
         }
         
-        /// <summary>Set curent mode</summary>
+        /// <summary>Set current mode</summary>
         public void SetMode(TriggerMode triggerMode)
         {
             // change the mode
@@ -643,7 +667,7 @@ namespace VARP.OSC
         private int dmaDraw;                    //< Number of sample for rendering
         private int dmaDrawBeg;                 //< Begin of rendering
         private int dmaDrawEnd;                 //< End of rendering
-        private int dmaWrite;                   //< Number of sample for aquiring
+        private int dmaWrite;                   //< Number of sample for acquiring
         private int dmaWriteTrggrd;             //< Store dmaWrite when triggered 
         private int dmaWriteEnd;                //< Store dmaWrite when triggered 
         private float trigSample1;              //< Previous trigger sample

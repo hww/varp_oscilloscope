@@ -1,4 +1,28 @@
-﻿using System.Collections;
+﻿// =============================================================================
+// MIT License
+// 
+// Copyright (c) [2018] [Valeriya Pudova]
+// 
+// Permission is hereby granted, free of charge, to any person obtaining a copy
+// of this software and associated documentation files (the "Software"), to deal
+// in the Software without restriction, including without limitation the rights
+// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+// copies of the Software, and to permit persons to whom the Software is
+// furnished to do so, subject to the following conditions:
+// 
+// The above copyright notice and this permission notice shall be included in all
+// copies or substantial portions of the Software.
+// 
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+// SOFTWARE.
+// =============================================================================
+
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Experimental.Rendering;
@@ -12,7 +36,7 @@ namespace VARP.OSC
 		public Color bgColor;
 		public Color gridColor;
 		private OscSettings oscSettings;
-		private RawImage screenImage;			//< The image to draw osciloscope
+		private RawImage screenImage;			//< The image to draw oscilloscope
 		private Texture2D screenTexture; 		//< The texture used for screenImage
 		private Color[] clearColors; 			//< The colors to clear screenTexture
 		private bool redraw;
@@ -30,8 +54,8 @@ namespace VARP.OSC
 			this.oscSettings = oscSettings;
 			screenImage = GetComponent<RawImage>();
 			drawGrid = oscSettings.drawGrid;
-			drawRullerX = oscSettings.drawRullerX;
-			drawRullerX = oscSettings.drawRullerY;
+			drawRulerX = oscSettings.drawRulerX;
+			drawRulerY = oscSettings.drawRulerY;
 			redraw = true;
 		}
 
@@ -53,18 +77,18 @@ namespace VARP.OSC
 			set { drawGrid = value; redraw = true; }
 		}
 		
-		private bool drawRullerX;
-		public bool DrawRullerX
+		private bool drawRulerX;
+		public bool DrawRulerX
 		{
-			get { return drawRullerX; }
-			set { drawRullerX = value; redraw = true; }
+			get { return drawRulerX; }
+			set { drawRulerX = value; redraw = true; }
 		}
 		
-		private bool drawRullerY;
-		public bool DrawRullerY
+		private bool drawRulerY;
+		public bool DrawRulerY
 		{
-			get { return drawRullerY; }
-			set { drawRullerY = value; redraw = true; }
+			get { return drawRulerY; }
+			set { drawRulerY = value; redraw = true; }
 		}
 		
 		// ============================================================================================
@@ -143,25 +167,25 @@ namespace VARP.OSC
 					PlotDotedLineHorizontal(screenTexture, xcenter, y, pxSub, color);
 			}
 
-			if (drawRullerX)
+			if (drawRulerX)
 			{
-				// -- draw horizontal ruller bar in center
+				// -- draw horizontal ruler bar in center
 				PlotDotedLineHorizontal(screenTexture, xcenter, ycenter + 2, pxSub, color);
 				PlotDotedLineHorizontal(screenTexture, xcenter, ycenter + 1, pxSub, color);
 				PlotDotedLineHorizontal(screenTexture, xcenter, ycenter - 1, pxSub, color);
 				PlotDotedLineHorizontal(screenTexture, xcenter, ycenter - 2, pxSub, color);
 			}
 
-			if (drawRullerY)
+			if (drawRulerY)
 			{
-				// -- draw verticals ruller bar in center
+				// -- draw verticals ruler bar in center
 				PlotDotedLineVertical(screenTexture, xcenter + 2, ycenter, pxSub, color);
 				PlotDotedLineVertical(screenTexture, xcenter + 1, ycenter, pxSub, color);
 				PlotDotedLineVertical(screenTexture, xcenter - 1, ycenter, pxSub, color);
 				PlotDotedLineVertical(screenTexture, xcenter - 2, ycenter, pxSub, color);
 			}
 
-			// -- draw frame arounf
+			// -- draw frame around
 			OscUtils.PlotRectangle(screenTexture, 0, 0, w - 1, h - 1, color);
 
 		}
@@ -171,7 +195,7 @@ namespace VARP.OSC
 		// ============================================================================================
 		
 		/// <summary>
-		/// Draw horizontaly multiple dots as the ruller's divisions. Argumens are in pixel Units.
+		/// Draw horizontally multiple dots as the ruler's divisions. Arguments are in pixel Units.
 		/// </summary>
 		/// <param name="color"></param>
 		/// <param name="x">Line position</param>
@@ -196,7 +220,7 @@ namespace VARP.OSC
 		}
 
 		/// <summary>
-		/// Draw verticaly multiple dots as the ruller's divisions 
+		/// Draw vertically multiple dots as the ruler's divisions 
 		/// </summary>
 		/// <param name="color"></param>
 		/// <param name="x">Line position</param>

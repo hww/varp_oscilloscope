@@ -1,4 +1,28 @@
-﻿using System;
+﻿// =============================================================================
+// MIT License
+// 
+// Copyright (c) [2018] [Valeriya Pudova]
+// 
+// Permission is hereby granted, free of charge, to any person obtaining a copy
+// of this software and associated documentation files (the "Software"), to deal
+// in the Software without restriction, including without limitation the rights
+// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+// copies of the Software, and to permit persons to whom the Software is
+// furnished to do so, subject to the following conditions:
+// 
+// The above copyright notice and this permission notice shall be included in all
+// copies or substantial portions of the Software.
+// 
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+// SOFTWARE.
+// =============================================================================
+
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
@@ -24,7 +48,7 @@ namespace VARP.OSC
 			C8  //< Channel 8 (Expansion)
 		}
 
-		public Name channelName;				//< Channe's name will be displayed on screen
+		public Name channelName;				//< Channel's name will be displayed on screen
 		public Text configText;		  			//< The channel's text message
 		public Text statusText;		  			//< The channel's measurements text message
 		public OscChannelLabel label;			//< Label at left side of screen
@@ -37,7 +61,7 @@ namespace VARP.OSC
 		public float trigLevel;					//< Trigger threshold
 		public bool isPlugged;
 		
-		private Oscilloscope oscilloscope;		//< Oscilloscope refference
+		private Oscilloscope oscilloscope;		//< Oscilloscope reference
 		private OscSettings oscSettings;
 		private OscRenderer oscRenderer;
 		private float chanLabelPosX;			//< (Calculate) Coordinate of markers (Grid Divisions)
@@ -123,8 +147,8 @@ namespace VARP.OSC
 		// Acquire sample
 		// =============================================================================================================
 		
-		public Vector3 sample;											//< Curent sample
-		public Vector3 dclevel;											//< Dc level for decouplig
+		public Vector3 sample;											//< Current sample
+		public Vector3 dclevel;											//< DC level for decoupling
 		public OscProbe.ReadTriggerSampleDelegate readTriggerSample; 	//< Read sample for trigger	
 		public OscProbe.ReadSampleDelegate readSample;					//< Read sample from this probe	
 		
@@ -333,7 +357,7 @@ namespace VARP.OSC
 		private float gain = 1; //< Values per division
 		private float scale = 1f;
 		private float position = 0f;			//< Change vertical position of this diagram
-		private bool autoGain = false;			//< Make this input autoscaled verticaly
+		private bool autoGain = false;			//< Make this input auto-scaled vertically
 		private bool decoupling;				//< AC/DC coupling mode
 		private OscProbe.Style style;			//< Rendering style
 		
