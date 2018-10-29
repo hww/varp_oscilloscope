@@ -391,8 +391,4 @@ oscilloscope.trigger.AddTimeLabel(0, "T1", Color.red); // add time label at the 
 
 ![Icons](images/osc_icons.png)
 
-## Donation
 
-If this project help you reduce time to develop, you can give me a cup of coffee :)
-
-[![paypal](https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif)](valery.hww@gmail.com)
