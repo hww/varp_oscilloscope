@@ -16,16 +16,16 @@ In addition to the list of general features, this section covers the following t
 
 - Single time base digital real-time oscilloscope.
 - Every frame or every fixed update sample rate<sup>1</sup> and 1024<sup>2</sup> point record length for each channel. 
-- Four<sup>3</sup> independent recording channels.
-- One of channels can be used for trigger acquiring 
-- Each buffer is array of Vector3 values.
-- Each channel has its own color tag.
 - Screen 550x550 pixels and 11x11 divisions grid<sup>4</sup>.
+- Four<sup>3</sup> independent recording channels.
+- Any channel can be used as trigger source. 
+- Each channel has buffer is array of Vector3 values.
+- Each channel has its own color tag.
 - Four automated measurements (min, max, peak, average).
 - Custom labels OSD.
 - Alternative 'Logic' rendering for integer values as a logic analyzer.
-- Cursors with readout<sup>5</sup>.
 - Autoset for quick setup<sup>5</sup>.
+- Cursors with readout<sup>5</sup>.
 
 <sup>1</sup> _The sampling rate is fully configurable and can be replaced to other time steps._
 
@@ -39,7 +39,7 @@ In addition to the list of general features, this section covers the following t
 
 ## Additional Features 
 
-- Does not require custom Unity GUI tools and learning them.
+- Does not require custom Unity GUI tools and eqasy to learn.
 - Fully configurable with script for different measurements. 
 - Human friendly attenuation gain and time per division values. 
 
@@ -49,7 +49,7 @@ The asset is in development so the actual screenshot can have differences.
 
 ![Screenshot](images/screenshot.png)
 
-## Installation
+## Adding to your project
 
 Drop asset folder inside Assets/Plugins folder. After that you can instantiate prefab Oscilloscope in the scene of your project. Now you can write your own script to control the oscilloscope with your game events or data.
 
