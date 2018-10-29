@@ -390,3 +390,5 @@ oscilloscope.trigger.AddTimeLabel(0, "T1", Color.red); // add time label at the 
 ### Icons legends
 
 ![Icons](images/osc_icons.png)
+
+
