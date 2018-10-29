@@ -1,49 +1,49 @@
 # VARP Oscilloscope
-_Documentation for Untiy asset_ 
+_Documentation for Unity asset_ 
 
-## Getting Stated
+## Getting Started
 
- VARP Oscilloscope are small, easy to use Unity asset, that you can use to record and analyze values modifyed by script, physcis or animation in real time. The oscilloscopes have four-channels but can be extended to 8 without additional programing.
+ VARP Oscilloscope is a small, easy to use Unity asset that you can use to record and analyze values modifyed by script, physics or animation in real time. The oscilloscopes have 4 channels but can be extended to 8 without additional programming.
 In addition to the list of general features, this section covers the following topics:
 
-- How to add asset to your project
-- How to add initialize the oscilloscope from your code
-- How to push or pull values to the oscilloscope probes
-- How to ajust probe magnitude attenuation factor
-- How to ajust trigger settings and horizontal scale value
+- How to add asset to your project.
+- How to add initialize the oscilloscope from your code.
+- How to push or pull values to the oscilloscope probes.
+- How to adjust probe magnitude attenuation factor.
+- How to adjust trigger settings and horizontal scale value.
 
 ## Features
 
-- Single time base digital real-time oscilloscope
-- Every frame or every fixed update sample rate<sup>1</sup> and 1024<sup>2</sup> point record lenght for each channel. 
-- Four<sup>3</sup> independed recording channels.
+- Single time base digital real-time oscilloscope.
+- Every frame or every fixed update sample rate<sup>1</sup> and 1024<sup>2</sup> point record length for each channel. 
+- Four<sup>3</sup> independent recording channels.
 - One of channels can be used for trigger acquiring 
-- Each buffer is aray of Vector3 values
-- Each channel has it's own color tag.
-- Screen 550x550pixels and 11x11 divisions grid<sup>4</sup>.
-- Four automated measurements (min,max,peak,average)
+- Each buffer is array of Vector3 values.
+- Each channel has its own color tag.
+- Screen 550x550 pixels and 11x11 divisions grid<sup>4</sup>.
+- Four automated measurements (min, max, peak, average).
 - Custom labels OSD.
 - Alternative 'Logic' rendering for integer values as a logic analyzer.
-- Cursors with readout<sup>5</sup>
-- Autoset for quick setup<sup>5</sup>
+- Cursors with readout<sup>5</sup>.
+- Autoset for quick setup<sup>5</sup>.
 
 <sup>1</sup> _The sampling rate is fully configurable and can be replaced to other time steps._
 
-<sup>2</sup> _Can be modifyed to another size._
+<sup>2</sup> _Can be modified to another size._
 
-<sup>3</sup> _Can be modifyed to another channels quantity._
+<sup>3</sup> _Can be modified to another channels quantity._
 
-<sup>4</sup> _Can be modifyed to another dimentions and ._
+<sup>4</sup> _Can be modified to another dimensions._
 
 <sup>5</sup> _Not yet implemented._
 
 ## Additional Features 
 
-- Does not require custom Unity GUI tools and learing it.
+- Does not require custom Unity GUI tools and learning them.
 - Fully configurable with script for different measurements. 
 - Human friendly attenuation gain and time per division values. 
 
-## Screenshoot
+## Screenshot
 
 The asset is in development so the actual screenshot can have differences.
 
@@ -51,18 +51,18 @@ The asset is in development so the actual screenshot can have differences.
 
 ## Installation
 
-Drop asset folder inside Assets/Plugins folder. After that you can instantiate prefab Oscilloscope in the sceene of your project. Now you can write your own script to control the oscilloscope with your game events or data.
+Drop asset folder inside Assets/Plugins folder. After that you can instantiate prefab Oscilloscope in the scene of your project. Now you can write your own script to control the oscilloscope with your game events or data.
 
 ## Basic Concepts
 
 To use your oscilloscope effectively, you must understand the
 following basic concepts:
 
-- Triggering
-- Acquiring data
-- Scaling and positioning waveforms
-- Measuring waveforms
-- Setting Up the oscilloscope
+- Triggering.
+- Acquiring data.
+- Scaling and positioning waveforms.
+- Measuring waveforms.
+- Setting up the oscilloscope.
 
 The figure below shows a block diagram of the various functions of
 an oscilloscope and their relationship to each other.
@@ -71,29 +71,29 @@ an oscilloscope and their relationship to each other.
 
 **GameValue** _Any variable or class member can be captured by pushing it to the probe every frame or only when it was changed. As alternative the value can be pulled by lambda function assigned to the probe. Before recording the value should be converted to floating point type._
 
-**OscProbe** _Container of sample and configuration settings for the channel or trigger. Avery time when the probe connected to the oscilloscope channel, the values will be copyied to the channel and to trigger (if this channel connected to trigger)._
+**OscProbe** _Container of sample and configuration settings for the channel or trigger. Every time when the probe is connected to the oscilloscope channel, the values will be copied to the channel and to trigger (if this channel connected to trigger)._
 
-**OscChannel** _This class contains data for data recording and rendering it on the screen. Every time when probe coonected to the channel, the channel reads settings from probe._
+**OscChannel** _This class contains data for data recording and rendering it on the screen. Every time when probe connected to the channel, the channel reads settings from probe._
 
-**OscGrid** _Rendering of grid on the screen._
+**OscGrid** _Rendering the grid on the screen._
 
 **OscRenderer** _Renderer of waveforms._
 
-**OscTrigger** _Class which monitoring one of the channels and can be used to the start/stop acquiring data. Every time when trigger connected to channel, the trigger reads the configuration falues from channel._
+**OscTrigger** _Class which is monitoring one of the channels and can be used to the start/stop acquiring data. Every time when trigger is connected to channel, the trigger reads the configuration values from channel._
 
 **Oscilloscope** _Main code for the oscilloscope._
 
 ## Understanding Grid
 
-The grid has divisions, subdivisions and rullers. Center of screen has coordinate 0,0. Horizontal axis X, and vertical axis Y has the ruller bar in the center of screen.
+The grid has divisions, subdivisions and rulers. Center of the screen has coordinate 0,0. Horizontal axis X, and vertical axis Y have the ruler bar in the center of screen.
 
 ![Grid](images/varp_oscilloscope_grid_info.png)
 
 ## Channel Names
 
-The cnannels named C1,C2,C3,C4 can be used for record samples and draw oscillogram on screen. The channel's name will be displayed on sceen display and can be used as argumen of functions.
+The channels named C1, C2, C3, C4 can be used for record samples and draw oscillogram on screen. The channel's name will be displayed on screen display and can be used as an argument of functions.
 
-The enum value OscChannel.Name has the list of  default names. 
+The enum value OscChannel.Name has the list of default names. 
 
 | Value | Value Name | Comment               |
 |-------|------------|-----------------------|
@@ -118,15 +118,15 @@ In cases when origin is outside of screen the channel's label will rendered at t
 
 It is based on ScriptabbleObject, can be used to create asset with oscilloscope's configuration settings.
 
-| Type | Field             | Info                                                       |
-|------|-------------------|------------------------------------------------------------|
-| int  | pixelsPerDivision | How many pixels in single division (recomend 10,20,30,...) |
-| int  | divisionsX        | Horizontal divisions (Recomend odd value)                  |
-| int  | divisionsY        | Vertical divisions (Recomend odd value)                    |
-| int  | subdivisions      | Subdivisions in the division (Recomend 5 or 10)            |
-| bool | drawGrid          | Draw grid lines                                            |
-| bool | drawRullerX       | Draw horizontal ruller in center                           |
-| bool | drawRullerY       | Draw vertical ruller in center                             |
+| Type | Field             | Info                                                        |
+|------|-------------------|-------------------------------------------------------------|
+| int  | pixelsPerDivision | How many pixels in single division (recommend 10,20,30,...) |
+| int  | divisionsX        | Horizontal divisions (recommend odd value)                  |
+| int  | divisionsY        | Vertical divisions (recommend odd value)                    |
+| int  | subdivisions      | Subdivisions in the division (recommend 5 or 10)            |
+| bool | drawGrid          | Draw grid lines                                             |
+| bool | drawRullerX       | Draw horizontal ruler in center                             |
+| bool | drawRullerY       | Draw vertical ruler in center                               |
 
 ## Class OsdGrid
 
@@ -134,15 +134,15 @@ Changing the grid view by script.
 
 ```C#
 oscilloscope.grid.DrawGrid = true;    // Draw grid cells
-oscilloscope.grid.DrawRullerX = true; // Draw horizontal ruller
-oscilloscope.grid.DrawRullerY = true; // Draw vertical ruller
+oscilloscope.grid.DrawRullerX = true; // Draw horizontal ruler
+oscilloscope.grid.DrawRullerY = true; // Draw vertical ruler
 ```
 
 ## Class OsdProbe
 
 ### Probe Names
 
-The name of probe in just a string value will be displayed on scree to inform user about which probe connected to this or that channel.
+The name of probe in just a string value will be displayed on screen to inform user about which probe is connected to this or that channel.
 
 ### Probe Instantiating
 
@@ -160,10 +160,10 @@ oscilloscope.GetChannel(OscChannel.Name.C1).Unplug();
 ### Probe Parameters
 
 ```C#
-probe.Gain = 2f;                              // To sen gain value V/
-probe.position = -5;                          // To ajust vertical position (zero level of oscillogram)
-probe.autoGain = true;                        // To enable auto gain featue
-probe.autoGainDivisions = 2;                  // Request 2 division for peak to peak oscillogram
+probe.Gain = 2f;                              // To set gain value V/
+probe.position = -5;                          // To adjust vertical position (zero level of oscillogram)
+probe.autoGain = true;                        // To enable auto gain feature
+probe.autoGainDivisions = 2;                  // Request 2 divisions for peak to peak oscillogram
 probe.style = OscProbe.Style.Logic;           // To change rendering style (Default, Logic)
 // To set trigger's values (will be applyyed after tigger will be connected to channel)
 probe.triggerMode = OscTrigger.Mode.Normal;   // Trigger's normal mode
@@ -185,10 +185,10 @@ characterVelocityProbe.Log(rigidbody.velocity.magnitude);
 characterVelocityProbe.Log((int)Time.time);
 // Write bool value to probe
 characterVelocityProbe.Log(Time.time > 10f);
-// Write vector 2 to probe
+// Write Vector2 to probe
 characterVelocityProbe.Log(transform.achoredPosition);
 characterVelocityProbe.Log(x,y);
-// Write vector3 value to probe
+// Write Vector3 value to probe
 characterVelocityProbe.Log(rigidbody.velocity);
 characterVelocityProbe.Log(x,y,z);
 // Write color value to probe
@@ -233,7 +233,7 @@ Three predefined probe types available.
 
 ## Class OscChannel
 
-When probe connected to channel all values from this probe will be copyied to the chanel. Now we can manipulate by channel's values directly.
+When probe is connected to channel, all values from this probe will be copied to the channel. Now we can manipulate by channel's values directly.
 
 ```C#
 var channel = oscilloscope.GetChannel(OscChannel.Name.C1);
@@ -308,7 +308,7 @@ waveform, if any, will remain on the display.
 
 ### Edge Detection
 
-The trigger compare the channel value with trigger's level value and produces starting data acquiring depend on Edge detection mode. The picture below explain difference of Edge modes.
+The trigger compares the channel value with trigger's level value and produces starting data acquiring depend on Edge detection mode. The picture below explain difference of Edge modes.
 
 ![Edge Detection](images/varp_oscilloscope_trigger.png)
 
@@ -336,7 +336,7 @@ oscilloscope.trigger.ForceTrigger(); // start capturing
 
 ### Time Labels
 
-The time label will be rendered below the screen.  Each lable has unique id and calling the _AddTimeLabel_ method with same index will override previously defined label.  
+The time label will be rendered below the screen.  Each label has unique id and calling the _AddTimeLabel_ method with the same index will override previously defined label.  
 
 ```C#
 oscilloscope.trigger.AddTimeLabel(0, "T1", Color.red); // add time label at the current time
@@ -362,16 +362,16 @@ oscilloscope.trigger.AddTimeLabel(0, "T1", Color.red); // add time label at the 
 | S                    | _Force start acquiring_ |
 | G                    | _Modify grid style_ |
 | **Selected Channel** | | 
-| +, -                 | _Ajust gain value_ |
-| Up, Down             | _Ajust verical position_ |
-| C                    | _Ajust coupling settigs_ |
+| +, -                 | _Adjust gain value_ |
+| Up, Down             | _Adjust verical position_ |
+| C                    | _Adjust coupling settigs_ |
 | A                    | _Enable/Disable auto gain mode_ |
 | V                    | _Alternate view style_ |
 | **Selected Trigger** | |
 | E                    | _Edge detection mode_ |
 | M                    | _Trigger mode_ |
-| +, -                 | _Ajust time scale value_ |
-| Left, Right          | _Ajust horizontal position_ |
+| +, -                 | _Adjust time scale value_ |
+| Left, Right          | _Adjust horizontal position_ |
 
 ### Icons
 
