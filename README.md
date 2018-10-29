@@ -382,8 +382,8 @@ oscilloscope.trigger.AddTimeLabel(0, "T1", Color.red); // add time label at the 
 | A                    | _Enable/Disable auto gain mode_ |
 | V                    | _Alternate view style_ |
 | **Selected Trigger** | |
-| E                    | __Alternate edge detection mode_ |
-| M                    | __Alternate trigger mode_ |
+| E                    | _Alternate edge detection mode_ |
+| M                    | _Alternate trigger mode_ |
 | +, -                 | _Adjust time scale value_ |
 | Left, Right          | _Adjust horizontal position_ |
 
