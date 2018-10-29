@@ -34,7 +34,6 @@ namespace VARP.OSC
 		 ***********************************************/
 		
 		public bool decoupling;							//< Decoupling mode
-		public Vector3 dclevel;							//< Dc level for decouplig
 		
 		/***********************************************
 		 * Sample format
@@ -54,7 +53,7 @@ namespace VARP.OSC
 		public ReadSampleDelegate readSample;				//< Read sample from this probe	
 
 		/// <summary>Return trigger sample</summary>
-		public delegate float ReadTriggerSampleDelegate();
+		public delegate float ReadTriggerSampleDelegate(OscChannel channel);
 		public ReadTriggerSampleDelegate readTriggerSample; //< Read sample for trigger	
 
 		/// <summary>Oscilloscope will call it after rendering</summary>
@@ -92,47 +91,32 @@ namespace VARP.OSC
 		// =============================================================================================================
 		
 		/// <summary>Curent sample value</summary>
-		private Vector3 sampleIn;
-		private Vector3 sample;
-
-		public Vector3 GetSample(float dt)
-		{
-			readSample?.Invoke(this);
-			dclevel = Vector3.Lerp(dclevel, sampleIn, dt);
-			return sample = sampleIn - dclevel;
-		}
-
-		public Vector3 GetSample()
-		{
-			readSample?.Invoke(this);
-			return sample = sampleIn;
-		}
-
+		public Vector3 sample;
 		/// <summary>Write floating point value to probe</summary>
-		public void Log(float value) { sampleIn.x = value; }
+		public void Log(float value) { sample.x = value; }
 		/// <summary>Write integer value to probe</summary>
-		public void Log(int value) { sampleIn.x = (float)value; }
+		public void Log(int value) { sample.x = (float)value; }
 		/// <summary>Write bool value to probe</summary>
-		public void Log(bool value) { sampleIn.x = value ? 1f : 0f; }
+		public void Log(bool value) { sample.x = value ? 1f : 0f; }
 		/// <summary>Write vector 2 to probe</summary>
-		public void Log(Vector2 value) { sampleIn.x = value.x; sampleIn.y = value.y; }
+		public void Log(Vector2 value) { sample.x = value.x; sample.y = value.y; }
 		/// <summary>Write vector 2 to probe</summary>
-		public void Log(float x, float y) { sampleIn.x = x; sampleIn.y = y; }
+		public void Log(float x, float y) { sample.x = x; sample.y = y; }
 		/// <summary>Write vector3 value to probe</summary>
 		public void Log(Vector3 value)
 		{
-			sampleIn.x = value.x; sampleIn.y = value.y; sampleIn.z = value.z;
+			sample.x = value.x; sample.y = value.y; sample.z = value.z;
 		}
 		/// <summary>Write vector3 value to probe</summary>
 		public void Log(float x, float y, float z)
 		{
-			sampleIn.x = x; sampleIn.y = y; sampleIn.z = z;
+			sample.x = x; sample.y = y; sample.z = z;
 		}
 		/// <summary>Write color value to probe</summary>
 		public void Log(Color value) { 
-			sampleIn.x = value.r;
-			sampleIn.y = value.g;
-			sampleIn.z = value.b;
+			sample.x = value.r;
+			sample.y = value.g;
+			sample.z = value.b;
 		}
 		
 		// =============================================================================================================
@@ -146,8 +130,9 @@ namespace VARP.OSC
 			this.name = name;
 			// defalut method read all sample
 			this.readSample = null;
-			// default method read x value
-			this.readTriggerSample = () => sample.x;	
+			// default method read x value can be: this.readTriggerSample = (OscChannel channel) => channel.sample.x;	
+			// but using X component is default function of readTriggerSample is null
+			this.readTriggerSample = null;	
 		}
 
 		/// <summary>Null probe used as default frobe for unused channels</summary>

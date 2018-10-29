@@ -1507,7 +1507,8 @@ MonoBehaviour:
   rect: {fileID: 224423975732269228}
   label: {fileID: 114400303909150334}
   image: {fileID: 114817311743943366}
-  gridPosition: {x: 0, y: 0}
+  position: 0
+  frameCount: 0
 --- !u!114 &114191293887859974
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1684,7 +1685,8 @@ MonoBehaviour:
   rect: {fileID: 224751122490648472}
   label: {fileID: 114059456365117678}
   image: {fileID: 114590789878622510}
-  gridPosition: {x: 0, y: 0}
+  position: 0
+  frameCount: 0
 --- !u!114 &114349151434262172
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1722,6 +1724,8 @@ MonoBehaviour:
   TrigTriggerEdge: 0
   trigLevel: 0
   isPlugged: 0
+  sample: {x: 0, y: 0, z: 0}
+  dclevel: {x: 0, y: 0, z: 0}
 --- !u!114 &114386132998393114
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1736,7 +1740,8 @@ MonoBehaviour:
   rect: {fileID: 224486546324270230}
   label: {fileID: 114033033017443960}
   image: {fileID: 114238935523148434}
-  gridPosition: {x: 0, y: 0}
+  position: 0
+  frameCount: 0
 --- !u!114 &114390406375219862
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1751,7 +1756,8 @@ MonoBehaviour:
   rect: {fileID: 224615416635010462}
   label: {fileID: 114144085706966710}
   image: {fileID: 114563602447769542}
-  gridPosition: {x: 0, y: 0}
+  position: 0
+  frameCount: 0
 --- !u!114 &114391820116934766
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2210,6 +2216,8 @@ MonoBehaviour:
   TrigTriggerEdge: 0
   trigLevel: 0
   isPlugged: 0
+  sample: {x: 0, y: 0, z: 0}
+  dclevel: {x: 0, y: 0, z: 0}
 --- !u!114 &114563602447769542
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2550,7 +2558,8 @@ MonoBehaviour:
   rect: {fileID: 224072790687403156}
   label: {fileID: 114964991264417624}
   image: {fileID: 114662141844717964}
-  gridPosition: {x: 0, y: 0}
+  position: 0
+  frameCount: 0
 --- !u!114 &114705191503033152
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2629,7 +2638,8 @@ MonoBehaviour:
   rect: {fileID: 224814048804383558}
   label: {fileID: 114685061267895742}
   image: {fileID: 114799844411311902}
-  gridPosition: {x: 0, y: 0}
+  position: 0
+  frameCount: 0
 --- !u!114 &114776534837182564
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2773,6 +2783,8 @@ MonoBehaviour:
   TrigTriggerEdge: 0
   trigLevel: 0
   isPlugged: 0
+  sample: {x: 0, y: 0, z: 0}
+  dclevel: {x: 0, y: 0, z: 0}
 --- !u!114 &114817311743943366
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3110,6 +3122,8 @@ MonoBehaviour:
   TrigTriggerEdge: 0
   trigLevel: 0
   isPlugged: 0
+  sample: {x: 0, y: 0, z: 0}
+  dclevel: {x: 0, y: 0, z: 0}
 --- !u!114 &114964991264417624
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -29,7 +29,8 @@ namespace VARP.OSC
         public const bool DEBUG_DISPLAY = true;
         /// <summary>Will be rendered on screen as label</summary>
         public const string TRIGGER_CHANNEL_NAME = "T";
-        
+        /// <summary>Maximum number of horizontal labels</summary>
+        public const int TIME_LABELS_COUNT = 4;
         // =============================================================================================================
         // Initialization 
         // =============================================================================================================
@@ -41,6 +42,7 @@ namespace VARP.OSC
             oscilloscope = osc;
             oscSettings = osc.oscSettings;
             oscRenderer = osc.oscRenderer;
+            textureCenterX = oscSettings.textureCenter.x; /* Perf. Opt */
             configText.color = color;
             valueLabel.color = color;
             valueLabel.text = TRIGGER_CHANNEL_NAME;
@@ -48,9 +50,10 @@ namespace VARP.OSC
             timeCursor.text = TRIGGER_CHANNEL_NAME;
             ledPlugged.message = TRIGGER_CHANNEL_NAME;
             pause = true;
-            timeLabelPosY = oscSettings.rectangle.yMax;
+            timeLabelPosY = oscSettings.rectangle.yMin;
             debugText.enabled = DEBUG_DISPLAY;
             SetChannel(oscChannel);
+            SpawnLabels();
             RenderGUI();
         }
 
@@ -86,7 +89,7 @@ namespace VARP.OSC
         // =============================================================================================================
 
         /// <summary>Redraw grpah from left side of screen to current time</summary>
-        public void Redraw()
+        public void RequestRedraw()
         {
             dmaDrawBeg = dmaWriteTrggrd - numSamplesBeforeTrigger;
             dmaDrawEnd = dmaWriteTrggrd + numSamplesAfterTrigger;
@@ -99,21 +102,34 @@ namespace VARP.OSC
         private int RenderSamples(int smpStart, int smpEnd)
         {
             var smpCenter = dmaWriteTrggrd - sampAtCenterRel;
-            var pixelsPerSample = oscSettings.pixelsPerDivision * divsPerSample;
-            var pixStart = (smpStart - smpCenter) * pixelsPerSample + oscSettings.textureCenter.x;
+
+            var pixStart = (smpStart - smpCenter) * pixelsPerSample + textureCenterX;
             oscilloscope.Render(smpStart, smpEnd, pixStart, pixelsPerSample);
             return smpEnd;
+        }
+
+        /// <summary>Convert sample number to X coordinate in pixels</summary>
+        public int GetPixelPositionX(int sampleIndex)
+        {
+            var smpCenter = dmaWriteTrggrd - sampAtCenterRel;
+            return Mathf.RoundToInt((sampleIndex - smpCenter) * pixelsPerSample + textureCenterX);
+        }
+        
+        /// <summary>Convert sample number to X coordinate in grid cells</summary>
+        public int GetGridPositionX(int sampleIndex)
+        {
+            var smpCenter = dmaWriteTrggrd - sampAtCenterRel;
+            return Mathf.RoundToInt((sampleIndex - smpCenter) * divsPerSample);
         }
         
         /// <summary>Update text at the channel's label</summary>
         public void RenderGUI()
         {
             // channel's custom time labels at the bottom side of screen
-            var timesNum = timeLabels.Count;
-            for (var i = 0; i < timesNum ; i++)
+            for (var i = 0; i < timeLabels.Length ; i++)
             {
                 var label = timeLabels[i];
-                label.anchoredPosition = oscSettings.GetPixelPositionClamped(label.gridPosition.x + position, timeLabelPosY);
+                label.anchoredPosition = oscSettings.GetPixelPositionClamped(label.position + position, timeLabelPosY);
             }
             
             if (isDirtyConfigText)
@@ -165,8 +181,26 @@ namespace VARP.OSC
                 var valueLabelY = level * channel.Scale + channel.Position;
                 valueLabel.anchoredPosition = oscSettings.GetPixelPositionClamped(oscSettings.rectangle.xMin, valueLabelY);
             }
-
-
+            
+            for (var i = 0; i < timeLabels.Length; i++)
+            {
+                var label = timeLabels[i];
+                var xpos = GetGridPositionX((int) label.position);
+                if (frameCount - label.frameCount < 3)
+                {
+                    if (xpos > oscSettings.rectangle.xMin && xpos < oscSettings.rectangle.xMax)
+                    {
+                        label.anchoredPosition = oscSettings.GetPixelPosition(xpos, timeLabelPosY);
+                        label.visible = true;
+                    }
+                    else
+                        label.visible = false;
+                }
+                else
+                {
+                    label.visible = false;
+                }
+            }
             
             if (DEBUG_DISPLAY)
             {
@@ -211,7 +245,7 @@ namespace VARP.OSC
                         status = Status.Triggered;
                     }
                     break;
-                case Status.Triggered: /* Record samples after trigger */
+                case Status.Triggered:                 /* Record samples after trigger */
                     AquireSampe();
                     // test if we fill the buffer for all screen then finish render of screen
                     if (dmaWrite > dmaWriteEnd)
@@ -242,7 +276,7 @@ namespace VARP.OSC
                             dmaDraw = RenderSamples(dmaDraw, dmaWrite-1);
                     }
                     break;
-                case Status.Auto:  /* Record and display on screen all what acuired */
+                case Status.Auto:                      /* Record and display on screen all what acuired */
                     AquireSampe();
                     // test if we fill the buffer for all screen then finish render of screen
                     if (dmaWrite > dmaWriteEnd)
@@ -271,19 +305,20 @@ namespace VARP.OSC
 
         private void AquireSampe()
         {
-            oscilloscope.AquireSampe(dmaWrite++);
+            oscilloscope.AquireSampe(dmaWrite++); //< TODO! Overflow protection required
             trigSample1 = trigSample2;
-            trigSample2 = channel.probe.readTriggerSample.Invoke();
+            trigSample2 = channel.AcquireTriggerSample();
         }
         
         /// <summary>Start trigger</summary>
         private void TriggerIt()
         {
+            frameCount++;
             forceTrigger = false;
             dmaWriteTrggrd = dmaWrite;
             dmaWriteEnd = dmaWrite + numSamplesAfterTrigger;
             isDirtyConfigText = isDirtyStatusText = true;
-            Redraw();
+            RequestRedraw();
         }
         
         /// <summary>Detect the start/stop events for oscilloscope</summary>
@@ -404,43 +439,50 @@ namespace VARP.OSC
         private bool forceTrigger;                   //< Pressed start button
         private TriggerMode mode;                    //< When we start/stop samples capturing
         private TriggerEdge triggerEdge;             //< The edge detection mode
+        private int frameCount;                      //< Increase each trigger event
         
         // =============================================================================================================
         // Dirty flags
         // =============================================================================================================
 		
-        private bool isDirtyConfigText;    //< Required rebuld config text
-        private bool isDirtyStatusText;   //< Required rebuld statuc text
+        private bool isDirtyConfigText;              //< Required rebuld config text
+        private bool isDirtyStatusText;              //< Required rebuld statuc text
         
         // =============================================================================================================
         // Timing labels
         // =============================================================================================================
         		
-        private List<OscChannelLabel> timeLabels = new List<OscChannelLabel>(10);
-        private float timeLabelPosY;		        //< (Calculate) Coordinate of markers (Grid Divisions)
-        
-        /// <summary>Add horizontal (time) label</summary>
-        public void AddTimeLabel(string text, float x)
-        {
-            var label = oscilloscope.timeLables.SpawnLabel();
-            label.text = text;
-            label.color = color;
-            label.gridPosition = new Vector2(x, 0);
-            label.anchoredPosition = oscSettings.GetPixelPositionClamped(label.gridPosition.x + position, timeLabelPosY);
-            label.visible = true;
-            timeLabels.Add(label);				
-        }
+        private OscChannelLabel[] timeLabels = new OscChannelLabel[TIME_LABELS_COUNT];
+        private float timeLabelPosY;		         //< (Calculate) Coordinate of markers (Grid Divisions)
 
         /// <summary>Add horizontal (time) label now</summary>
-        public void AddTimeLabel(string text)
+        public void AddTimeLabel(int index, string text, Color color)
         {
+            Debug.Assert(index>=0 && index<timeLabels.Length);
+            var label = timeLabels[index];
+            label.text = text;
+            label.color = color;
+            label.position = dmaWrite; // will contain sample number
+            label.frameCount = frameCount;
         }
 
-        /// <summary>Clear all labels/summary>
+        /// <summary>Clear all labels</summary>
         private void ClearLabels()
         {
-            for (var i=0; i<timeLabels.Count; i++)
+            for (var i=0; i<timeLabels.Length; i++)
                 oscilloscope.timeLables.Release(timeLabels[i]);
+        }
+        
+        /// <summary>Spawn all labels</summary>
+        private void SpawnLabels()
+        {
+            for (var i = 0; i < TIME_LABELS_COUNT; i++)
+            {
+                var label = oscilloscope.timeLables.SpawnLabel();
+                label.text = string.Empty;
+                label.color = color;
+                timeLabels[i] = label;	
+            }
         }
         
         // =============================================================================================================
@@ -458,6 +500,7 @@ namespace VARP.OSC
                 sampPerDivision = secondsDivision / oscSettings.timePerSample;
                 sampPerScreen = oscSettings.rectangle.width * sampPerDivision;
                 divsPerSample = 1f / sampPerDivision;
+                pixelsPerSample = oscSettings.pixelsPerDivision * divsPerSample;
                 SetPosition(position);
             }
         }
@@ -507,7 +550,7 @@ namespace VARP.OSC
             numSamplesAfterTrigger = Mathf.RoundToInt((int)halfScreen - sampAtCenterRel);
             isDirtyConfigText = isDirtyStatusText = true;
             timeCursor.anchoredPosition = oscSettings.GetPixelPositionClamped(position, oscSettings.rectangle.yMin);
-            Redraw(); /* request redraw */
+            RequestRedraw(); /* request redraw */
         }
 
         // =============================================================================================================
@@ -605,10 +648,12 @@ namespace VARP.OSC
         private int dmaWriteEnd;                //< Store dmaWrite when triggered 
         private float trigSample1;              //< Previous trigger sample
         private float trigSample2;              //< Next trigger sample
+        private float textureCenterX;           //< (Perf. Opt) Value from configuration
         private float secondsDivision = 1;    	//< (Knob) Horizontal scale
         private float position;			  		//< (Knob) Horizontal position
         private float sampPerScreen;	  		//< (Calculated) Width of screen in samples
         private float sampPerDivision; 		    //< (Calculated) How many samples in single division
+        private float pixelsPerSample;          //< (Calculated) Pixels per sample
         private float divsPerSample;            //< (Calculated) Divisions per samples
         private float timeAtCenterRel;          //< (Calculated) Relative sample number at center of screen
         private int sampAtCenterRel;            //< (Calculated) Relative time at center of screen

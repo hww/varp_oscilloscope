@@ -10,8 +10,9 @@ namespace VARP.OSC
         public RectTransform rect;
         public Text label;
         public Image image;
-        public Vector2 gridPosition;
-
+        public float position;
+        public int frameCount; 
+        
         private bool _visible;
         public bool visible
         {

@@ -118,22 +118,11 @@ namespace VARP.OSC
 		/// </summary>
 		public void AquireSampe(int dmaWrite)
 		{
+			var dt = oscSettings.timePerSample;
 			var addr = dmaWrite & OscSettings.BUFFER_INDEX_MASK;
 			// -- for each input record sample --
 			for (var i = 0; i < oscChannels.Length; i++)
-			{
-				var channel = oscChannels[i];
-				var probe = channel.probe;
-
-				if (channel.Decoupling)
-				{
-					channel[addr] = probe.GetSample(oscSettings.timePerSample);
-				}
-				else
-				{
-					channel[addr] = probe.GetSample();
-				}
-			}
+				oscChannels[i].AcquireSample(addr, dt);
 		}
 
 		// =============================================================================================================

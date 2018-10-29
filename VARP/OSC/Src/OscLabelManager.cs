@@ -49,4 +49,5 @@ public class OscLabelManager : MonoBehaviour
 		if (!freeLabels.Contains(label))
 			freeLabels.Add(label);
 	}
+
 }

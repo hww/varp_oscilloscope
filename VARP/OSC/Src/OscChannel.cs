@@ -102,6 +102,8 @@ namespace VARP.OSC
 			style = probe.style;
 			TrigTriggerMode = probe.Mode;
 			TrigTriggerEdge = probe.Edge;
+			readSample = probe.readSample;
+			readTriggerSample = probe.readTriggerSample;
 			trigLevel = probe.triggerLevel;
 			isPlugged = !probe.IsNullProbe;
 			label.visible = isPlugged;
@@ -109,11 +111,47 @@ namespace VARP.OSC
 			isDirtyConfigText = isDirtyStatusText = true;
 			if (oscilloscope.trigger.channel == this)
 				oscilloscope.trigger.OnPlugHandle();
+			sample = dclevel = new Vector3();
 		}
 
 		private void UpdateLeds()
 		{
 			ledPlugged.State = isPlugged;
+		}
+		
+		// =============================================================================================================
+		// Acquire sample
+		// =============================================================================================================
+		
+		public Vector3 sample;											//< Curent sample
+		public Vector3 dclevel;											//< Dc level for decouplig
+		public OscProbe.ReadTriggerSampleDelegate readTriggerSample; 	//< Read sample for trigger	
+		public OscProbe.ReadSampleDelegate readSample;					//< Read sample from this probe	
+		
+		/// <summary>Acquire sample with curent probe</summary>
+		public void AcquireSample(int dmaWrIdx, float dt)
+		{
+			if (isPlugged)
+			{
+				readSample?.Invoke(probe);
+				if (decoupling)
+				{
+					var sampleIn = probe.sample;
+					dclevel = Vector3.Lerp(dclevel, sampleIn, dt);
+					sample = sampleIn - dclevel;
+				}
+				else
+				{
+					sample = probe.sample;
+				}
+				this[dmaWrIdx] = sample;
+			}
+		}
+
+		/// <summary>Acquire sample for trigger</summary>
+		public float AcquireTriggerSample()
+		{
+			return isPlugged ? (readTriggerSample?.Invoke(this) ?? sample.x) : 0f;
 		}
 		
 		// =============================================================================================================
@@ -208,7 +246,7 @@ namespace VARP.OSC
 				for (var i = 0; i < valsNum; i++)
 				{
 					var label = valueLabels[i];
-					label.anchoredPosition = oscSettings.GetPixelPositionClamped(valsLabelPosX, label.gridPosition.y + position);
+					label.anchoredPosition = oscSettings.GetPixelPositionClamped(valsLabelPosX, label.position + position);
 				}
 
 			}
@@ -375,8 +413,8 @@ namespace VARP.OSC
 			var label = oscilloscope.valueLables.SpawnLabel();
 			label.text = text;
 			label.color = color;
-			label.gridPosition = new Vector2(0, y);
-			label.anchoredPosition = oscSettings.GetPixelPositionClamped(valsLabelPosX, label.gridPosition.y + position);
+			label.position = y;
+			label.anchoredPosition = oscSettings.GetPixelPositionClamped(valsLabelPosX, label.position + position);
 			label.visible = true;
 			valueLabels.Add(label);	
 		}

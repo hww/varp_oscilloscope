@@ -20,7 +20,8 @@ public class OscilloscopeDemo : MonoBehaviour
 	private OscProbe oscDistanceXZ;
 	private OscProbe oscEvents;
 	private bool heartBeat;
-
+	private bool heartBeat2;
+	
 	// =================================================================================================================
 	// Mono behaviour
 	// =================================================================================================================
@@ -48,7 +49,7 @@ public class OscilloscopeDemo : MonoBehaviour
 		oscSinwaveProbe = new OscProbe("Sinus+1V");
 		oscSinwaveProbe.readSample = (OscProbe probe) =>
 		{
-			probe.Log(Mathf.Sin(Time.time*3f) + 1f); // 1V DC
+			probe.Log(Mathf.Sin(Time.time * 3f) + 1f); // 1V DC
 		};
 		oscSinwaveProbe.autoGain = true;
 		oscSinwaveProbe.autoGainDivisions = 2;
@@ -80,7 +81,7 @@ public class OscilloscopeDemo : MonoBehaviour
 		oscVecProbe.triggerLevel = 0.5f;
 		oscilloscope.GetChannel(OscChannel.Name.C3).Plug(oscVecProbe);
 		
-		// -- Setup vector 3 probe input -- 
+		// -- Setup vector 4 probe input -- 
 		var oscLogicProbe = new OscProbe("LogicProbe");
 		oscLogicProbe.readSample = (OscProbe probe) =>
 		{
@@ -96,7 +97,6 @@ public class OscilloscopeDemo : MonoBehaviour
 		oscLogicProbe.triggerLevel = 0.5f;
 		oscilloscope.GetChannel(OscChannel.Name.C4).Plug(oscLogicProbe);
 		
-		
 		// -- Plug them to scope --
 		oscilloscope.trigger.SecondsDivision = 0.5f;
 		
@@ -106,6 +106,12 @@ public class OscilloscopeDemo : MonoBehaviour
 	private void Update()
 	{
 		heartBeat = (1 & (int) Time.time) > 0; // demo pulses
+		// Demo of using horizontal labels
+		if (heartBeat && !heartBeat2)
+			oscilloscope.trigger.AddTimeLabel(0, "R", Color.green);
+		if (!heartBeat && heartBeat2)
+			oscilloscope.trigger.AddTimeLabel(1, "F", Color.red);		
+		heartBeat2 = heartBeat;
 	}
 	
 	// =================================================================================================================
