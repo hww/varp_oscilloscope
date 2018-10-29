@@ -3,7 +3,7 @@ _Documentation for Unity asset_
 
 ## Getting Started
 
- VARP Oscilloscope is a small, easy to use Unity asset that you can use to record and analyze values modifyed by script, physics or animation in real time. The oscilloscopes have 4 channels but can be extended to 8 without additional programming.
+ VARP Oscilloscope is a small, easy to use Unity asset that you can use to record and analyze values modified by script, physics or animation in real time. The oscilloscopes have 4 channels but can be extended to 8 without additional programming.
 In addition to the list of general features, this section covers the following topics:
 
 - How to add asset to your project.
@@ -39,7 +39,7 @@ In addition to the list of general features, this section covers the following t
 
 ## Additional Features 
 
-- Does not require custom Unity GUI tools and eqasy to learn.
+- Does not require custom Unity GUI tools and easy to learn.
 - Fully configurable with script for different measurements. 
 - Human friendly attenuation gain and time per division values. 
 
@@ -51,7 +51,7 @@ The asset is in development so the actual screenshot can have differences.
 
 ## Adding to your project
 
-Coppy VARP folder inside Assets/Plugins folder. After that you can instantiate prefab Oscilloscope in the scene of your project. Now you can write your own script to control the oscilloscope with your game events or data.
+Copy VARP folder inside Assets/Plugins folder. After that you can instantiate prefab Oscilloscope in the scene of your project. Now you can write your own script to control the oscilloscope with your game events or data.
 
 To activate/deactivate oscilloscope use ` key or property _IsVisible_.
 
@@ -63,7 +63,7 @@ oscilloscope.gui.IsVisible = false; // Make invisible
 To deactivate or activate input shortcuts use property _IsInFocus_. The state of keyboard (enabled/disabled) indicated by icon on the screen.
 
 ```C#
-oscilloscope.gui.IsInFocus = true;  // Enable keyabord shortcuts
+oscilloscope.gui.IsInFocus = true;  // Enable keybord shortcuts
 oscilloscope.gui.IsInFocus = false; // Disable keyboard
 ```
 
@@ -123,7 +123,7 @@ Additionaly the name of channel will be displayed on screen as the label. The la
 
 ![Channel Labels](images/varp_oscilloscope_channel_labels.png)
 
-In cases when origin is outside of screen the label will rendered at the sceen edge.
+In cases when origin is outside of screen the label will rendered at the screen edge.
 
 ## Class OscSettings
 
@@ -161,9 +161,9 @@ Lets create simple probe and connect it to oscilloscope channel A.
 
 ```C#
 // Create probe
-var characterVelocityProbe = new OscProbe("CharacterVelocity");
+var probe = new OscProbe("CharacterVelocity");
 // Plug to the channel
-oscilloscope.GetChannel(OscChannel.Name.C1).Plug(characterVelocityProbe);
+oscilloscope.GetChannel(OscChannel.Name.C1).Plug(probe);
 // Remove probe from channel (disable channel)
 oscilloscope.GetChannel(OscChannel.Name.C1).Unplug();
 ```
@@ -176,7 +176,7 @@ probe.position = -5;                          // To adjust vertical position (ze
 probe.autoGain = true;                        // To enable auto gain feature
 probe.autoGainDivisions = 2;                  // Request 2 divisions for peak to peak oscillogram
 probe.style = OscProbe.Style.Logic;           // To change rendering style (Default, Logic)
-// To set trigger's values (will be applyyed after tigger will be connected to channel)
+// To set trigger's values (will be applied after tigger will be connected to channel)
 probe.triggerMode = OscTrigger.Mode.Normal;   // Trigger's normal mode
 probe.triggerMode = OscTrigger.Mode.Auto;     // Trigger's auto mode
 probe.triggerMode = OscTrigger.Mode.Single;   // Trigger's single mode
@@ -211,7 +211,7 @@ probe.Log(text.color);
 
 ### Pull Value by Probe
 
-Alternative way to read values is to assign the lambda method to the deligate of probe.
+Alternative way to read values is to assign the lambda method to the delegate of probe.
 
 ```C#
 characterVelocityProbe.readSample = (OscProbe probe) =>
@@ -260,7 +260,7 @@ channel.autoDivisions = 2f;                   // Auto gain division number
 channel.Decoupling = true;                    // AC mode
 channel.Decoupling = false;                   // DC mode
 channel.Style = Style.Default;                // Render standart diagramm
-channel.Style = Style.Logic;                  // Render logic analyzer diagramm
+channel.Style = Style.Logic;                  // Render logic analyzer diagram
  ```
    
 ## Class OscTrigger
@@ -279,13 +279,13 @@ var trigger = oscilloscope.trigger;
 trigger.SetChannel(OscChannel.Name.C1);
 ```
 
-After method _SetChannel_ the settings from the channel will be applyed for trigger. After that the settings can be ajusted by next methods.
+After method _SetChannel_ the settings from the channel will be applied for trigger. After that the settings can be adjusted by next methods.
 
 ```C#
 oscilloscope.trigger.SecondsDivision = 1f;   // set 1 second per division
 oscilloscope.trigger.SecondsDivisionPlus();  // increase second per division value
 oscilloscope.trigger.SecondsDivisionMinus(); // decrease second per division value
-oscilloscope.trigger.Position = 1f;          // chane horizontal position 1 division after trigger
+oscilloscope.trigger.Position = 1f;          // chanel horizontal position 1 division after trigger
 oscilloscope.trigger.Level = 1f;             // set threshold value for trigger
 ```
 
