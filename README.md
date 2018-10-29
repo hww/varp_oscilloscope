@@ -51,12 +51,25 @@ The asset is in development so the actual screenshot can have differences.
 
 ## Adding to your project
 
-Drop asset folder inside Assets/Plugins folder. After that you can instantiate prefab Oscilloscope in the scene of your project. Now you can write your own script to control the oscilloscope with your game events or data.
+Coppy VARP folder inside Assets/Plugins folder. After that you can instantiate prefab Oscilloscope in the scene of your project. Now you can write your own script to control the oscilloscope with your game events or data.
+
+To activate/deactivate oscilloscope use ` key or property _IsVisible_.
+
+```C#
+oscilloscope.gui.IsVisible = true;  // Make visible
+oscilloscope.gui.IsVisible = false; // Make invisible
+```
+
+To deactivate or activate input shortcuts use property _IsInFocus_. The state of keyboard (enabled/disabled) indicated by icon on the screen.
+
+```C#
+oscilloscope.gui.IsInFocus = true;  // Enable keyabord shortcuts
+oscilloscope.gui.IsInFocus = false; // Disable keyboard
+```
 
 ## Basic Concepts
 
-To use your oscilloscope effectively, you must understand the
-following basic concepts:
+To use your oscilloscope effectively, you must understand the following basic concepts:
 
 - Triggering.
 - Acquiring data.
@@ -69,19 +82,19 @@ an oscilloscope and their relationship to each other.
 
 ![Basic Concept Diagram](images/varp_oscilloscope_basic_concept.png)
 
-**GameValue** _Any variable or class member can be captured by pushing it to the probe every frame or only when it was changed. As alternative the value can be pulled by lambda function assigned to the probe. Before recording the value should be converted to floating point type._
+**GameValue** _Any variable or class member can be captured by pushing it to the probe every frame or only when it was changed. As alternative the value can be pulled by lambda function assigned to the probe. Before recording the value should be converted to floating point, Vector2 or Vector3 types._
 
-**OscProbe** _Container of sample and configuration settings for the channel or trigger. Every time when the probe is connected to the oscilloscope channel, the values will be copied to the channel and to trigger (if this channel connected to trigger)._
+**OscProbe** _Container of configuration settings for the channel or trigger. Every time when the probe is connected to the channel, the values will be copied to the channel and to trigger (if this channel connected to trigger)._
 
-**OscChannel** _This class contains data for data recording and rendering it on the screen. Every time when probe connected to the channel, the channel reads settings from probe._
+**OscChannel** _This class contains data for data recording and rendering it on the screen._
 
 **OscGrid** _Rendering the grid on the screen._
 
-**OscRenderer** _Renderer of waveforms._
+**OscRenderer** _Renderer waveforms or texts on screen._
 
-**OscTrigger** _Class which is monitoring one of the channels and can be used to the start/stop acquiring data. Every time when trigger is connected to channel, the trigger reads the configuration values from channel._
+**OscTrigger** _Class which is monitoring one of the channels and can be used to the start/stop acquiring data. Every time when trigger is connected to channel, the trigger reads the configuration values from it._
 
-**Oscilloscope** _Main code for the oscilloscope._
+**Oscilloscope** _Main oscilloscope's code._
 
 ## Understanding Grid
 
@@ -91,9 +104,7 @@ The grid has divisions, subdivisions and rulers. Center of the screen has coordi
 
 ## Channel Names
 
-The channels named C1, C2, C3, C4 can be used for record samples and draw oscillogram on screen. The channel's name will be displayed on screen display and can be used as an argument of functions.
-
-The enum value OscChannel.Name has the list of default names. 
+Access to each channel by script require to provide as argument channel's name C1, C2, ..., C8. The enum value OscChannel.Name has the list of default names. 
 
 | Value | Value Name | Comment               |
 |-------|------------|-----------------------|
@@ -108,21 +119,21 @@ The enum value OscChannel.Name has the list of default names.
 
 <sup>1</sup> _Reserved for extension_
 
-The number of channel will be displayed on screen as the marker. It has horizontal arrow to mark channel's origin (0 value).
+Additionaly the name of channel will be displayed on screen as the label. The label has horizontal arrow to mark channel's origin (0 value).
 
 ![Channel Labels](images/varp_oscilloscope_channel_labels.png)
 
-In cases when origin is outside of screen the channel's label will rendered at the sceen edge.
+In cases when origin is outside of screen the label will rendered at the sceen edge.
 
 ## Class OscSettings
 
-It is based on ScriptabbleObject, can be used to create asset with oscilloscope's configuration settings.
+This class based on ScriptabbleObject, can be used to create asset with oscilloscope's configuration settings.
 
 | Type | Field             | Info                                                        |
 |------|-------------------|-------------------------------------------------------------|
 | int  | pixelsPerDivision | How many pixels in single division (recommend 10,20,30,...) |
-| int  | divisionsX        | Horizontal divisions (recommend odd value)                  |
-| int  | divisionsY        | Vertical divisions (recommend odd value)                    |
+| int  | divisionsX        | Horizontal divisions number (recommend odd value)           |
+| int  | divisionsY        | Vertical divisions number (recommend odd value)             |
 | int  | subdivisions      | Subdivisions in the division (recommend 5 or 10)            |
 | bool | drawGrid          | Draw grid lines                                             |
 | bool | drawRullerX       | Draw horizontal ruler in center                             |
@@ -176,23 +187,26 @@ probe.triggerLevel = 0.5f;                    // Trigger's edge detection thresh
 
 ### Push Value to Probe
 
-As probe created we can push value to the probe with setting the sample field. You can directly change the _sample_ field or use various methods.
+As probe created we can push value to the probe with various of methods (listed below) or you can directly change the _sample_ field.
 
 ```C#
+// Direct access to sample
+probe.sample.x = Time.time;
+probe.sample = transform.position;
 // Write floating point value to probe
-characterVelocityProbe.Log(rigidbody.velocity.magnitude);
+probe.Log(rigidbody.velocity.magnitude);
 // Write integer value to probe
-characterVelocityProbe.Log((int)Time.time);
+probe.Log((int)Time.time);
 // Write bool value to probe
-characterVelocityProbe.Log(Time.time > 10f);
+probe.Log(Time.time > 10f);
 // Write Vector2 to probe
-characterVelocityProbe.Log(transform.achoredPosition);
-characterVelocityProbe.Log(x,y);
+probe.Log(transform.achoredPosition);
+probe.Log(x,y);
 // Write Vector3 value to probe
-characterVelocityProbe.Log(rigidbody.velocity);
-characterVelocityProbe.Log(x,y,z);
+probe.Log(rigidbody.velocity);
+probe.Log(x,y,z);
 // Write color value to probe
-characterVelocityProbe.Log(text.color);
+probe.Log(text.color);
 ```
 
 ### Pull Value by Probe
@@ -258,15 +272,14 @@ waveforms.
 
 ### Trigger Source
 
-You can derive your trigger source from any channel. To select trigger source use method.
+You can derive your trigger source from any channel. To select trigger source use method _SetChannel_.
 
 ```C#
 var trigger = oscilloscope.trigger;
 trigger.SetChannel(OscChannel.Name.C1);
 ```
 
-After method _SetChannel_ the settings from this channels will be applyed for trigger. After that the settings can be ajusted by next methods.
-
+After method _SetChannel_ the settings from the channel will be applyed for trigger. After that the settings can be ajusted by next methods.
 
 ```C#
 oscilloscope.trigger.SecondsDivision = 1f;   // set 1 second per division
@@ -276,7 +289,7 @@ oscilloscope.trigger.Position = 1f;          // chane horizontal position 1 divi
 oscilloscope.trigger.Level = 1f;             // set threshold value for trigger
 ```
 
-When channel record Vector3 or Vecto2 data, the trigger reading only X component of vector on input. To alternate it can be used _readTriggerSample_ delegate.
+When channel records Vector3 or Vecto2 data, the trigger reading only X component of the vector. To alternate this behaviour can be used _readTriggerSample_ delegate.
 
 ```C#
 probe.readTriggerSample = (OscCnammel ch) => ch.sample.magntude; // use vector's magnitude as the trigger's source
@@ -304,16 +317,14 @@ waveform, if any, will remain on the display.
 
 - **Single** The Single mode allows the oscilloscope to acquire one waveform each time you call ForceTrigger method, and the trigger condition is detected.
 
-
-
 ### Edge Detection
 
 The trigger compares the channel value with trigger's level value and produces starting data acquiring depend on Edge detection mode. The picture below explain difference of Edge modes.
 
 ![Edge Detection](images/varp_oscilloscope_trigger.png)
 
-The method **AutoSetLevel** set the trigger level is set to the vertical midpoint
-between the peaks of the trigger signal.
+The method _AutoSetLevel_ will set the trigger's level to the vertical midpoint
+between the peaks of signal at the trigger's source.
 
 ```C#
 oscilloscope.trigger.AutoSetLevel();  
@@ -328,6 +339,9 @@ mode, the waveform display can be scaled or positioned with the vertical and hor
 oscilloscope.trigger.Pause = true;   // stop acquiring
 oscilloscope.trigger.Pause = false;  // run acquiring
 ```
+
+### Single Mode
+
 Starts an acquisition regardless of an adequate trigger signal. This button has no effect if the acquisition is already stopped.
 
 ```C#
@@ -354,7 +368,7 @@ oscilloscope.trigger.AddTimeLabel(0, "T1", Color.red); // add time label at the 
 
 | Keys                 | Functions |
 |:--------------------:|--|
-| `                    | _Enable, Disable oscilloscope GUI. Also used for activate input focus on oscilloscope_  |
+| `                    | _Enable, Disable oscilloscope GUI. Also used for activate input focus_  |
 | 1 to 8               | _Select current channel_ |
 | 0                    | _Select trigger_ |
 | SHIFT+1 to SHIFT+8   | _Activate channel for trigger's source_ |
@@ -368,11 +382,11 @@ oscilloscope.trigger.AddTimeLabel(0, "T1", Color.red); // add time label at the 
 | A                    | _Enable/Disable auto gain mode_ |
 | V                    | _Alternate view style_ |
 | **Selected Trigger** | |
-| E                    | _Edge detection mode_ |
-| M                    | _Trigger mode_ |
+| E                    | __Alternate edge detection mode_ |
+| M                    | __Alternate trigger mode_ |
 | +, -                 | _Adjust time scale value_ |
 | Left, Right          | _Adjust horizontal position_ |
 
-### Icons
+### Icons legends
 
 ![Icons](images/osc_icons.png)
