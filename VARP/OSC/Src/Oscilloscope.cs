@@ -149,6 +149,13 @@ namespace VARP.OSC
 				oscChannels[i].AcquireSample(addr, dt);
 		}
 
+		public void OnTrigger()
+		{
+			// -- reset min max and other values --
+			for (var i = 0; i < oscChannels.Length; i++)
+				oscChannels[i].OnTrigger();
+		}
+			
 		// =============================================================================================================
 		// Renderrer
 		// =============================================================================================================

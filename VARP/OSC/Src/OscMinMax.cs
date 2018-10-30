@@ -41,6 +41,7 @@ namespace VARP.OSC
 		public float P2P => p2p;
 		public float Mid => (Max - Min) / 2f;
 		
+		/// <summary>Reset min and max values</summary>
 		public void Reset()
 		{
 			isZero = true;
@@ -49,6 +50,7 @@ namespace VARP.OSC
 			max = 0;
 		}
 
+		/// <summary>Calculate min max value</summary>
 		public bool CalculateMinMax(Vector3[] buffer, int smpStart, int smpEnd, OscProbe.Format format)
 		{
 			isZero = false;

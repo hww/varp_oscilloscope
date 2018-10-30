@@ -182,11 +182,6 @@ namespace VARP.OSC
 		// The renderer
 		// =============================================================================================================
 
-		public void BeforeRender()
-		{
-			minMax.Reset();
-		}
-
 		/// <summary>Render this channel</summary>
 		/// <param name="renderer"></param>
 		/// <param name="smpBeg">Start sample</param>
@@ -236,6 +231,12 @@ namespace VARP.OSC
 		public OscMinMax minMax = new OscMinMax();						//< (Calculated) min value
 
 		/// <summary>Calculate min max value</summary>
+		public void OnTrigger()
+		{
+			minMax.Reset();
+		}
+
+		/// <summary>Calculate min max value</summary>
 		public bool CalculateMinMax(int smpStart, int smpEnd)
 		{
 			return minMax.CalculateMinMax(buffer, smpStart, smpEnd, format);
@@ -254,10 +255,12 @@ namespace VARP.OSC
 				
 		private const string STR_AUTO_ON = "AUTO";
 		private const string STR_AUTO_OFF = "";
-		private const string STR_AC = "AC";
-		private const string STR_DC = "DC";
+		private const string STR_DECOUPLING_ON = "AC";
+		private const string STR_DECOUPLING_OFF = "DC";
+		
 		private bool isDirtyConfigText;
 		private bool isDirtyStatusText;
+		
 		/// <summary>Render OSD labels. Can be called per frame</summary>
 		public void RenderGUI()
 		{
@@ -278,15 +281,10 @@ namespace VARP.OSC
 			if (isDirtyConfigText)
 			{
 				isDirtyConfigText = false;
+				oscilloscope.trigger.RequestRedraw();
 				if (probe != null)
-					configText.text = string.Format("{0} {1} {2}\n{3} {4}\nPos:{5} divs ({6})",
-						probe.name, 
-						autoGain ? STR_AUTO_ON : STR_AUTO_OFF,
-						style,
-						decoupling ? STR_AC : STR_DC, 
-						OscFormatter.FormatValuePerDiv(gain), 
-						position, 
-						OscFormatter.FormatValue(position * scale));	
+					configText.text =
+						$"{probe.name} {(autoGain ? STR_AUTO_ON : STR_AUTO_OFF)} {style}\n{(decoupling ? STR_DECOUPLING_ON : STR_DECOUPLING_OFF)} {OscFormatter.FormatValuePerDiv(gain)}\nPos:{position} divs ({OscFormatter.FormatValue(position * scale)})";	
 				else
 					configText.text = string.Empty;
 			}
@@ -295,8 +293,7 @@ namespace VARP.OSC
 			{
 				isDirtyStatusText = false;
 				if (probe != null)
-					statusText.text = string.Format("Vpp: {0,5}", 
-						OscFormatter.FormatValue(minMax.P2P));	
+					statusText.text = $"Vpp: {OscFormatter.FormatValue(minMax.P2P),5}";	
 				else
 					statusText.text = string.Empty;
 			}

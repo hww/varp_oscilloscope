@@ -342,6 +342,7 @@ namespace VARP.OSC
             dmaWriteTrggrd = dmaWrite;
             dmaWriteEnd = dmaWrite + numSamplesAfterTrigger;
             isDirtyConfigText = isDirtyStatusText = true;
+            oscilloscope.OnTrigger();
             RequestRedraw();
         }
         
