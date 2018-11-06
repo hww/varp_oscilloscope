@@ -71,7 +71,7 @@ namespace VARP.OSC
 		/// <param name="buffer">Samples buffer</param>
 		/// <param name="smpStart">Start from sample</param>
 		/// <param name="smpEnd">End with samples</param>
-		/// <param name="smpEnd">Result true if peak to peak is modifyed</param>
+		/// <param name="smpEnd">Result true if peak to peak is modified</param>
 		private bool CalculateMinMaxFloat(Vector3[] buffer, int smpStart, int smpEnd)
 		{
 			for (var i = smpStart; i <= smpEnd; i++)
@@ -89,7 +89,7 @@ namespace VARP.OSC
 		/// <param name="buffer">Samples buffer</param>
 		/// <param name="smpStart">Start from sample</param>
 		/// <param name="smpEnd">End with samples</param>
-		/// <param name="smpEnd">Result true if peak to peak is modifyed</param>
+		/// <param name="smpEnd">Result true if peak to peak is modified</param>
 		private bool CalculateMinMaxVector2(Vector3[] buffer, int smpStart, int smpEnd)
 		{
 			for (var i = smpStart; i <= smpEnd; i++)
@@ -110,7 +110,7 @@ namespace VARP.OSC
 		/// <param name="buffer">Samples buffer</param>
 		/// <param name="smpStart">Start from sample</param>
 		/// <param name="smpEnd">End with samples</param>
-		/// <param name="smpEnd">Result true if peak to peak is modifyed</param>
+		/// <param name="smpEnd">Result true if peak to peak is modified</param>
 		private bool CalculateMinMaxVector3(Vector3[] buffer, int smpStart, int smpEnd)
 		{
 			for (var i = smpStart; i <= smpEnd; i++)

@@ -224,7 +224,7 @@ namespace VARP.OSC
             }
             else
             {
-                // when unfocuse main button make focus
+                // when unfocused main button make focus
                 if (main)
                     IsVisible = true;
             }

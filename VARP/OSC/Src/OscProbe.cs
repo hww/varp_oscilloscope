@@ -64,7 +64,7 @@ namespace VARP.OSC
 		 ***********************************************/
 
 		public enum Format { Float, Vector2, Vector3 }
-		public Format format;							//< Format os sample
+		public Format format;							//< Format of sample
 		public enum Style { Default, Logic }
 		public Style style;								//< Rendering style
 		
@@ -88,7 +88,7 @@ namespace VARP.OSC
 		// Gain control
 		// =============================================================================================================
 		
-		private float gain = 1f; 						//< Manual scale for inputs
+		private float gain = 1f; 							//< Manual scale for inputs
 		
 		/// <summary>The gain (values per division)</summary>
 		public float Gain
@@ -111,16 +111,16 @@ namespace VARP.OSC
 		}
 		
 		// =============================================================================================================
-		// Log data api
+		// Log data API
 		// =============================================================================================================
 		
-		/// <summary>Curent sample value</summary>
+		/// <summary>Current sample value</summary>
 		public Vector3 sample;
 		/// <summary>Write floating point value to probe</summary>
 		public void Log(float value) { sample.x = value; }
 		/// <summary>Write integer value to probe</summary>
 		public void Log(int value) { sample.x = (float)value; }
-		/// <summary>Write bool value to probe</summary>
+		/// <summary>Write boolean value to probe</summary>
 		public void Log(bool value) { sample.x = value ? 1f : 0f; }
 		/// <summary>Write vector 2 to probe</summary>
 		public void Log(Vector2 value) { sample.x = value.x; sample.y = value.y; }
@@ -159,7 +159,7 @@ namespace VARP.OSC
 			this.readTriggerSample = null;	
 		}
 
-		/// <summary>Null probe used as default frobe for unused channels</summary>
+		/// <summary>Null probe used as default probe for unused channels</summary>
 		public bool IsNullProbe => this == Null;
 		
 		/// <summary>Default probe with constant 0 value</summary>

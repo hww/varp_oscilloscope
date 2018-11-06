@@ -417,18 +417,18 @@ namespace VARP.OSC
         public enum Status
         {            
             /// <summary>
-            /// The instrument is acquiring pretrigger data. All
+            /// The instrument is acquiring pre-trigger data. All
             /// triggers are ignored in this state.
             /// </summary>
             Armed,    
             /// <summary>
-            /// All pretrigger data has been acquired and the
+            /// All pre-trigger data has been acquired and the
             /// instrument is ready to accept a trigger.
             /// </summary>
             Ready,
             /// <summary>
             /// The instrument has seen a trigger and is acquiring the
-            /// posttrigger data.
+            /// post-trigger data.
             /// </summary>
             Triggered,
             /// <summary>
@@ -506,7 +506,7 @@ namespace VARP.OSC
                 var label = oscilloscope.timeLables.SpawnLabel();
                 label.text = string.Empty;
                 label.color = color;
-                timeLabels[i] = label;	
+                timeLabels[i] = label;
             }
         }
         
@@ -536,7 +536,7 @@ namespace VARP.OSC
             var index = OscValue.Time.GetValueIndex(secondsDivision);
             SecondsDivision = OscValue.Time.GetValueByIndex(index + 1);
         }
-		
+
         /// <summary>Decrease seconds per division</summary>
         public void SecondsDivisionMinus()
         {

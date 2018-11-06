@@ -49,18 +49,18 @@ namespace VARP.OSC
 		public OscGuiManager guiManager;
 		[Header("Horizontal")] 
 
-		public OscTrigger trigger; 				//< The trigger object 
+		public OscTrigger trigger;						//< The trigger object 
 		[Header("Vetical")] 
 		public OscChannel[] oscChannels; 				//< The oscilloscope's channels
 		[Header("Grid")] 
-		public OscGrid grid;   							//< The grid of oscilloscope
+		public OscGrid grid;							//< The grid of oscilloscope
 
 		
 		private Color bgColorForRenderer;
 		private bool isInitialized; 					//< Is this oscilloscope initialized
 
 		// =============================================================================================================
-		// Mono Behaviour
+		// Mono Behavior
 		// =============================================================================================================
 
 		void Awake() { Initialize(); }
@@ -157,7 +157,7 @@ namespace VARP.OSC
 		}
 			
 		// =============================================================================================================
-		// Renderrer
+		// Renderer
 		// =============================================================================================================
 
 		/// <summary>

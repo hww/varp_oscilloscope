@@ -36,7 +36,7 @@ namespace VARP.OSC
 		// ============================================================================================
 
 		/// <summary>
-		/// Draw line on the texture. Argumens are in pixel Units.
+		/// Draw line on the texture. Arguments are in pixel Units.
 		/// 
 		/// Bresenham's line algorithm is an algorithm that determines the points of an n-dimensional
 		/// raster that should be selected in order to form a close approximation to a straight line
@@ -50,7 +50,7 @@ namespace VARP.OSC
 		/// <param name="x1">Source position X</param>
 		/// <param name="y1">Source position Y</param>
 		/// <param name="x2">Target position X</param>
-		/// <param name="y2">Targte position Y</param>
+		/// <param name="y2">Target position Y</param>
 		/// <param name="color">Color of line</param>
 		public static void PlotLine(Texture2D texture, int x0, int y0, int x1, int y1, Color color)
 		{
@@ -130,7 +130,7 @@ namespace VARP.OSC
 		/// <param name="x1">Source position X</param>
 		/// <param name="y1">Source position Y</param>
 		/// <param name="x2">Target position X</param>
-		/// <param name="y2">Targte position Y</param>
+		/// <param name="y2">Target position Y</param>
 		/// <param name="color">Color of line</param>
 		public static void PlotRectangle(Texture2D texture, int x1, int y1, int x2, int y2, Color color)
 		{
@@ -275,7 +275,7 @@ namespace VARP.OSC
 		private readonly float[] availableGains;
 		
 		
-		/// <summary>Counstructor</summary>
+		/// <summary>Constructor</summary>
 		/// <param name="minGain">Minimum ratio: 0.1, 0.01, ..., 0.000001</param>
 		/// <param name="maxGain">Maximum ratio: 1000, 10000, ..., 100000</param>
 		/// <param name="gains">The requested row: [1, 2, 5] or [1, 2.5, 5]</param>
@@ -291,7 +291,7 @@ namespace VARP.OSC
 		}
 		
 		/// <summary>
-		/// I do not want to have strange numbers in autogain feature.
+		/// I do not want to have strange numbers in auto-gain feature.
 		/// The strange like 0.21245 etc. It is hard read for human.
 		/// That is why this function can find nearest gain value.
 		/// </summary>
@@ -321,7 +321,7 @@ namespace VARP.OSC
 		}
 		
 		/// <summary>
-		/// I do not want to have strange numbers in autogain feature.
+		/// I do not want to have strange numbers in auto gain feature.
 		/// The strange like 0.21245 etc. It is hard read for human.
 		/// That is why this function can find nearest gain value.
 		/// </summary>
