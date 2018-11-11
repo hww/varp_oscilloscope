@@ -1,7 +1,7 @@
 ﻿// =============================================================================
 // MIT License
 // 
-// Copyright (c) [2018] [Valeriya Pudova]
+// Copyright (c) [2018] [Valeriya Pudova] https://github.com/hww
 // 
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
