@@ -47,7 +47,7 @@ In addition to the list of general features, this section covers the following t
 
 The asset is in development so the final screenshot appearance may have slight differences.
 
-![Screenshot](images/screenshot.png)
+![Screenshot](Documentation/screenshot.png)
 
 ## Adding VARP/OSC to your project
 
@@ -80,7 +80,7 @@ To use your oscilloscope effectively, you must understand the following basic co
 The figure below shows a block diagram of the various functions of
 an oscilloscope and their relationship to each other.
 
-![Basic Concept Diagram](images/varp_oscilloscope_basic_concept.png)
+![Basic Concept Diagram](Documentation/varp_oscilloscope_basic_concept.png)
 
 **GameValue** _Any variable or class member can be captured by pushing it to the probe every frame or only when it was changed. As alternative the probe can pull values by calling a lambda function assigned to the probe. Before recording the value should be converted to floating point, Vector2 or Vector3 types._
 
@@ -100,7 +100,7 @@ an oscilloscope and their relationship to each other.
 
 The grid has divisions, subdivisions and rulers. Center of the screen has coordinate 0,0. Horizontal axis X, and vertical axis Y have the ruler bar in the center of screen.
 
-![Grid](images/varp_oscilloscope_grid_info.png)
+![Grid](Documentation/varp_oscilloscope_grid_info.png)
 
 ## Channel Names
 
@@ -121,7 +121,7 @@ Access to each channel by script require to provide as argument channel's name C
 
 Additionally the name of channel will be displayed on screen as the label. The label has a horizontal arrow to mark channel's origin (0 value).
 
-![Channel Labels](images/varp_oscilloscope_channel_labels.png)
+![Channel Labels](Documentation/varp_oscilloscope_channel_labels.png)
 
 When the origin is outside of screen the label will rendered at the screen edge.
 
@@ -235,7 +235,7 @@ oscLastDifficultyForce.postRender = (OscRenderer renderer, OscChannel channel) =
 };
 ```
 
-![Custom Probe Markers](images/varp_oscilloscope_custom_markers.png)
+![Custom Probe Markers](Documentation/varp_oscilloscope_custom_markers.png)
 
 ### Default Probes
 
@@ -321,7 +321,7 @@ waveform, if any, will remain on the display.
 
 The trigger compares the channel value with trigger's level value and produces starting data acquiring depend on Edge detection mode. The picture below explain difference of Edge modes.
 
-![Edge Detection](images/varp_oscilloscope_trigger.png)
+![Edge Detection](Documentation/varp_oscilloscope_trigger.png)
 
 The _AutoSetLevel_ method will set the trigger's level to the vertical midpoint
 between the peaks of signal at the trigger's source.
@@ -356,7 +356,7 @@ Time labels will be rendered below the screen.  Each label has unique id and cal
 oscilloscope.trigger.AddTimeLabel(0, "T1", Color.red); // add time label at the current time
 ```
 
-![Time Markers](images/varp_oscilloscope_time_markers.png)
+![Time Markers](Documentation/varp_oscilloscope_time_markers.png)
 
 ## Taking Measurements
 
@@ -389,4 +389,4 @@ oscilloscope.trigger.AddTimeLabel(0, "T1", Color.red); // add time label at the 
 
 ### Icons legends
 
-![Icons](images/osc_icons.png)
+![Icons](Documentation/osc_icons.png)
