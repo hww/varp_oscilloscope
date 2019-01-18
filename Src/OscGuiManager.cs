@@ -27,7 +27,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace VARP.OSC
+namespace Plugins.VARP.OSC
 {
 
     /// <summary>

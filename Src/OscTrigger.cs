@@ -29,7 +29,7 @@ using System.Xml;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace VARP.OSC
+namespace Plugins.VARP.OSC
 {
     /// <summary>
     /// Oscilloscope's trigger. 

@@ -24,7 +24,7 @@
 
 using UnityEngine;
 
-namespace VARP.OSC
+namespace Plugins.VARP.OSC
 {
     [CreateAssetMenu(menuName = "VARP/OscSettings")]
     public class OscSettings : ScriptableObject

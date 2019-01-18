@@ -30,7 +30,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 
-namespace VARP.OSC
+namespace Plugins.VARP.OSC
 {
     [System.Serializable]
 	public class OscChannel : MonoBehaviour, IRenderableGUI, IRenderable, IPluggable

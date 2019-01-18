@@ -1,8 +1,5 @@
-﻿using System;
+﻿using Plugins.VARP.OSC;
 using UnityEngine;
-using System.Collections;
-using System.Collections.Generic;
-using VARP.OSC;
 
 public class OscilloscopeDemo : MonoBehaviour
 {
@@ -12,7 +9,7 @@ public class OscilloscopeDemo : MonoBehaviour
 	
 	public Camera demoCamera;
 	public Canvas canvas;
-	public VARP.OSC.Oscilloscope oscilloscope;
+	public Oscilloscope oscilloscope;
 	
 	private OscProbe oscHeartBeatProbe;
 	private OscProbe oscSinwaveProbe;

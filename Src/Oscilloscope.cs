@@ -30,7 +30,7 @@ using System.Threading;
 using UnityEngine.UI;
 using UnityEngine;
 
-namespace VARP.OSC
+namespace Plugins.VARP.OSC
 {
 	/// <summary>
 	/// Two inputs oscilloscope

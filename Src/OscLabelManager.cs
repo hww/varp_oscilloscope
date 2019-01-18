@@ -23,10 +23,9 @@
 // =============================================================================
 
 using System;
-using System.Collections;
 using System.Collections.Generic;
+using Plugins.VARP.OSC;
 using UnityEngine;
-using VARP.OSC;
 
 public class OscLabelManager : MonoBehaviour
 {
