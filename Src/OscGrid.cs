@@ -22,13 +22,10 @@
 // SOFTWARE.
 // =============================================================================
 
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Experimental.Rendering;
 using UnityEngine.UI;
 
-namespace Plugins.VARP.OSC
+namespace VARP.OSC
 {
 	[RequireComponent(typeof(RawImage))]
 	public class OscGrid : MonoBehaviour

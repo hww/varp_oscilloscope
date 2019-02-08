@@ -23,14 +23,12 @@
 // =============================================================================
 
 using System;
-using System.Collections;
 using System.Collections.Generic;
-using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
 
 
-namespace Plugins.VARP.OSC
+namespace VARP.OSC
 {
     [System.Serializable]
 	public class OscChannel : MonoBehaviour, IRenderableGUI, IRenderable, IPluggable

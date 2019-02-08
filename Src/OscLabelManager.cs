@@ -24,7 +24,7 @@
 
 using System;
 using System.Collections.Generic;
-using Plugins.VARP.OSC;
+using VARP.OSC;
 using UnityEngine;
 
 public class OscLabelManager : MonoBehaviour

@@ -22,12 +22,10 @@
 // SOFTWARE.
 // =============================================================================
 
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Plugins.VARP.OSC
+namespace VARP.OSC
 {
 
     /// <summary>

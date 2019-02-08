@@ -1,4 +1,4 @@
-﻿using Plugins.VARP.OSC;
+﻿using VARP.OSC;
 using UnityEngine;
 
 public class OscilloscopeDemo : MonoBehaviour

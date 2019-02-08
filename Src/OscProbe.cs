@@ -22,11 +22,9 @@
 // SOFTWARE.
 // =============================================================================
 
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-namespace Plugins.VARP.OSC
+namespace VARP.OSC
 {
     /// <summary>
     /// The base class for all input. It is model of the oscilloscope's cable probe.

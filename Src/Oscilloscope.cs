@@ -22,15 +22,10 @@
 // SOFTWARE.
 // =============================================================================
 
-using System;
 using System.Collections;
-using System.Collections.Generic;
-using System.Security.Principal;
-using System.Threading;
-using UnityEngine.UI;
 using UnityEngine;
 
-namespace Plugins.VARP.OSC
+namespace VARP.OSC
 {
 	/// <summary>
 	/// Two inputs oscilloscope

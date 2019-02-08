@@ -23,11 +23,9 @@
 // =============================================================================
 
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-namespace Plugins.VARP.OSC
+namespace VARP.OSC
 {
 	public struct OscMinMax
 	{
