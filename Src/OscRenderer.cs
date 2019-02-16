@@ -68,7 +68,7 @@ namespace VARP.OSC
 		// Clear screen
 		// ============================================================================================
 
-		/// <summary>Clear screen by vlack color</summary>
+		/// <summary>Clear screen by black color</summary>
 		public void Clear(Color color)
 		{
 			var w = oscSettings.textureSize.x;
@@ -97,7 +97,7 @@ namespace VARP.OSC
 		}
 		
 		/// <summary>
-		/// Clear horizontal block of texture
+		/// 	Clear horizontal block of texture
 		/// </summary>
 		/// <param name="x1">Start pixel</param>
 		/// <param name="x2">End pixel</param>
@@ -129,7 +129,7 @@ namespace VARP.OSC
 		// ============================================================================================
 	
 		/// <summary>
-		/// Draw waveform. Argument's units are grid divisions (GD)
+		/// 	Draw waveform. Argument's units are grid divisions (GD)
 		/// </summary>
 		/// <param name="channel">Channel</param>
 		/// <param name="smpBeg">Index of first sample</param>
@@ -171,7 +171,7 @@ namespace VARP.OSC
 		}
 		
 		/// <summary>
-		/// Draw waveform. Argument's units are grid divisions (GD)
+		/// 	Draw waveform. Argument's units are grid divisions (GD)
 		/// </summary>
 		/// <param name="channel">Channel</param>
 		/// <param name="smpBeg">Index of first sample</param>
@@ -226,7 +226,7 @@ namespace VARP.OSC
 		}
 
 		/// <summary>
-		/// Draw waveform. Argument's units are grid divisions (GD)
+		/// 	Draw waveform. Argument's units are grid divisions (GD)
 		/// </summary>
 		/// <param name="channel">Channel</param>
 		/// <param name="smpBeg">Index of first sample</param>
@@ -290,7 +290,7 @@ namespace VARP.OSC
 		}		
 		
 		/// <summary>
-		/// Draw waveform. Argument's units are grid divisions (GD)
+		/// 	Draw waveform. Argument's units are grid divisions (GD)
 		/// </summary>
 		/// <param name="channel">Channel</param>
 		/// <param name="smpBeg">Index of first sample</param>
@@ -354,7 +354,7 @@ namespace VARP.OSC
 		}
 		
 		/// <summary>
-		/// Draw marker at the x,y position in the division units
+		/// 	Draw marker at the x,y position in the division units
 		/// </summary>
 		/// <param name="text"></param>
 		/// <param name="color"></param>
@@ -381,7 +381,7 @@ namespace VARP.OSC
 					return; // do not render label outside
 				}
 			}
-			// Render little cross hor. and vert. lines.			
+			// Render little cross horizontal and vertical lines.			
 			OscUtils.PlotLine(screenTexture, pxX, pxY, pxX+16, pxY, color);
 			OscUtils.PlotLine(screenTexture, pxX, pxY-8, pxX, pxY+8, color);
 			// Render text (if text is not fit move it below the line)
@@ -397,7 +397,7 @@ namespace VARP.OSC
 		
 		
 		/// <summary>
-		/// Draw horizontal line at position Y
+		/// 	Draw horizontal line at position Y
 		/// </summary>
 		/// <param name="color"></param>
 		/// <param name="y"></param>

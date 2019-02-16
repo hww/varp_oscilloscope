@@ -31,7 +31,7 @@ using UnityEngine.UI;
 namespace VARP.OSC
 {
     [System.Serializable]
-	public class OscChannel : MonoBehaviour, IRenderableGUI, IRenderable, IPluggable
+	public class OscChannel : MonoBehaviour, IRenderGUI, IRender, IPlug
 	{
 		/// <summary>Channel names</summary>
 		public enum Name
@@ -368,7 +368,7 @@ namespace VARP.OSC
 			}
 		}
 
-		/// <summary>Inrease gain</summary>
+		/// <summary>Increase gain</summary>
 		public void GainPlus()
 		{
 			var index = OscValue.Gain.GetValueIndex(gain);
@@ -385,35 +385,35 @@ namespace VARP.OSC
 		/// <summary>Set or get gain of the channel</summary>
 		public float Scale
 		{
-			get { return scale; }
+			get => scale;
 			set { Gain = 1f / value; }
 		}
 		
 		/// <summary>Change position of the level</summary>
 		public float Position
 		{
-			get { return position; }
+			get => position;
 			set { position = value; isDirtyConfigText = true; }
 		}
 		
 		/// <summary>Change AC/DC mode</summary>
 		public bool Decoupling
 		{
-			get { return decoupling; }
+			get => decoupling;
 			set { decoupling = value; isDirtyConfigText = true; }
 		}
 		
-		/// <summary>Change AutoGain controll</summary>
+		/// <summary>Change AutoGain control</summary>
 		public bool AutoGain
 		{
-			get { return autoGain; }
+			get => autoGain;
 			set { autoGain = value; isDirtyConfigText = true; }
 		}
 		
 		/// <summary>Rendering style</summary>
 		public OscProbe.Style Style
 		{
-			get { return style; }
+			get => style; 
 			set { style = value; isDirtyConfigText = true; }
 		}
 		
@@ -423,13 +423,13 @@ namespace VARP.OSC
 		// channel's oscillogram
 		// =============================================================================================================
 	
-		private List<OscChannelLabel> valueLabels = new List<OscChannelLabel>(10);
+		private readonly List<OscChannelLabel> valueLabels = new List<OscChannelLabel>(10);
 
 		
 		/// <summary>Add vertical (value) label</summary>
 		public void AddValueLabel(string text, float y)
 		{
-			var label = oscilloscope.valueLables.SpawnLabel();
+			var label = oscilloscope.valueLabels.SpawnLabel();
 			label.text = text;
 			label.color = color;
 			label.position = y;
@@ -442,11 +442,11 @@ namespace VARP.OSC
 		private void ClearLabels()
 		{
 			for (var i=0; i<valueLabels.Count; i++)
-				oscilloscope.valueLables.Release(valueLabels[i]);
+				oscilloscope.valueLabels.Release(valueLabels[i]);
 		}
 	}
 
-	public interface IRenderable
+	public interface IRender
 	{
 		/// <summary>Render this channel</summary>
 		/// <param name="renderer"></param>
@@ -457,7 +457,7 @@ namespace VARP.OSC
 		void Render(OscRenderer renderer, int smpBeg, int smpEnd, float pixStart, float smpScaleToPixels);
 	}
 
-	public interface IRenderableGUI
+	public interface IRenderGUI
 	{
 		/// <summary>
 		/// Render gui widgets of this channel
@@ -465,7 +465,7 @@ namespace VARP.OSC
 		void RenderGUI();
 	}
 
-	public interface IPluggable
+	public interface IPlug
 	{
 		/// <summary>Update parameters of channel from the probe</summary>
 		void Plug(OscProbe probe);

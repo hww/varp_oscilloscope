@@ -35,12 +35,8 @@ namespace VARP.OSC
 
         /// <summary>Size of buffer should be 2^N</summary>
         public const int BUFFER_SIZE = 1024;
-        /// <summary>Size of buffer should be 2^N / 2</summary>
-        public const int BUFFER_HALF_SIZE = BUFFER_SIZE / 2; 
         /// <summary>Size of buffer should be 2^N-1</summary>
         public const int BUFFER_INDEX_MASK = BUFFER_SIZE - 1;
-        /// <summary>How many samples per single draw</summary>
-        public const int SAMPLES_PER_DRAW = 10;
 
         // =============================================================================================================
         // Fiels for designer
@@ -67,7 +63,7 @@ namespace VARP.OSC
         // =============================================================================================================
 		
         /// <summary>
-        /// Initialize object
+        ///     Initialize object
         /// </summary>
         public void Initialize(float timePerSamp)
         {

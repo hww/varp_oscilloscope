@@ -41,7 +41,7 @@ public class OscLed : MonoBehaviour
 	
 	public bool State
 	{
-		get { return state; }
+		get => state;
 		set { 
 			state = value;
 			image.color = state ? colorOn : colorOff;

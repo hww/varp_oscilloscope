@@ -70,21 +70,21 @@ namespace VARP.OSC
 		private bool drawGrid;
 		public bool DrawGrid
 		{
-			get { return drawGrid; }
+			get => drawGrid;
 			set { drawGrid = value; redraw = true; }
 		}
 		
 		private bool drawRulerX;
 		public bool DrawRulerX
 		{
-			get { return drawRulerX; }
+			get => drawRulerX;
 			set { drawRulerX = value; redraw = true; }
 		}
 		
 		private bool drawRulerY;
 		public bool DrawRulerY
 		{
-			get { return drawRulerY; }
+			get => drawRulerY;
 			set { drawRulerY = value; redraw = true; }
 		}
 		
@@ -96,8 +96,8 @@ namespace VARP.OSC
 		/// <param name="color">Grid color</para>
 		public void Clear(Color color)
 		{
-			var w = (int) oscSettings.textureSize.x;
-			var h = (int) oscSettings.textureSize.y;
+			var w = oscSettings.textureSize.x;
+			var h = oscSettings.textureSize.y;
 			if (screenTexture == null)
 			{
 				CreateTexture(w, h, color);

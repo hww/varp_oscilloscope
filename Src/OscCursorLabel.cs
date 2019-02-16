@@ -33,14 +33,10 @@ namespace VARP.OSC
 		public Text label;
 		public Image image;
 		public RawImage line;
-		public Vector2 gridPosition;
         
 		public bool visible
 		{
-			get
-			{
-				return label.enabled;
-			}
+			get => label.enabled;
 			set
 			{
 				label.enabled = value;
@@ -51,10 +47,7 @@ namespace VARP.OSC
         
 		public Color color
 		{
-			get
-			{
-				return label.color;
-			}
+			get => label.color;
 			set
 			{
 				label.color = value;
@@ -65,26 +58,14 @@ namespace VARP.OSC
         
 		public string text
 		{
-			get
-			{
-				return label.text;
-			}
-			set
-			{
-				label.text = value;
-			}
+			get => label.text;
+			set => label.text = value;
 		}
         
 		public Vector2 anchoredPosition
 		{
-			get
-			{
-				return rect.anchoredPosition;
-			}
-			set
-			{
-				rect.anchoredPosition = value;
-			}
+			get => rect.anchoredPosition;
+			set => rect.anchoredPosition = value;
 		}
 	}
 }

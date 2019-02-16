@@ -38,10 +38,7 @@ namespace VARP.OSC
         private bool _visible;
         public bool visible
         {
-            get
-            {
-                return _visible;
-            }
+            get => _visible;
             set
             {
                 _visible = value;
@@ -53,10 +50,7 @@ namespace VARP.OSC
         private Color _color;
         public Color color
         {
-            get
-            {
-                return _color;
-            }
+            get => _color;
             set
             {
                 _color = value;
@@ -66,26 +60,14 @@ namespace VARP.OSC
         
         public string text
         {
-            get
-            {
-                return label.text;
-            }
-            set
-            {
-                label.text = value;
-            }
+            get => label.text;
+            set => label.text = value;
         }
         
         public Vector2 anchoredPosition
         {
-            get
-            {
-                return rect.anchoredPosition;
-            }
-            set
-            {
-                rect.anchoredPosition = value;
-            }
+            get => rect.anchoredPosition;
+            set => rect.anchoredPosition = value;
         }
 
     }

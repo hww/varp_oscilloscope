@@ -32,7 +32,7 @@ namespace VARP.OSC
     /// Oscilloscope's trigger. 
     /// </summary>
     [System.Serializable]
-    public class OscTrigger : MonoBehaviour, IRenderableGUI
+    public class OscTrigger : MonoBehaviour, IRenderGUI
     {
         // =============================================================================================================
         // Constants
@@ -52,6 +52,7 @@ namespace VARP.OSC
         public const string TRIGGER_CHANNEL_NAME = "T";
         /// <summary>Maximum number of horizontal labels</summary>
         public const int TIME_LABELS_COUNT = 4;
+        
         // =============================================================================================================
         // Initialization 
         // =============================================================================================================
@@ -326,7 +327,7 @@ namespace VARP.OSC
 
         private void AquireSampe()
         {
-            oscilloscope.AquireSampe(dmaWrite++); //< TODO! Overflow protection required
+            oscilloscope.AcquireSample(dmaWrite++); //< TODO! Overflow protection required
             trigSample1 = trigSample2;
             trigSample2 = channel.AcquireTriggerSample();
         }
@@ -474,7 +475,7 @@ namespace VARP.OSC
         // Timing labels
         // =============================================================================================================
         		
-        private OscChannelLabel[] timeLabels = new OscChannelLabel[TIME_LABELS_COUNT];
+        private readonly OscChannelLabel[] timeLabels = new OscChannelLabel[TIME_LABELS_COUNT];
         private float timeLabelPosY;		         //< (Calculate) Coordinate of markers (Grid Divisions)
 
         /// <summary>Add horizontal (time) label now</summary>
@@ -492,7 +493,7 @@ namespace VARP.OSC
         private void ClearLabels()
         {
             for (var i=0; i<timeLabels.Length; i++)
-                oscilloscope.timeLables.Release(timeLabels[i]);
+                oscilloscope.timeLabels.Release(timeLabels[i]);
         }
         
         /// <summary>Spawn all labels</summary>
@@ -500,7 +501,7 @@ namespace VARP.OSC
         {
             for (var i = 0; i < TIME_LABELS_COUNT; i++)
             {
-                var label = oscilloscope.timeLables.SpawnLabel();
+                var label = oscilloscope.timeLabels.SpawnLabel();
                 label.text = string.Empty;
                 label.color = color;
                 timeLabels[i] = label;
@@ -514,7 +515,7 @@ namespace VARP.OSC
         /// <summary>Set or get horizontal time scale setting</summary>
         public float SecondsDivision
         {
-            get { return secondsDivision; }
+            get => secondsDivision;
             set
             {
                 value = OscValue.Time.GetValue(value);
@@ -551,8 +552,8 @@ namespace VARP.OSC
         /// </summary>
         public float Position
         {
-            get { return position; }
-            set { SetPosition(value); }
+            get => position;
+            set => SetPosition(value);
         }
 
         /// <summary>Set position. But before test for minimum and maximum value</summary>
@@ -567,7 +568,7 @@ namespace VARP.OSC
             // calculate relative position 
             sampAtCenterRel = Mathf.RoundToInt(position * sampPerDivision);
             timeAtCenterRel = position * secondsDivision;
-            // caclulate samples before and after trigger
+            // calculate samples before and after trigger
             numSamplesBeforeTrigger = Mathf.RoundToInt((int)halfScreen + sampAtCenterRel);
             numSamplesAfterTrigger = Mathf.RoundToInt((int)halfScreen - sampAtCenterRel);
             isDirtyConfigText = isDirtyStatusText = true;
@@ -584,7 +585,7 @@ namespace VARP.OSC
         /// </summary>
         public float Level
         {
-            get { return level; }
+            get => level;
             set { 
                 level = value;
                 isDirtyStatusText = isDirtyConfigText = true;
@@ -596,7 +597,7 @@ namespace VARP.OSC
         /// </summary>
         public TriggerEdge Edge
         {
-            get { return triggerEdge; }
+            get => triggerEdge;
             set { triggerEdge = value; isDirtyStatusText = isDirtyConfigText = true; }
         }
         
@@ -617,8 +618,8 @@ namespace VARP.OSC
         /// </summary>
         public TriggerMode Mode
         {
-            get { return mode; }
-            set { SetMode(value); }
+            get => mode;
+            set => SetMode(value);
         }
         
         /// <summary>Set current mode</summary>
@@ -647,7 +648,7 @@ namespace VARP.OSC
         /// <summary>Start acquiring data</summary>
         public bool Pause
         {
-            get { return pause; }
+            get => pause;
             set { pause = value; status = pause ? Status.Stop : Status.Armed; }
         }
         

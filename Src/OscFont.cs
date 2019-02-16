@@ -24,7 +24,7 @@ public class OscFont  {
 
     // Constant: font8x8_basic
     // Contains an 8x8 font map for unicode points U+0000 - U+007F (basic latin)
-    public static readonly byte[] font8x8_basic = new byte[] {
+    private static readonly byte[] font8x8_basic = {
         0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,   // U+0000 (nul)
         0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,   // U+0001
         0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,   // U+0002
@@ -169,7 +169,7 @@ public class OscFont  {
         
         y += 8;
         
-        var glyphIdx = (((int)c) & 0x7F) * 8;
+        var glyphIdx = (c & 0x7F) * 8;
         
         for (var i = 0; i < 8; i++)
         {

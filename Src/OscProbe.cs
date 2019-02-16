@@ -27,9 +27,9 @@ using UnityEngine;
 namespace VARP.OSC
 {
     /// <summary>
-    /// The base class for all input. It is model of the oscilloscope's cable probe.
-    /// Also it has default settings for oscilloscope's channel. And when we will
-    /// plug input to the channel those settings will be applied to the channel.
+    /// 	The base class for all input. It is model of the oscilloscope's cable probe.
+    /// 	Also it has default settings for oscilloscope's channel. And when we will
+    /// 	plug input to the channel those settings will be applied to the channel.
     /// </summary>
 	public class OscProbe
 	{
@@ -91,8 +91,8 @@ namespace VARP.OSC
 		/// <summary>The gain (values per division)</summary>
 		public float Gain
 		{
-			get { return gain; }
-			set { gain = OscValue.Gain.GetValue(value); }
+			get => gain;
+			set => gain = OscValue.Gain.GetValue(value);
 		}
 		
 		// =============================================================================================================
@@ -150,7 +150,7 @@ namespace VARP.OSC
 		public OscProbe(string name)
 		{
 			this.name = name;
-			// defalut method read all sample
+			// default method read all sample
 			this.readSample = null;
 			// default method read x value can be: this.readTriggerSample = (OscChannel channel) => channel.sample.x;	
 			// but using X component is default function of readTriggerSample is null
@@ -165,7 +165,7 @@ namespace VARP.OSC
 	}
 
 	/// <summary>
-	/// Simple sine wave input
+	/// 	Simple sine wave input
 	/// </summary>
 	public class OscSineProbe : OscProbe
 	{
@@ -186,7 +186,7 @@ namespace VARP.OSC
 	}
 	
 	/// <summary>
-	/// Simple square form wave input
+	/// 	Simple square form wave input
 	/// </summary>
 	public class OscSquareProbe : OscProbe
 	{

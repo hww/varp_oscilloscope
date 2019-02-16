@@ -28,7 +28,7 @@ using UnityEngine;
 namespace VARP.OSC
 {
 	/// <summary>
-	/// Two inputs oscilloscope
+	/// 	Two inputs oscilloscope
 	/// </summary>
 	public class Oscilloscope : MonoBehaviour
 	{
@@ -39,17 +39,15 @@ namespace VARP.OSC
 		[Header("Oscilloscope")] 
 		public OscSettings oscSettings;
 		public OscRenderer oscRenderer; 				//< Waveforms renderer
-		public OscLabelManager valueLables;				//< Value labels
-		public OscLabelManager timeLables;				//< Time labels
+		public OscLabelManager valueLabels;				//< Value labels
+		public OscLabelManager timeLabels;				//< Time labels
 		public OscGuiManager guiManager;
 		[Header("Horizontal")] 
-
 		public OscTrigger trigger;						//< The trigger object 
-		[Header("Vetical")] 
+		[Header("Vertical")] 
 		public OscChannel[] oscChannels; 				//< The oscilloscope's channels
 		[Header("Grid")] 
 		public OscGrid grid;							//< The grid of oscilloscope
-
 		
 		private Color bgColorForRenderer;
 		private bool isInitialized; 					//< Is this oscilloscope initialized
@@ -132,10 +130,10 @@ namespace VARP.OSC
 		// =============================================================================================================
 
 		/// <summary>
-		/// Sample all available channels. Call this method once per frame to
-		/// record samples
+		/// 	Sample all available channels. Call this method once per frame to
+		/// 	record samples
 		/// </summary>
-		public void AquireSampe(int dmaWrite)
+		public void AcquireSample(int dmaWrite)
 		{
 			var dt = oscSettings.timePerSample;
 			var addr = dmaWrite & OscSettings.BUFFER_INDEX_MASK;
@@ -156,14 +154,14 @@ namespace VARP.OSC
 		// =============================================================================================================
 
 		/// <summary>
-		/// Render all scope channels now
+		/// 	Render all scope channels now
 		/// </summary>
 		public void Render(int smpStart, int smpEnd, float pixStart, float pixPerSample)
 		{
 			oscRenderer.OnBeforeRenderer();
 			oscRenderer.ClearHorizFrame(
 				Mathf.RoundToInt(pixStart) , 
-					Mathf.RoundToInt(pixStart + ((smpEnd - smpStart) * pixPerSample)),
+				Mathf.RoundToInt(pixStart + (smpEnd - smpStart) * pixPerSample),
 				bgColorForRenderer); /* skip one pixel */
 			for (var i = 0; i < oscChannels.Length; i++)
 			{
@@ -174,7 +172,7 @@ namespace VARP.OSC
 		}
 
 		/// <summary>
-		/// update texts and labels
+		/// 	Update texts and labels
 		/// </summary>
 		public void RenderGUI()
 		{

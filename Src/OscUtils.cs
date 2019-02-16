@@ -34,15 +34,15 @@ namespace VARP.OSC
 		// ============================================================================================
 
 		/// <summary>
-		/// Draw line on the texture. Arguments are in pixel Units.
-		/// 
-		/// Bresenham's line algorithm is an algorithm that determines the points of an n-dimensional
-		/// raster that should be selected in order to form a close approximation to a straight line
-		/// between two points. It is commonly used to draw line primitives in a bitmap image
-		/// (e.g. on a computer screen), as it uses only integer addition, subtraction and bit shifting,
-		/// all of which are very cheap operations in standard computer architectures. It is an
-		/// incremental error algorithm. It is one of the earliest algorithms developed in the field
-		/// of computer graphics. An extension to the original algorithm may be used for drawing circles.
+		/// 	Draw line on the texture. Arguments are in pixel Units.
+		/// 	
+		/// 	Bresenham's line algorithm is an algorithm that determines the points of an n-dimensional
+		/// 	raster that should be selected in order to form a close approximation to a straight line
+		/// 	between two points. It is commonly used to draw line primitives in a bitmap image
+		/// 	(e.g. on a computer screen), as it uses only integer addition, subtraction and bit shifting,
+		/// 	all of which are very cheap operations in standard computer architectures. It is an
+		/// 	incremental error algorithm. It is one of the earliest algorithms developed in the field
+		/// 	of computer graphics. An extension to the original algorithm may be used for drawing circles.
 		/// </summary>
 		/// <param name="texture">The texture</param>
 		/// <param name="x1">Source position X</param>
@@ -122,7 +122,7 @@ namespace VARP.OSC
 		}
 
 		/// <summary>
-		/// Draw rectangle. Argumens are in pixel Units.
+		/// 	Draw rectangle. Argumens are in pixel Units.
 		/// </summary>
 		/// <param name="texture">Target texture</param>
 		/// <param name="x1">Source position X</param>
@@ -265,8 +265,8 @@ namespace VARP.OSC
 	
 	
 	/// <summary>
-	/// The gain or time control class. Round any value to the human
-	/// friendly format aka: ..., 0.1, 0.2, 0.5, 1, 2, 5, 10, 20, ...
+	/// 	The gain or time control class. Round any value to the human
+	/// 	friendly format aka: ..., 0.1, 0.2, 0.5, 1, 2, 5, 10, 20, ...
 	/// </summary>
 	public struct OscValue
 	{
@@ -289,9 +289,9 @@ namespace VARP.OSC
 		}
 		
 		/// <summary>
-		/// I do not want to have strange numbers in auto-gain feature.
-		/// The strange like 0.21245 etc. It is hard read for human.
-		/// That is why this function can find nearest gain value.
+		/// 	I do not want to have strange numbers in auto-gain feature.
+		/// 	The strange like 0.21245 etc. It is hard read for human.
+		/// 	That is why this function can find nearest gain value.
 		/// </summary>
 		/// <param name="value">Requested value</param>
 		/// <returns>Result value (V.DIVISION or SEC.DIVISIONS)</returns>
@@ -302,7 +302,7 @@ namespace VARP.OSC
 		}
 
 		/// <summary>
-		/// Find best gain for given peak to peak amplitude,
+		/// 	Find best gain for given peak to peak amplitude,
 		/// </summary>
 		/// <param name="peak2Peak">Peak to peak value</param>
 		/// <param name="autoDivisions">Requested amount of grid divisions</param>
@@ -319,9 +319,9 @@ namespace VARP.OSC
 		}
 		
 		/// <summary>
-		/// I do not want to have strange numbers in auto gain feature.
-		/// The strange like 0.21245 etc. It is hard read for human.
-		/// That is why this function can find nearest gain value.
+		/// 	I do not want to have strange numbers in auto gain feature.
+		/// 	The strange like 0.21245 etc. It is hard read for human.
+		/// 	That is why this function can find nearest gain value.
 		/// </summary>
 		/// <param name="value">Requested value</param>
 		/// <returns>Result value's index</returns>
@@ -344,7 +344,7 @@ namespace VARP.OSC
 		}
 
 		/// <summary>
-		/// Get value by index
+		/// 	Get value by index
 		/// </summary>
 		/// <param name="index"></param>
 		/// <returns></returns>
