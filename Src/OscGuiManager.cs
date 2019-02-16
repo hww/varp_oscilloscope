@@ -29,11 +29,10 @@ namespace VARP.OSC
 {
 
     /// <summary>
-    /// Simple GUI for oscilloscope
+    ///     Simple GUI for oscilloscope
     /// </summary>
     public class OscGuiManager : MonoBehaviour
     {
-
         public Canvas oscCanvas;
         public Text helpText;
         public Image keyboard;
@@ -42,24 +41,26 @@ namespace VARP.OSC
         /**********************************************************
          * Main button to activate or deactivate oscilloscope
          **********************************************************/
-        private const KeyCode buttonMain = KeyCode.BackQuote;
+
+        private const KeyCode ButtonMain = KeyCode.F4;
 
         /**********************************************************
          * Channel selection
          **********************************************************/
-        private const KeyCode buttonSelectC1 = KeyCode.Alpha1;
-        private const KeyCode buttonSelectC2 = KeyCode.Alpha2;
-        private const KeyCode buttonSelectC3 = KeyCode.Alpha3;
-        private const KeyCode buttonSelectC4 = KeyCode.Alpha4;
-        private const KeyCode buttonSelectC5 = KeyCode.Alpha5;
-        private const KeyCode buttonSelectC6 = KeyCode.Alpha6;
-        private const KeyCode buttonSelectC7 = KeyCode.Alpha7;
-        private const KeyCode buttonSelectC8 = KeyCode.Alpha8;
-        private const KeyCode buttonSelectTrigger = KeyCode.Alpha0;
+
+        private const KeyCode ButtonSelectC1 = KeyCode.Alpha1;
+        private const KeyCode ButtonSelectC2 = KeyCode.Alpha2;
+        private const KeyCode ButtonSelectC3 = KeyCode.Alpha3;
+        private const KeyCode ButtonSelectC4 = KeyCode.Alpha4;
+        private const KeyCode ButtonSelectC5 = KeyCode.Alpha5;
+        private const KeyCode ButtonSelectC6 = KeyCode.Alpha6;
+        private const KeyCode ButtonSelectC7 = KeyCode.Alpha7;
+        private const KeyCode ButtonSelectC8 = KeyCode.Alpha8;
+        private const KeyCode ButtonSelectTrigger = KeyCode.Alpha0;
         // used for changing function buttonSelectCN, when shift pressed
         // the channel attached as trigger's source
-        private const KeyCode buttonSelectModifyer1 = KeyCode.LeftShift;
-        private const KeyCode buttonSelectModifyer2 = KeyCode.LeftShift;
+        private const KeyCode ButtonSelectModifier1 = KeyCode.LeftShift;
+        private const KeyCode ButtonSelectModifier2 = KeyCode.LeftShift;
         
         // (computed) list of all above
         private KeyCode[] buttonSelectKeys;
@@ -67,59 +68,63 @@ namespace VARP.OSC
         /**********************************************************
          * Cursors will be used to control magnitude 
          **********************************************************/
+ 
         // horizontal position and level
-        private const KeyCode buttonTimePosPlus = KeyCode.RightArrow;
-        private const KeyCode buttonTimePosMinus = KeyCode.LeftArrow;
-        private const KeyCode buttonTimeScalePlus = KeyCode.Equals;
-        private const KeyCode buttonTimeScaleMinus = KeyCode.Minus;
-        private const KeyCode buttonLevelPlus = KeyCode.UpArrow;
-        private const KeyCode buttonLevelMinus = KeyCode.DownArrow;
+        private const KeyCode ButtonTimePosPlus = KeyCode.RightArrow;
+        private const KeyCode ButtonTimePosMinus = KeyCode.LeftArrow;
+        private const KeyCode ButtonTimeScalePlus = KeyCode.Equals;
+        private const KeyCode ButtonTimeScaleMinus = KeyCode.Minus;
+        private const KeyCode ButtonLevelPlus = KeyCode.UpArrow;
+        private const KeyCode ButtonLevelMinus = KeyCode.DownArrow;
         // channel settings
-        private const KeyCode buttonPosPlus = KeyCode.UpArrow;
-        private const KeyCode buttonPosMinus = KeyCode.DownArrow;
-        private const KeyCode buttonGainPlus = KeyCode.Equals;
-        private const KeyCode buttonGainMinus = KeyCode.Minus;
+        private const KeyCode ButtonPosPlus = KeyCode.UpArrow;
+        private const KeyCode ButtonPosMinus = KeyCode.DownArrow;
+        private const KeyCode ButtonGainPlus = KeyCode.Equals;
+        private const KeyCode ButtonGainMinus = KeyCode.Minus;
 
         /**********************************************************
          * Channel settings
          **********************************************************/
-        private const KeyCode buttonChannelAuto = KeyCode.A;
-        private const KeyCode buttonChannelAcDC = KeyCode.C;
-        private const KeyCode buttonChannelUnplug = KeyCode.U;
-        private const KeyCode buttonChannelView = KeyCode.V;
+
+        private const KeyCode ButtonChannelAuto = KeyCode.A;
+        private const KeyCode ButtonChannelAcDc = KeyCode.C;
+        private const KeyCode ButtonChannelUnplug = KeyCode.U;
+        private const KeyCode ButtonChannelView = KeyCode.V;
 
         /**********************************************************
          * Trigger settings
          **********************************************************/
-        private const KeyCode buttonTriggerMode = KeyCode.M;
-        private const KeyCode buttonTriggerEdge = KeyCode.E;
-        private const KeyCode buttonTriggerPause = KeyCode.Pause;
-        private const KeyCode buttonTriggerForceStart = KeyCode.S;
+
+        private const KeyCode ButtonTriggerMode = KeyCode.M;
+        private const KeyCode ButtonTriggerEdge = KeyCode.E;
+        private const KeyCode ButtonTriggerPause = KeyCode.Pause;
+        private const KeyCode ButtonTriggerForceStart = KeyCode.S;
 
         /**********************************************************
          * Grid settings
          **********************************************************/
-        private const KeyCode buttonGridSettings = KeyCode.G;
+        
+        private const KeyCode ButtonGridSettings = KeyCode.G;
         private int gridSetting;
         
         public void Initialize(Oscilloscope osc)
         {
             oscilloscope = osc;
-            buttonSelectKeys = new KeyCode[]
+            buttonSelectKeys = new[]
             {
-                buttonSelectC1, buttonSelectC2, buttonSelectC3, buttonSelectC4,
-                buttonSelectC5, buttonSelectC6, buttonSelectC7, buttonSelectC8,
+                ButtonSelectC1, ButtonSelectC2, ButtonSelectC3, ButtonSelectC4,
+                ButtonSelectC5, ButtonSelectC6, ButtonSelectC7, ButtonSelectC8
             };
             SelectChannel(OscChannel.Name.C1);
             UpdateHelp();
-            IsVisible = true;
+            IsVisible = false;
         }
 
 
         void Update()
         {
             // -- Test main button --
-            var main = Input.GetKeyDown(buttonMain);
+            var main = Input.GetKeyDown(ButtonMain);
             if (IsVisible)
             {
                 var trigger = oscilloscope.trigger;
@@ -135,13 +140,13 @@ namespace VARP.OSC
                 else if (isInFocus)
                 {
                     // select channel
-                    if (Input.GetKeyDown(buttonSelectTrigger))
+                    if (Input.GetKeyDown(ButtonSelectTrigger))
                     {
                         SelectTriggerChannel();
                     }
                     else
                     {
-                        var shift = Input.GetKey(buttonSelectModifyer1) || Input.GetKey(buttonSelectModifyer2);
+                        var shift = Input.GetKey(ButtonSelectModifier1) || Input.GetKey(ButtonSelectModifier2);
                         for (var i = 0; i < buttonSelectKeys.Length; i++)
                         {
                             if (Input.GetKeyDown(buttonSelectKeys[i]))
@@ -157,18 +162,18 @@ namespace VARP.OSC
                     }
 
                     // global evens and buttons
-                    if (Input.GetKeyDown(buttonTriggerPause))
+                    if (Input.GetKeyDown(ButtonTriggerPause))
                         trigger.Pause = !trigger.Pause;
-                    else if (Input.GetKeyDown(buttonTriggerForceStart))
+                    else if (Input.GetKeyDown(ButtonTriggerForceStart))
                         trigger.ForceTrigger();
                     
                     // -- trigger control --
-                    else if (Input.GetKeyDown(buttonTriggerMode))
+                    else if (Input.GetKeyDown(ButtonTriggerMode))
                         trigger.Mode = GetNextEnum<OscTrigger.TriggerMode>(trigger.Mode);
-                    else if (Input.GetKeyDown(buttonTriggerEdge))
+                    else if (Input.GetKeyDown(ButtonTriggerEdge))
                         trigger.Edge = GetNextEnum<OscTrigger.TriggerEdge>(trigger.Edge);
                     
-                    else if (Input.GetKeyDown(buttonGridSettings))
+                    else if (Input.GetKeyDown(ButtonGridSettings))
                     {
                         gridSetting++;
                         oscilloscope.grid.DrawGrid = (gridSetting & 1) > 0;
@@ -179,17 +184,17 @@ namespace VARP.OSC
                     if (selectedChannel == null)
                     {
                         // Joy pad control
-                        if (Input.GetKeyDown(buttonTimeScalePlus))
+                        if (Input.GetKeyDown(ButtonTimeScalePlus))
                             trigger.SecondsDivisionPlus();
-                        else if (Input.GetKeyDown(buttonTimeScaleMinus))
+                        else if (Input.GetKeyDown(ButtonTimeScaleMinus))
                             trigger.SecondsDivisionMinus();
-                        else if (Input.GetKeyDown(buttonLevelPlus))
+                        else if (Input.GetKeyDown(ButtonLevelPlus))
                             trigger.Level += 0.5f;
-                        else if (Input.GetKeyDown(buttonLevelMinus))
+                        else if (Input.GetKeyDown(ButtonLevelMinus))
                             trigger.Level -= 0.5f;
-                        else if (Input.GetKeyDown(buttonTimePosPlus))
+                        else if (Input.GetKeyDown(ButtonTimePosPlus))
                             trigger.Position += 0.5f;
-                        else if (Input.GetKeyDown(buttonTimePosMinus))
+                        else if (Input.GetKeyDown(ButtonTimePosMinus))
                             trigger.Position -= 0.5f;
                     }
                     else
@@ -199,23 +204,23 @@ namespace VARP.OSC
                         // ------------------------------------------------------
                         var channel = SelectedChannel;
                         
-                        if (Input.GetKeyDown(buttonChannelAuto))
+                        if (Input.GetKeyDown(ButtonChannelAuto))
                             channel.AutoGain = !channel.AutoGain;
-                        else if (Input.GetKeyDown(buttonChannelAcDC))
+                        else if (Input.GetKeyDown(ButtonChannelAcDc))
                             channel.Decoupling = !channel.Decoupling;
-                        else if (Input.GetKeyDown(buttonChannelUnplug))
+                        else if (Input.GetKeyDown(ButtonChannelUnplug))
                             channel.Unplug();
-                        else if (Input.GetKeyDown(buttonChannelView))
+                        else if (Input.GetKeyDown(ButtonChannelView))
                             channel.Style = GetNextEnum<OscProbe.Style>(channel.Style);
 
                         // Joy pad control
-                        if (Input.GetKeyDown(buttonPosPlus))
+                        if (Input.GetKeyDown(ButtonPosPlus))
                             channel.Position += 0.5f;
-                        else if (Input.GetKeyDown(buttonPosMinus))
+                        else if (Input.GetKeyDown(ButtonPosMinus))
                             channel.Position -= 0.5f;
-                        else if (Input.GetKeyDown(buttonGainPlus))
+                        else if (Input.GetKeyDown(ButtonGainPlus))
                             channel.GainPlus();
-                        else if (Input.GetKeyDown(buttonGainMinus))
+                        else if (Input.GetKeyDown(ButtonGainMinus))
                             channel.GainMinus();
                     }
                 }
@@ -237,10 +242,11 @@ namespace VARP.OSC
 
         public bool IsVisible
         {
-            get { return oscCanvas.enabled; }
+            get => oscCanvas.enabled;
             set
             {
                 oscCanvas.enabled = isInFocus = value;
+                oscCanvas.scaleFactor = 1f;
                 updateHelp = true;
             }
         }
@@ -252,12 +258,12 @@ namespace VARP.OSC
         private bool isInFocus; //< TRUE means inputs tested
 
         /// <summary>
-        /// When oscilloscope is in focus the oscilloscope controlled by keys.
-        /// In other case the keyboard ignored.
+        ///     When oscilloscope is in focus the oscilloscope controlled by keys.
+        ///     In other case the keyboard ignored.
         /// </summary>
         public bool IsInFocus
         {
-            get { return isInFocus; }
+            get => isInFocus;
             set
             {
                 keyboard.enabled = isInFocus = value;
@@ -281,25 +287,25 @@ namespace VARP.OSC
                 if (!isInFocus)
                 {
                     // not in focus 
-                    helpText.text = toFocusHelp;
+                    helpText.text = ToFocusHelp;
                 }
                 else
                 {
                     var help = "";
                     if (selectedChannel == null)
                     {
-                        // selected trigger channgel
+                        // selected trigger channel
                         help += "TRIGGER:\n";
-                        help += triggerHelp;
+                        help += TriggerHelp;
                     }
                     else
                     {
                         // selected channel
                         help += $"CHANNEL: {selectedChannel.channelName}\n";
-                        help += channelHelp;
+                        help += ChannelHelp;
                     }
                     // display this help in any case 
-                    help += persistHelp;
+                    help += PersistHelp;
                     helpText.text = help;
                 }
             }
@@ -309,10 +315,10 @@ namespace VARP.OSC
         // The text messages for help
         // =============================================================================================================
 
-        private readonly string toFocusHelp = "` activate keyboard shortcuts\n";
-        private readonly string channelHelp = "1,2,..,8 select input\nA auto, C coupling\nU unplug, V view\nUP,DOWN position\n+,- gain\n";
-        private readonly string triggerHelp = "SHIFT+1,2,..,8 select input\nM mode, E edge\nUP,DOWN level\nLEFT,RIGHT time position\n+,- time scale";
-        private readonly string persistHelp = "PAUSE pause, S force start\n";
+        private const string ToFocusHelp = "` activate keyboard shortcuts\n";
+        private const string ChannelHelp = "1,2,..,8 select input\nA auto, C coupling\nU unplug, V view\nUP,DOWN position\n+,- gain\n";
+        private const string TriggerHelp = "SHIFT+1,2,..,8 select input\nM mode, E edge\nUP,DOWN level\nLEFT,RIGHT time position\n+,- time scale";
+        private const string PersistHelp = "PAUSE pause, S force start\n";
         
         // =============================================================================================================
         // Current channel can be used for keyboard shortcuts
@@ -346,24 +352,24 @@ namespace VARP.OSC
         // Increment/Decrement enum value
         // =============================================================================================================
 
-        public T GetNextEnum<T>(T src) where T : struct
+        private T GetNextEnum<T>(T src) where T : struct
         {
             if (!typeof(T).IsEnum)
-                throw new System.ArgumentException(string.Format("Argument {0} is not an Enum", typeof(T).FullName));
+                throw new System.ArgumentException($"Argument {typeof(T).FullName} is not an Enum");
 
             T[] values = (T[]) System.Enum.GetValues(src.GetType());
             var j = System.Array.IndexOf<T>(values, src) + 1;
-            return (values.Length == j) ? values[0] : values[j];
+            return values.Length == j ? values[0] : values[j];
         }
 
-        public T GetPrevEnum<T>(T src) where T : struct
+        private T GetPrevEnum<T>(T src) where T : struct
         {
             if (!typeof(T).IsEnum)
-                throw new System.ArgumentException(string.Format("Argument {0} is not an Enum", typeof(T).FullName));
+                throw new System.ArgumentException($"Argument {typeof(T).FullName} is not an Enum");
 
             T[] values = (T[]) System.Enum.GetValues(src.GetType());
             var j = System.Array.IndexOf<T>(values, src) - 1;
-            return (0 > j) ? values[values.Length - 1] : values[j];
+            return 0 > j ? values[values.Length - 1] : values[j];
         }
     }
 }

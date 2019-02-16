@@ -54,7 +54,6 @@ public class OscLabelManager : MonoBehaviour
 	{
 		if (freeLabels.Count == 0)
 			throw new SystemException("OscLabelManager.SpawnLabel reached limit if labels quantity.");
-
 		var last = freeLabels.Count - 1;
 		var label = freeLabels[last];
 		freeLabels.RemoveAt(freeLabels.Count - 1);
