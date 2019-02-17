@@ -152,11 +152,13 @@ namespace VARP.OSC
 			var fpx = pxStart;
 			var x1 = Mathf.RoundToInt(pxStart-pxPerSample);
 			var y1 = Mathf.RoundToInt (channel.GetFloat(smpBeg-1) * pixPerDivs + texCenterY);
+			y1 = oscSettings.ClampPixelInsideScreenY(y1);
 			// iterate over all samples (starts from sample 2)
 			for (var i=smpBeg; i<=smpEnd; i++)
 			{
 				var x2 = Mathf.RoundToInt(fpx);
 				var y2 = Mathf.RoundToInt(channel.GetFloat(i) * pixPerDivs + texCenterY);
+				y2 = oscSettings.ClampPixelInsideScreenY(y2);
 				// first line at the sample 2
 				var absDx = Math.Abs(x1 - x2);
 				var absDy = Math.Abs(y1 - y2);

@@ -42,7 +42,7 @@ namespace VARP.OSC
          * Main button to activate or deactivate oscilloscope
          **********************************************************/
 
-        private const KeyCode ButtonMain = KeyCode.F4;
+        private const KeyCode ButtonMain = KeyCode.F11;
 
         /**********************************************************
          * Channel selection
